@@ -1,0 +1,7 @@
+GAS/backend/bin/
+GAS/backend/obj/
+GAS/frontend/node_modules/
+GAS/frontend/.next/
+GAS/frontend/out/
+GAS/frontend/build/
+GAS/frontend/.env*
