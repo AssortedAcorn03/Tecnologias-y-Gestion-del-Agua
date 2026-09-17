@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tachi\\OneDrive\\Desktop\\GA\\backend\\backend.csproj": {}
+    "C:\\Users\\tachi\\OneDrive\\Documents\\GitHub\\Tecnologias-y-Gestion-del-Agua\\GA\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tachi\\OneDrive\\Desktop\\GA\\backend\\backend.csproj": {
+    "C:\\Users\\tachi\\OneDrive\\Documents\\GitHub\\Tecnologias-y-Gestion-del-Agua\\GA\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tachi\\OneDrive\\Desktop\\GA\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\tachi\\OneDrive\\Documents\\GitHub\\Tecnologias-y-Gestion-del-Agua\\GA\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\tachi\\OneDrive\\Desktop\\GA\\backend\\backend.csproj",
+        "projectPath": "C:\\Users\\tachi\\OneDrive\\Documents\\GitHub\\Tecnologias-y-Gestion-del-Agua\\GA\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\tachi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tachi\\OneDrive\\Desktop\\GA\\backend\\obj\\",
+        "outputPath": "C:\\Users\\tachi\\OneDrive\\Documents\\GitHub\\Tecnologias-y-Gestion-del-Agua\\GA\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
