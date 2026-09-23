@@ -1,0 +1,339 @@
+/* =========================================
+   ENCABEZADO DEL LOGIN
+========================================= */
+
+.header {
+
+    background-color: var(--color-primary);
+
+    color: var(--color-white);
+
+    width: 100%;
+
+}
+
+
+.header-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    min-height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+
+    max-width: 180px;
+
+    height: auto;
+
+}
+
+
+/* =========================================
+   MENÚ SUPERIOR
+========================================= */
+
+.top-menu {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+}
+
+.top-menu a {
+
+    color: var(--color-white);
+
+}
+
+.top-menu a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   BARRA DE FRASE
+========================================= */
+
+.phrase-bar {
+
+    background-color: var(--color-secondary);
+
+    color: var(--color-white);
+
+    padding: 10px 0;
+
+}
+
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+========================================= */
+
+.main-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+}
+
+
+.content-grid {
+
+    display: grid;
+
+    grid-template-columns: 40% 60%;
+
+    gap: 30px;
+
+}
+
+
+/* =========================================
+   TARJETA DEL LOGIN
+========================================= */
+
+.login-card {
+
+    background-color: var(--color-white);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 5px;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    overflow: hidden;
+
+}
+
+
+.card-header {
+
+    background-color: var(--color-primary);
+
+    color: var(--color-white);
+
+    padding: 15px;
+
+}
+
+
+.card-header h2,
+.card-header h3 {
+
+    margin: 0;
+
+}
+
+
+.card-body {
+
+    padding: 25px;
+
+}
+
+
+/* =========================================
+   CAMPOS DEL FORMULARIO
+========================================= */
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 4px;
+
+    font-size: 16px;
+
+}
+
+
+.form-group input:focus {
+
+    outline: none;
+
+    border-color: var(--color-secondary);
+
+}
+
+
+/* =========================================
+   BOTÓN DE LOGIN
+========================================= */
+
+.button-container {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+}
+
+
+.login-button {
+
+    background-color: var(--color-primary);
+
+    color: var(--color-white);
+
+    border: none;
+
+    border-radius: 5px;
+
+    padding: 10px 30px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+.login-button:hover {
+
+    background-color: var(--color-secondary);
+
+}
+
+
+/* =========================================
+   TARJETAS DE INFORMACIÓN
+========================================= */
+
+.information-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+.information-title {
+
+    margin-top: 0;
+
+}
+
+
+.info-card {
+
+    background-color: var(--color-white);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+}
+
+
+.info-link {
+
+    color: var(--color-secondary);
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+
+    background-color: var(--color-primary);
+
+    color: var(--color-white);
+
+    padding: 30px 0;
+
+}
+
+
+.footer-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 30px;
+
+}
+
+
+.social-section {
+
+    display: flex;
+
+    gap: 15px;
+
+}
+
+
+.footer-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
