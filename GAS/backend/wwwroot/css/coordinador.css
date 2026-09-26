@@ -1672,3 +1672,1161 @@ body {
         width: 100%;
     }
 }
+/* ==================================================
+   ALTA DE ALUMNO
+================================================== */
+
+.student-page {
+    width: 100%;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.student-page .page-header {
+    margin-bottom: 15px;
+}
+
+.student-page .page-header h2 {
+    margin: 5px 0;
+
+    color: #102a72;
+
+    font-size: 20px;
+}
+
+.student-page .page-header p {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #52627a;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   NOTA INFORMATIVA
+================================================== */
+
+.student-information-message {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 39px;
+
+    padding: 8px 12px;
+
+    margin-bottom: 15px;
+
+    background: #f1f6ff;
+
+    border: 1px solid #d5e3ff;
+
+    border-radius: 5px;
+
+    color: #0758d5;
+}
+
+.student-information-icon {
+    width: 16px;
+    height: 16px;
+
+    min-width: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #0758d5;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.student-information-message p {
+    margin: 0;
+
+    font-size: 9px;
+}
+
+
+/* ==================================================
+   TARJETA DEL FORMULARIO
+================================================== */
+
+.student-form-card {
+    background: white;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 6px;
+
+    padding: 18px 15px 20px;
+}
+
+.student-form-card h3 {
+    margin: 0 0 18px;
+
+    color: #102a72;
+
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   GRID
+================================================== */
+
+.student-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    column-gap: 20px;
+
+    row-gap: 15px;
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.student-form-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.student-form-group label {
+    margin-bottom: 6px;
+
+    color: #173b82;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.student-form-group label span {
+    color: #e00000;
+}
+
+.student-form-group input,
+.student-form-group select {
+    width: 100%;
+
+    height: 31px;
+
+    padding: 0 9px;
+
+    border: 1px solid #d6dce6;
+
+    border-radius: 4px;
+
+    background: white;
+
+    color: #344054;
+
+    outline: none;
+
+    font-size: 9px;
+}
+
+.student-form-group input::placeholder {
+    color: #98a2b3;
+}
+
+.student-form-group input:focus,
+.student-form-group select:focus {
+    border-color: #1261e8;
+
+    box-shadow: 0 0 0 2px rgba(18, 97, 232, 0.08);
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.student-form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.cancel-student-button,
+.save-student-button {
+    height: 34px;
+
+    padding: 0 15px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+}
+
+.cancel-student-button {
+    background: white;
+
+    color: #0758d5;
+
+    border: 1px solid #1261e8;
+}
+
+.cancel-student-button:hover {
+    background: #f3f7ff;
+}
+
+.save-student-button {
+    background: #0758d5;
+
+    color: white;
+
+    border: 1px solid #0758d5;
+}
+
+.save-student-button:hover {
+    background: #0048b8;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 900px) {
+
+    .student-form-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .student-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-form-actions {
+        flex-direction: column;
+    }
+
+    .cancel-student-button,
+    .save-student-button {
+        width: 100%;
+    }
+
+}
+
+/* ==================================================
+   MENU ALUMNOS
+================================================== */
+
+#alumnosMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#alumnosMenu span:first-child {
+    margin: 0;
+    padding: 0;
+}
+
+#alumnosArrow {
+    margin-left: auto;
+}
+/* ==================================================
+   CONSULTA DE ALUMNOS
+================================================== */
+
+.student-query-page {
+    width: 100%;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.student-query-page .page-header {
+    margin-bottom: 14px;
+}
+
+.student-query-page .page-header h2 {
+    margin: 5px 0;
+
+    color: #102a72;
+
+    font-size: 20px;
+}
+
+.student-query-page .page-header p {
+    margin: 0;
+
+    max-width: 650px;
+
+    color: #52627a;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   MENSAJE INFORMATIVO
+================================================== */
+
+.student-query-information {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 34px;
+
+    padding: 7px 10px;
+
+    margin-bottom: 10px;
+
+    background: #f1f6ff;
+
+    border: 1px solid #d5e3ff;
+
+    border-radius: 5px;
+
+    color: #0758d5;
+}
+
+.student-query-information-icon {
+    width: 16px;
+    height: 16px;
+
+    min-width: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #0758d5;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    font-weight: bold;
+}
+
+.student-query-information p {
+    margin: 0;
+
+    font-size: 9px;
+}
+
+
+/* ==================================================
+   TARJETA DE CRITERIOS
+================================================== */
+
+.student-search-card {
+    background: white;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 6px;
+
+    padding: 13px 11px 14px;
+
+    margin-bottom: 9px;
+}
+
+.student-search-card h3 {
+    margin: 0 0 12px;
+
+    color: #102a72;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   GRID DE BÚSQUEDA
+================================================== */
+
+.student-search-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    column-gap: 10px;
+
+    row-gap: 11px;
+}
+
+
+/* ==================================================
+   CAMPOS DE BÚSQUEDA
+================================================== */
+
+.student-search-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.student-search-group label,
+.student-progress-filter label {
+    margin-bottom: 5px;
+
+    color: #173b82;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+.student-search-group input,
+.student-search-group select {
+    width: 100%;
+
+    height: 28px;
+
+    padding: 0 8px;
+
+    border: 1px solid #d6dce6;
+
+    border-radius: 4px;
+
+    background: white;
+
+    color: #344054;
+
+    outline: none;
+
+    font-size: 8px;
+
+    box-sizing: border-box;
+}
+
+.student-search-group input::placeholder {
+    color: #98a2b3;
+}
+
+.student-search-group input:focus,
+.student-search-group select:focus {
+    border-color: #1261e8;
+
+    box-shadow:
+        0 0 0 2px rgba(18, 97, 232, 0.08);
+}
+
+
+/* ==================================================
+   CAMPO CLAVE CON BUSCADOR
+================================================== */
+
+.student-search-input {
+    position: relative;
+}
+
+.student-search-input input {
+    padding-right: 25px;
+}
+
+.student-search-input span {
+    position: absolute;
+
+    right: 8px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #1261e8;
+
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   PORCENTAJE DE AVANCE
+================================================== */
+
+.student-progress-filter {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.progress-inputs {
+    display: flex;
+
+    gap: 20px;
+}
+
+.progress-inputs > div {
+    position: relative;
+
+    width: 95px;
+}
+
+.progress-inputs input {
+    width: 100%;
+
+    height: 28px;
+
+    padding: 0 23px 0 8px;
+
+    border: 1px solid #d6dce6;
+
+    border-radius: 4px;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    font-size: 8px;
+}
+
+.progress-inputs input:focus {
+    border-color: #1261e8;
+}
+
+.progress-inputs span {
+    position: absolute;
+
+    right: 7px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #667085;
+
+    font-size: 8px;
+}
+
+
+/* ==================================================
+   BOTONES DE BÚSQUEDA
+================================================== */
+
+.student-search-actions {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    grid-column: 3;
+}
+
+.clear-student-search,
+.search-student-button {
+    height: 28px;
+
+    padding: 0 11px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+}
+
+.clear-student-search {
+    background: white;
+
+    color: #1261e8;
+
+    border: 1px solid #d6dce6;
+}
+
+.clear-student-search:hover {
+    background: #f5f8fd;
+}
+
+.search-student-button {
+    background: #0758d5;
+
+    color: white;
+
+    border: 1px solid #0758d5;
+}
+
+.search-student-button:hover {
+    background: #0048b8;
+}
+
+
+/* ==================================================
+   RESULTADOS
+================================================== */
+
+.student-results-card {
+    background: white;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+}
+
+
+/* ==================================================
+   CABECERA DE RESULTADOS
+================================================== */
+
+.student-results-header {
+    min-height: 37px;
+
+    padding: 0 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.student-results-header h3 {
+    margin: 0;
+
+    color: #102a72;
+
+    font-size: 11px;
+}
+
+.student-results-header span {
+    color: #52627a;
+
+    font-size: 8px;
+}
+
+
+/* ==================================================
+   CONTENEDOR DE TABLA
+================================================== */
+
+.student-table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+/* ==================================================
+   TABLA
+================================================== */
+
+.student-table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+.student-table th {
+    height: 30px;
+
+    padding: 0 5px;
+
+    background: #f8faff;
+
+    border-bottom: 1px solid #dfe5ed;
+
+    color: #173b82;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+.student-table td {
+    height: 34px;
+
+    padding: 0 5px;
+
+    border-bottom: 1px solid #edf0f5;
+
+    color: #344054;
+
+    font-size: 7px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ==================================================
+   ANCHOS DE COLUMNAS
+================================================== */
+
+.student-table th:nth-child(1) {
+    width: 10%;
+}
+
+.student-table th:nth-child(2) {
+    width: 8%;
+}
+
+.student-table th:nth-child(3) {
+    width: 11%;
+}
+
+.student-table th:nth-child(4) {
+    width: 8%;
+}
+
+.student-table th:nth-child(5) {
+    width: 7%;
+}
+
+.student-table th:nth-child(6) {
+    width: 11%;
+}
+
+.student-table th:nth-child(7) {
+    width: 12%;
+}
+
+.student-table th:nth-child(8) {
+    width: 8%;
+}
+
+.student-table th:nth-child(9) {
+    width: 10%;
+}
+
+.student-table th:nth-child(10) {
+    width: 9%;
+}
+
+.student-table th:nth-child(11) {
+    width: 6%;
+}
+
+
+/* ==================================================
+   ESTADO VACÍO
+================================================== */
+
+.empty-students {
+    min-height: 120px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color: #667085;
+}
+
+.empty-students strong {
+    margin-bottom: 4px;
+
+    color: #344054;
+
+    font-size: 10px;
+}
+
+.empty-students p {
+    margin: 0;
+
+    font-size: 8px;
+}
+
+
+/* ==================================================
+   PIE DE RESULTADOS
+================================================== */
+
+.student-results-footer {
+    min-height: 37px;
+
+    padding: 0 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-top: 1px solid #edf0f5;
+
+    color: #667085;
+
+    font-size: 8px;
+}
+
+.student-pagination {
+    display: flex;
+
+    gap: 4px;
+}
+
+.student-pagination button {
+    width: 24px;
+    height: 24px;
+
+    border: 1px solid #dce2eb;
+
+    border-radius: 4px;
+
+    background: white;
+
+    color: #173b82;
+
+    cursor: pointer;
+
+    font-size: 8px;
+}
+
+.student-pagination button:hover:not(:disabled) {
+    background: #f3f7ff;
+}
+
+.student-pagination button.current-page {
+    background: #0758d5;
+
+    border-color: #0758d5;
+
+    color: white;
+}
+
+.student-pagination button:disabled {
+    color: #b7c1ce;
+
+    cursor: default;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 1000px) {
+
+    .student-search-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .student-search-actions {
+        grid-column: span 2;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .student-search-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-search-actions {
+        grid-column: auto;
+
+        justify-content: stretch;
+    }
+
+    .clear-student-search,
+    .search-student-button {
+        flex: 1;
+    }
+
+}
+/* ==================================================
+   PANEL EDITAR ALUMNO
+================================================== */
+
+.edit-student-panel {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: 350px;
+    height: 100vh;
+
+    background: #ffffff;
+
+    border-left: 1px solid #dfe5ed;
+
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.08);
+
+    z-index: 1000;
+
+    display: none;
+
+    flex-direction: column;
+}
+
+
+/* ==================================================
+   CABECERA
+================================================== */
+
+.edit-student-header {
+    height: 58px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e5e9f0;
+}
+
+.edit-student-header h3 {
+    margin: 0;
+
+    color: #102a72;
+
+    font-size: 15px;
+}
+
+.close-edit-student {
+    width: 28px;
+    height: 28px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #52627a;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.close-edit-student:hover {
+    color: #102a72;
+}
+
+
+/* ==================================================
+   CUERPO
+================================================== */
+
+.edit-student-body {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 18px;
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.edit-student-group {
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 14px;
+}
+
+.edit-student-group label {
+    margin-bottom: 5px;
+
+    color: #173b82;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.edit-student-group label span {
+    color: #e00000;
+}
+
+.edit-student-group input,
+.edit-student-group select,
+.edit-student-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d6dce6;
+
+    border-radius: 4px;
+
+    background: white;
+
+    color: #344054;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 9px;
+}
+
+.edit-student-group input,
+.edit-student-group select {
+    height: 32px;
+
+    padding: 0 9px;
+}
+
+.edit-student-group textarea {
+    min-height: 75px;
+
+    padding: 8px 9px;
+
+    resize: vertical;
+}
+
+.edit-student-group input:focus,
+.edit-student-group select:focus,
+.edit-student-group textarea:focus {
+    border-color: #1261e8;
+
+    box-shadow:
+        0 0 0 2px rgba(18, 97, 232, 0.08);
+}
+
+
+/* CAMPO NO MODIFICABLE */
+
+.edit-student-group input:disabled {
+    background: #f5f7fa;
+
+    color: #667085;
+
+    cursor: not-allowed;
+}
+
+
+/* TEXTO DE AYUDA */
+
+.edit-student-group small {
+    margin-top: 4px;
+
+    color: #7a8699;
+
+    font-size: 7px;
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.edit-student-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding: 14px 18px;
+
+    border-top: 1px solid #e5e9f0;
+
+    background: white;
+}
+
+.cancel-edit-student,
+.save-edit-student {
+    height: 32px;
+
+    padding: 0 13px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 9px;
+}
+
+.cancel-edit-student {
+    background: white;
+
+    color: #1261e8;
+
+    border: 1px solid #1261e8;
+}
+
+.cancel-edit-student:hover {
+    background: #f3f7ff;
+}
+
+.save-edit-student {
+    background: #0758d5;
+
+    color: white;
+
+    border: 1px solid #0758d5;
+}
+
+.save-edit-student:hover {
+    background: #0048b8;
+}
+
+
+/* ==================================================
+   CUANDO EL PANEL ESTÁ ABIERTO
+================================================== */
+
+.edit-student-panel.active {
+    display: flex;
+}

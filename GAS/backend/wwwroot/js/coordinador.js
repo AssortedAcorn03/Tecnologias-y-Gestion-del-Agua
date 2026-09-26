@@ -6,16 +6,428 @@
 // --------------------------------------------------
 // ELEMENTOS DEL DOM
 // --------------------------------------------------
-
+const alumnosButton = document.getElementById("alumnosButton");
+const alumnosMenu = document.getElementById("alumnosMenu");
+const alumnosSubmenu = document.getElementById("alumnosSubmenu");
+const alumnosArrow = document.getElementById("alumnosArrow");
 const usuariosButton = document.getElementById("usuariosButton");
 const usuariosSubmenu = document.getElementById("usuariosSubmenu");
 const usuariosArrow = document.getElementById("usuariosArrow");
-
+const agregarAlumnoButton = document.getElementById("agregarAlumnoButton");
+const consultarAlumnoButton = document.getElementById("consultarAlumnoButton");
 const altaUsuarioButton = document.getElementById("altaUsuarioButton");
 const listadoUsuariosButton = document.getElementById("listadoUsuariosButton");
 
 const contentArea = document.getElementById("contentArea");
+// --------------------------------------------------
+// MENÚ ALUMNOS
+// --------------------------------------------------
 
+alumnosButton.addEventListener("click", function () {
+
+    const submenuVisible =
+        alumnosSubmenu.style.display !== "none";
+
+    if (submenuVisible) {
+
+        alumnosSubmenu.style.display = "none";
+        alumnosArrow.textContent = "⌄";
+
+    } else {
+
+        alumnosSubmenu.style.display = "flex";
+        alumnosArrow.textContent = "⌃";
+
+    }
+
+});
+// ==================================================
+// AGREGAR ALUMNO
+// ==================================================
+
+agregarAlumnoButton.addEventListener("click", function () {
+
+    contentArea.innerHTML = `
+
+        <div class="student-page">
+
+            <!-- ==========================================
+                 ENCABEZADO
+            =========================================== -->
+
+            <div class="page-header">
+
+                <div class="breadcrumb">
+                    Alumnos
+                    <span>›</span>
+                    Agregar alumno
+                </div>
+
+                <h2>
+                    Alta del alumno
+                </h2>
+
+                <p>
+                    El sistema deberá permitir registrar un nuevo
+                    tesista con la información básica necesaria
+                    para incorporarlo al sistema de seguimiento
+                    académico.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 NOTA INFORMATIVA
+            =========================================== -->
+
+            <div class="student-information-message">
+
+                <div class="student-information-icon">
+                    i
+                </div>
+
+                <p>
+                    Completa todos los campos obligatorios para
+                    registrar el nuevo tesista.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 DATOS DEL ALUMNO
+            =========================================== -->
+
+            <section class="student-form-card">
+
+                <h3>
+                    Datos del alumno
+                </h3>
+
+
+                <div class="student-form-grid">
+
+
+                    <!-- CLAVE DEL ALUMNO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Clave del alumno
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. 20241234">
+
+                    </div>
+
+
+                    <!-- NOMBRE -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Nombre
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Juan">
+
+                    </div>
+
+
+                    <!-- APELLIDO PATERNO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Apellido paterno
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Pérez">
+
+                    </div>
+
+
+                    <!-- APELLIDO MATERNO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Apellido materno
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Martínez">
+
+                    </div>
+
+
+                    <!-- FECHA DE INGRESO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Fecha de ingreso
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date">
+
+                    </div>
+
+
+                    <!-- PROGRAMA ACADÉMICO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Programa académico
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option value="">
+                                Maestría en Tecnología y Gestión del Agua
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- GENERACIÓN -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Generación
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option value="">
+                                Seleccionar generación
+                            </option>
+
+                            <option>
+                                2024 - 2026
+                            </option>
+
+                            <option>
+                                2025 - 2027
+                            </option>
+
+                            <option>
+                                2026 - 2028
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SEMESTRE -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Semestre
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option value="">
+                                Seleccionar semestre
+                            </option>
+
+                            <option>
+                                Primero
+                            </option>
+
+                            <option>
+                                Segundo
+                            </option>
+
+                            <option>
+                                Tercero
+                            </option>
+
+                            <option>
+                                Cuarto
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CORREO INSTITUCIONAL -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Correo institucional
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="Ej. juan.perez@alumno.uaslp.mx">
+
+                    </div>
+
+
+                    <!-- CORREO PERSONAL -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Correo personal
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="Ej. juan.perez@gmail.com">
+
+                    </div>
+
+
+                    <!-- TELÉFONO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Teléfono
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            placeholder="Ej. 444 123 4567">
+
+                    </div>
+
+
+                    <!-- ESTADO ACADÉMICO -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Estado académico
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Activo
+                            </option>
+
+                            <option>
+                                Inactivo
+                            </option>
+
+                            <option>
+                                Egresado
+                            </option>
+
+                            <option>
+                                Baja temporal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MODALIDAD DE TITULACIÓN -->
+
+                    <div class="student-form-group">
+
+                        <label>
+                            Modalidad de titulación
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option>
+                                Tesis
+                            </option>
+
+                            <option>
+                                Artículo
+                            </option>
+
+                            <option>
+                                Examen de conocimientos
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 BOTONES
+            =========================================== -->
+
+            <div class="student-form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-student-button">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    type="button"
+                    class="save-student-button">
+
+                    Guardar alumno
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    // Marcar opción activa
+
+    agregarAlumnoButton.classList.add("active");
+
+    consultarAlumnoButton.classList.remove("active");
+
+    listadoUsuariosButton.classList.remove("active");
+
+    altaUsuarioButton.classList.remove("active");
+
+});
 
 // --------------------------------------------------
 // MENÚ USUARIOS
