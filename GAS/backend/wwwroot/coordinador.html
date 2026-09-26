@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portal del Coordinador</title>
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/coordinador.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
+    <header class="top-header">
+
+        <div class="header-left">
+
+            <div class="university-logo">
+                <img src="images/logoUASLP.PNG" alt="UASLP">
+            </div>
+
+            <div class="portal-title">
+                <h1>PORTAL DEL COORDINADOR</h1>
+                <p>MAESTRÍA EN TECNOLOGÍA Y GESTIÓN DEL AGUA</p>
+            </div>
+
+        </div>
+
+
+        <div class="user-area">
+
+            <div class="user-icon">
+            </div>
+
+            <div class="user-information">
+                <strong>Dr. nombre</strong>
+                <span>Coordinador del Posgrado</span>
+            </div>
+
+            <button class="user-menu-button" type="button">
+                ▼
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         ESTRUCTURA PRINCIPAL
+    ========================== -->
+    <div class="dashboard">
+
+
+        <!-- =========================
+             MENÚ LATERAL
+        ========================== -->
+        <aside class="sidebar">
+
+            <nav class="sidebar-menu">
+
+
+                <!-- INICIO -->
+                <button class="menu-item" type="button">
+                    <span class="menu-icon">⌂</span>
+                    <span class="menu-text">Inicio</span>
+                </button>
+
+
+                <!-- EGRESADOS -->
+                <button class="menu-item expandable" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Egresados</span>
+                    <span class="arrow">⌄</span>
+                </button>
+
+
+                <!-- TESISTAS -->
+                <button class="menu-item expandable" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Tesistas</span>
+                    <span class="arrow">⌄</span>
+                </button>
+
+
+                <!-- TESIS -->
+                <button class="menu-item expandable" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Tesis</span>
+                    <span class="arrow">⌄</span>
+                </button>
+
+
+                <!-- COMITÉS -->
+                <button class="menu-item" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Comités tutoriales</span>
+                </button>
+
+
+                <!-- ENCUESTAS -->
+                <button class="menu-item" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Encuestas y formularios</span>
+                </button>
+
+
+                <!-- REPORTES -->
+                <button class="menu-item expandable" type="button">
+                    <span class="menu-icon">▥</span>
+                    <span class="menu-text">Reportes</span>
+                    <span class="arrow">⌄</span>
+                </button>
+
+
+                <!-- =====================
+                     USUARIOS
+                ====================== -->
+                <button
+                    class="menu-item expandable"
+                    id="usuariosButton"
+                    type="button">
+
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Usuarios</span>
+                    <span class="arrow" id="usuariosArrow">⌃</span>
+
+                </button>
+
+
+                <!-- SUBMENÚ USUARIOS -->
+                <div class="submenu" id="usuariosSubmenu">
+
+                    <button
+                        class="submenu-item"
+                        id="altaUsuarioButton"
+                        type="button">
+
+                        Alta de usuario
+
+                    </button>
+
+                    <button
+                        class="submenu-item"
+                        id="listadoUsuariosButton"
+                        type="button">
+
+                        Listado de usuarios
+
+                    </button>
+
+                </div>
+
+
+                <!-- CONFIGURACIÓN -->
+                <button class="menu-item expandable" type="button">
+
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Configuración</span>
+                    <span class="arrow">⌄</span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- PARTE INFERIOR -->
+            <div class="sidebar-bottom">
+
+                <button class="menu-item" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Ayuda</span>
+                </button>
+
+                <button class="menu-item logout" type="button">
+                    <span class="menu-icon"></span>
+                    <span class="menu-text">Cerrar sesión</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             ÁREA DE CONTENIDO
+        ========================== -->
+        <main class="content" id="contentArea">
+
+            <!--
+                Inicialmente esta área queda vacía.
+                El contenido aparecerá cuando
+                seleccionemos una opción del menú.
+            -->
+
+        </main>
+
+    </div>
+
+
+    <script src="js/coordinador.js"></script>
+
+</body>
+</html>
