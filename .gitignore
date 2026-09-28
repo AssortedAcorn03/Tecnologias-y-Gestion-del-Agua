@@ -5,3 +5,6 @@ GAS/frontend/.next/
 GAS/frontend/out/
 GAS/frontend/build/
 GAS/frontend/.env*
+
+# Material local: credenciales, notas y borradores. No se versiona.
+Extras/

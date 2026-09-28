@@ -69,7 +69,7 @@ agregarAlumnoButton.addEventListener("click", function () {
 
                 <p>
                     El sistema deberá permitir registrar un nuevo
-                    tesista con la información básica necesaria
+                    alumno con la información básica necesaria
                     para incorporarlo al sistema de seguimiento
                     académico.
                 </p>
@@ -89,7 +89,7 @@ agregarAlumnoButton.addEventListener("click", function () {
 
                 <p>
                     Completa todos los campos obligatorios para
-                    registrar el nuevo tesista.
+                    registrar el nuevo alumno.
                 </p>
 
             </div>
@@ -492,7 +492,7 @@ altaUsuarioButton.addEventListener("click", function () {
 
             <p>
                 Si el usuario que deseas registrar es un
-                tesista o egresado, puedes seleccionarlo
+                alumno o egresado, puedes seleccionarlo
                 para dirigirte al alta correspondiente.
             </p>
 
@@ -581,11 +581,11 @@ altaUsuarioButton.addEventListener("click", function () {
                         
                     </div>
 
-                    <strong>Tesista</strong>
+                    <strong>Alumno</strong>
 
                     <span>
                         El usuario es un
-                        tesista del programa.
+                        alumno del programa.
                     </span>
 
                 </button>
@@ -636,7 +636,7 @@ altaUsuarioButton.addEventListener("click", function () {
                 </div>
 
                 <p>
-                    Si seleccionas Tesista o Egresado,
+                    Si seleccionas Alumno o Egresado,
                     serás redirigido al formulario
                     correspondiente para registrar
                     primero sus datos.
@@ -1023,7 +1023,7 @@ listadoUsuariosButton.addEventListener("click", function () {
                             </option>
 
                             <option>
-                                Tesista
+                                Alumno
                             </option>
 
                             <option>
@@ -1352,7 +1352,7 @@ listadoUsuariosButton.addEventListener("click", function () {
                     </div>
 
 
-                    <!-- NOTA TESISTA / EGRESADO -->
+                    <!-- NOTA ALUMNO / EGRESADO -->
 
                     <div class="edit-information-message">
 
@@ -1361,7 +1361,7 @@ listadoUsuariosButton.addEventListener("click", function () {
                         </div>
 
                         <p>
-                            Si seleccionas Tesista o Egresado,
+                            Si seleccionas Alumno o Egresado,
                             serás redirigido al formulario
                             correspondiente para modificación
                             de sus datos.

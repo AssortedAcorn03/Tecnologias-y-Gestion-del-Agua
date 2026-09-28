@@ -1,0 +1,6 @@
+# Artefactos de compilación de .NET
+bin/
+obj/
+
+# Nota: la carpeta Extras/ (credenciales y notas locales) está fuera de
+# este repositorio, como hermana de GAS/, así que no hace falta ignorarla.
