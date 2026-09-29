@@ -1,0 +1,16 @@
+body.security { margin:0; background:#f1f5f9; color:#19314c; font:16px system-ui,sans-serif; }
+.security header { background:#133d69; color:white; padding:24px; }
+.security main { max-width:900px; margin:32px auto; padding:24px; background:white; border-radius:12px; }
+.gas-panel { padding:24px; background:white; color:#19314c; font-family:system-ui,sans-serif; }
+.gas-panel form,.security form { display:grid; gap:14px; margin:20px 0; }
+.gas-panel label,.security label { display:grid; gap:6px; }
+.gas-panel input,.gas-panel select,.security input { padding:10px; border:1px solid #aabaca; border-radius:5px; font:inherit; }
+.gas-panel button,.security button { padding:10px 16px; background:#174a7e; color:white; border:0; border-radius:5px; cursor:pointer; margin:4px; }
+button:disabled { opacity:.5; cursor:wait; }
+.gas-panel .toolbar { display:flex; flex-wrap:wrap; gap:10px; }
+.gas-panel table { width:100%; border-collapse:collapse; }
+.gas-panel th,.gas-panel td { padding:12px; border-bottom:1px solid #dde4ec; text-align:left; }
+.gas-panel .table-scroll { overflow-x:auto; }
+.gas-panel .error,.security [role=status] { color:#96351d; min-height:24px; }
+.gas-panel dialog { border:0; border-radius:12px; width:min(90vw,560px); max-height:90vh; overflow:auto; }
+.gas-panel dialog::backdrop { background:#0008; }
