@@ -1,0 +1,405 @@
+/* ==================================================
+   PANEL DEL ALUMNO
+================================================== */
+
+
+/* ==================================================
+   ESTRUCTURA GENERAL
+================================================== */
+
+.student-panel {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #ffffff;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.student-header {
+    height: 74px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #06256d;
+
+    color: white;
+}
+
+
+/* CONTENEDOR DEL ENCABEZADO */
+
+.student-header-content {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    box-sizing: border-box;
+}
+
+
+/* LOGO */
+
+.student-logo-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.student-logo {
+    width: 150px;
+
+    object-fit: contain;
+}
+
+
+/* TÍTULO */
+
+.student-title-area {
+    flex: 1;
+
+    margin-left: 20px;
+}
+
+.student-title-area h1 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+.student-title-area p {
+    margin: 4px 0 0;
+
+    font-size: 11px;
+
+    opacity: 0.9;
+}
+
+
+/* INFORMACIÓN DEL USUARIO */
+
+.student-user-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.student-user-area span {
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+================================================== */
+
+.student-main {
+    flex: 1;
+
+    display: flex;
+
+    min-height: calc(100vh - 74px);
+}
+
+
+/* ==================================================
+   MENÚ LATERAL
+================================================== */
+
+.student-sidebar {
+    width: 220px;
+
+    flex-shrink: 0;
+
+    padding: 14px 10px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e2e6ed;
+}
+
+
+/* ==================================================
+   ELEMENTOS DEL MENÚ
+================================================== */
+
+.sidebar-item {
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    margin-bottom: 3px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #06256d;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.sidebar-item:hover {
+    background: #f2f6ff;
+}
+
+
+/* ==================================================
+   ELEMENTO ACTIVO
+================================================== */
+
+.sidebar-item.active {
+    background: #edf3ff;
+
+    color: #004bd4;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   ICONOS
+================================================== */
+
+.sidebar-icon {
+    width: 18px;
+
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   FLECHA
+================================================== */
+
+.sidebar-arrow {
+    margin-left: auto;
+
+    font-size: 11px;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* Cuando Tesis está abierto */
+
+.sidebar-item.expanded .sidebar-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ==================================================
+   SUBMENÚ
+================================================== */
+
+.sidebar-submenu {
+    display: none;
+
+    flex-direction: column;
+
+    padding: 2px 0 5px 28px;
+}
+
+.sidebar-submenu.open {
+    display: flex;
+}
+
+
+/* ==================================================
+   ELEMENTOS DEL SUBMENÚ
+================================================== */
+
+.sidebar-subitem {
+    min-height: 36px;
+
+    padding: 0 10px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: transparent;
+
+    color: #06256d;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.sidebar-subitem:hover {
+    background: #f2f6ff;
+}
+
+.sidebar-subitem.active {
+    background: #edf3ff;
+
+    color: #004bd4;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   SEPARADOR
+================================================== */
+
+.sidebar-separator {
+    height: 1px;
+
+    margin: 22px 8px;
+
+    background: #e4e7ec;
+}
+
+
+/* ==================================================
+   CERRAR SESIÓN
+================================================== */
+
+.sidebar-item.logout {
+    color: #e00000;
+
+    margin-top: 3px;
+}
+
+.sidebar-item.logout:hover {
+    background: #fff1f1;
+}
+
+
+/* ==================================================
+   ÁREA DE CONTENIDO
+================================================== */
+
+.student-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 20px 24px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+}
+
+
+/* ==================================================
+   CONTENIDO VACÍO / PLACEHOLDER
+================================================== */
+
+.student-content-placeholder {
+    width: 100%;
+}
+
+.student-content-placeholder h2 {
+    margin: 0;
+
+    color: #102a72;
+
+    font-size: 20px;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 900px) {
+
+    .student-sidebar {
+        width: 190px;
+    }
+
+    .student-title-area h1 {
+        font-size: 16px;
+    }
+
+    .student-title-area p {
+        font-size: 9px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .student-sidebar {
+        width: 170px;
+    }
+
+    .student-header {
+        height: 65px;
+    }
+
+    .student-logo {
+        width: 110px;
+    }
+
+    .student-title-area {
+        margin-left: 10px;
+    }
+
+    .student-title-area h1 {
+        font-size: 13px;
+    }
+
+    .student-title-area p {
+        display: none;
+    }
+
+    .student-content {
+        padding: 15px;
+    }
+
+}
