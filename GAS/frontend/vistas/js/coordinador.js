@@ -18,7 +18,441 @@ const consultarAlumnoButton = document.getElementById("consultarAlumnoButton");
 const altaUsuarioButton = document.getElementById("altaUsuarioButton");
 const listadoUsuariosButton = document.getElementById("listadoUsuariosButton");
 
+// ==================================================
+// EGRESADOS
+// ==================================================
+
+const egresadosMenu = document.getElementById("egresadosMenu");
+const egresadosSubmenu = document.getElementById("egresadosSubmenu");
+const egresadosArrow = document.getElementById("egresadosArrow");
+const registrarEgresadoButton = document.getElementById("registrarEgresadoButton");
+const consultarEgresadoButton = document.getElementById("consultarEgresadoButton");
+const modificarEgresadoButton = document.getElementById("modificarEgresadoButton");
 const contentArea = document.getElementById("contentArea");
+
+// ==================================================
+// MENÚ EGRESADOS
+// ==================================================
+
+egresadosMenu.addEventListener("click", function () {
+
+    const submenuVisible =
+        egresadosSubmenu.style.display === "flex";
+
+    if (submenuVisible) {
+
+        egresadosSubmenu.style.display = "none";
+
+        egresadosArrow.textContent = "⌄";
+
+    } else {
+
+        egresadosSubmenu.style.display = "flex";
+
+        egresadosArrow.textContent = "⌃";
+
+    }
+
+});
+// ==================================================
+// REGISTRAR EGRESADO
+// ==================================================
+
+registrarEgresadoButton.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+
+    // Quitar selección anterior
+    document
+        .querySelectorAll(".sidebar-item, .sidebar-subitem")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+    // Marcar Registrar
+    registrarEgresadoButton.classList.add("active");
+
+    mostrarRegistrarEgresado();
+
+});
+// ==================================================
+// VISTA REGISTRAR EGRESADO
+// ==================================================
+
+function mostrarRegistrarEgresado() {
+
+    contentArea.innerHTML = `
+
+        <div class="graduate-page">
+
+            <!-- ==========================================
+                 ENCABEZADO
+            =========================================== -->
+
+            <div class="graduate-header">
+
+                <h2>
+                    Nuevo egresado
+                </h2>
+
+                <button
+                    type="button"
+                    class="back-button">
+
+                    ← Volver a egresados
+
+                </button>
+
+            </div>
+
+
+            <!-- ==========================================
+                 INFORMACIÓN
+            =========================================== -->
+
+            <div class="graduate-information">
+
+                <span class="information-icon">
+                    i
+                </span>
+
+                <span>
+                    Complete la información del nuevo egresado.
+                    Los campos marcados con
+                    <strong>*</strong>
+                    son obligatorios.
+                </span>
+
+            </div>
+
+
+            <!-- ==========================================
+                 DATOS PERSONALES Y ACADÉMICOS
+            =========================================== -->
+
+            <section class="graduate-card">
+
+                <h3>
+                    Datos personales y académicos
+                </h3>
+
+
+                <!-- IDENTIFICADORES -->
+
+                <div class="graduate-grid two-columns">
+
+                    <div class="form-group">
+
+                        <label>
+                            Identificador único de alumno
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. 201812345">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Clave egresado
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. MTGA-2024-015">
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOMBRE -->
+
+                <div class="graduate-grid three-columns">
+
+                    <div class="form-group">
+
+                        <label>
+                            Nombre(s)
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Juan">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Apellido paterno
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Pérez">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Apellido materno
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. Martínez">
+
+                    </div>
+
+                </div>
+
+
+                <!-- GENERACIÓN -->
+
+                <div class="graduate-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Generación
+                            <span>*</span>
+                        </label>
+
+                        <select>
+
+                            <option value="">
+                                Seleccionar generación
+                            </option>
+
+                            <option>
+                                2022-2024
+                            </option>
+
+                            <option>
+                                2023-2025
+                            </option>
+
+                            <option>
+                                2024-2026
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ======================================
+                     EMPLEO
+                ======================================= -->
+
+                <div class="employment-section">
+
+                    <div class="employment-header">
+
+                        <div>
+
+                            <strong>
+                                ¿El egresado está empleado?
+                            </strong>
+
+                            <span>
+                                Active esta opción si el egresado
+                                cuenta con empleo actual.
+                            </span>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="empleadoEgresado">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="employment-fields">
+
+                        <!-- EMPRESA -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Empresa
+                            </label>
+
+                            <div class="input-with-button">
+
+                                <input
+                                    type="text"
+                                    id="empresaEgresado"
+                                    placeholder="Seleccionar empresa"
+                                    disabled>
+
+                                <button
+                                    type="button"
+                                    class="select-button"
+                                    id="seleccionarEmpresaButton">
+
+                                    ☷
+                                    Seleccionar
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ÁREA Y UBICACIÓN -->
+
+                        <div class="graduate-grid two-columns">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Área profesional
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Ej. Ingeniería y desarrollo"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Ubicación
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Ej. San Luis Potosí, S.L.P."
+                                    disabled>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ======================================
+                     CONTACTO
+                ======================================= -->
+
+                <div class="graduate-grid two-columns contact-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Correo electrónico
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="Ej. juan.perez@correo.com">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Otro medio de contacto
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Ej. 444 123 4567 / LinkedIn / WhatsApp">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 BOTONES
+            =========================================== -->
+
+            <div class="graduate-actions">
+
+                <button
+                    type="button"
+                    class="graduate-cancel-button">
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="graduate-save-button">
+
+                    Guardar egresado
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    // ==========================================
+    // SWITCH DE EMPLEO
+    // ==========================================
+
+    const empleado =
+        document.getElementById("empleadoEgresado");
+
+    const employmentFields =
+        document.querySelector(".employment-fields");
+
+
+    empleado.addEventListener("change", function () {
+
+        if (empleado.checked) {
+
+            employmentFields.classList.add("enabled");
+
+        } else {
+
+            employmentFields.classList.remove("enabled");
+
+        }
+
+    });
+
+}
 // --------------------------------------------------
 // MENÚ ALUMNOS
 // --------------------------------------------------

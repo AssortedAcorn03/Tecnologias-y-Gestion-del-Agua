@@ -2830,3 +2830,501 @@ body {
 .edit-student-panel.active {
     display: flex;
 }
+/* ==================================================
+   REGISTRAR EGRESADO
+================================================== */
+
+.graduate-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.graduate-header {
+    margin-bottom: 14px;
+}
+
+.graduate-header h2 {
+    margin: 0 0 5px;
+
+    color: #102a72;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+
+.back-button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #0645c0;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+
+/* ==================================================
+   INFORMACIÓN
+================================================== */
+
+.graduate-information {
+    min-height: 38px;
+
+    padding: 8px 12px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #cbdcff;
+
+    border-radius: 5px;
+
+    background: #f1f6ff;
+
+    color: #1747a0;
+
+    font-size: 10px;
+}
+
+
+.information-icon {
+    width: 16px;
+
+    height: 16px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.graduate-information strong {
+    color: #e00000;
+}
+
+
+/* ==================================================
+   TARJETA
+================================================== */
+
+.graduate-card {
+    padding: 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+}
+
+
+.graduate-card h3 {
+    margin: 0 0 13px;
+
+    color: #06256d;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   GRID
+================================================== */
+
+.graduate-grid {
+    display: grid;
+
+    gap: 12px 16px;
+
+    margin-bottom: 12px;
+}
+
+
+.graduate-grid.two-columns {
+    grid-template-columns:
+        repeat(2, 1fr);
+}
+
+
+.graduate-grid.three-columns {
+    grid-template-columns:
+        repeat(3, 1fr);
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.form-group {
+    min-width: 0;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #06256d;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.form-group label span {
+    color: #e00000;
+}
+
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 32px;
+
+    padding: 0 9px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #0b4edb;
+
+    box-shadow:
+        0 0 0 2px rgba(11, 78, 219, 0.07);
+}
+
+
+.form-group input::placeholder {
+    color: #9aa5b5;
+}
+
+
+/* ==================================================
+   EMPLEO
+================================================== */
+
+.employment-section {
+    margin: 3px 0 12px;
+
+    padding: 10px;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 5px;
+
+    background: #fbfcfe;
+}
+
+
+.employment-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 12px;
+}
+
+
+.employment-header > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.employment-header strong {
+    color: #06256d;
+
+    font-size: 10px;
+}
+
+
+.employment-header span {
+    color: #8a94a5;
+
+    font-size: 8px;
+}
+
+
+/* ==================================================
+   SWITCH
+================================================== */
+
+.switch {
+    position: relative;
+
+    width: 38px;
+
+    height: 20px;
+
+    flex-shrink: 0;
+
+    cursor: pointer;
+}
+
+
+.switch input {
+    display: none;
+}
+
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 20px;
+
+    background: #d6dce6;
+
+    transition: 0.2s;
+}
+
+
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 16px;
+
+    height: 16px;
+
+    left: 2px;
+
+    top: 2px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition: 0.2s;
+}
+
+
+.switch input:checked + .slider {
+    background: #0b4edb;
+}
+
+
+.switch input:checked + .slider::before {
+    transform: translateX(18px);
+}
+
+
+/* ==================================================
+   CAMPOS DE EMPLEO
+================================================== */
+
+.employment-fields {
+    opacity: 0.55;
+}
+
+
+.employment-fields.enabled {
+    opacity: 1;
+}
+
+
+.input-with-button {
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.input-with-button input {
+    flex: 1;
+}
+
+
+.select-button {
+    min-width: 78px;
+
+    height: 32px;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.select-button:hover {
+    border-color: #0b4edb;
+
+    color: #0645c0;
+}
+
+
+/* ==================================================
+   CONTACTO
+================================================== */
+
+.contact-grid {
+    margin-top: 2px;
+
+    margin-bottom: 0;
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.graduate-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    margin-top: 9px;
+
+    margin-bottom: 20px;
+}
+
+
+.graduate-cancel-button,
+.graduate-save-button {
+    min-width: 115px;
+
+    height: 34px;
+
+    padding: 0 15px;
+
+    border-radius: 4px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.graduate-cancel-button {
+    border: 1px solid #0b4edb;
+
+    background: #ffffff;
+
+    color: #0645c0;
+}
+
+
+.graduate-cancel-button:hover {
+    background: #f1f6ff;
+}
+
+
+.graduate-save-button {
+    border: 1px solid #0b4edb;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+}
+
+
+.graduate-save-button:hover {
+    background: #063eaf;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .graduate-grid.two-columns,
+    .graduate-grid.three-columns {
+        grid-template-columns: 1fr;
+    }
+
+
+    .graduate-actions {
+        flex-direction: column;
+    }
+
+
+    .graduate-cancel-button,
+    .graduate-save-button {
+        width: 100%;
+    }
+
+}
