@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,77 +9,122 @@
 
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/alumno.css">
-<link rel="stylesheet" href="css/seguridad.css"></head>
+</head>
 
 <body>
 
-    <!-- =========================
-         ENCABEZADO
-    ========================== -->
-    <header class="top-header">
+    <div class="student-panel">
 
-        <div class="header-left">
+        <!-- =========================
+             ENCABEZADO
+        ========================== -->
 
-            <div class="university-logo">
-                <img src="images/logoUASLP.PNG" alt="UASLP">
+        <header class="student-header">
+
+            <div class="student-header-content">
+
+                <div class="student-logo-area">
+
+                    <img
+                        class="student-logo"
+                        src="images/logoUASLP.PNG"
+                        alt="UASLP">
+
+                </div>
+
+
+                <div class="student-title-area">
+
+                    <h1>
+                        PORTAL DEL ALUMNO
+                    </h1>
+
+                    <p>
+                        MAESTRÍA EN TECNOLOGÍA Y GESTIÓN DEL AGUA
+                    </p>
+
+                </div>
+
+
+                <div class="student-user-area">
+
+                    <div class="user-icon">
+                    </div>
+
+                    <div class="user-information">
+
+                        <strong>
+                            Nombre
+                        </strong>
+
+                        <span>
+                            Alumno
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="user-menu-button"
+                        type="button">
+
+                        ▼
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <div class="portal-title">
-                <h1>PORTAL DEL ALUMNO</h1>
-                <p>MAESTRÍA EN TECNOLOGÍA Y GESTIÓN DEL AGUA</p>
-            </div>
-
-        </div>
+        </header>
 
 
-        <div class="user-area">
+        <!-- =========================
+             CONTENIDO PRINCIPAL
+        ========================== -->
 
-            <div class="user-icon">
-            </div>
-
-            <div class="user-information">
-                <strong>Nombre</strong>
-                <span>Alumno</span>
-            </div>
-
-            <button class="user-menu-button" type="button">
-                ▼
-            </button>
-
-        </div>
-
-    </header>
+        <div class="student-main">
 
 
-    <!-- =========================
-         ESTRUCTURA PRINCIPAL
-    ========================== -->
-    <div class="dashboard">
+            <!-- =========================
+                 MENÚ LATERAL
+            ========================== -->
+
+            <aside class="student-sidebar">
 
 
-       <!-- ==================================================
-     MENÚ LATERAL - ALUMNO
-================================================== -->
+                <!-- INICIO -->
 
-<aside class="sidebar">
+                <button
+                    class="sidebar-item"
+                    id="inicioAlumnoButton">
 
-    <!-- INICIO -->
+                    <span class="sidebar-icon"></span>
 
-    <button class="sidebar-item" id="inicioAlumnoButton">
-        <span class="sidebar-icon"></span>
-        <span>Inicio</span>
-    </button>
+                    <span>
+                        Inicio
+                    </span>
 
-
-    <!-- MI PERFIL -->
-
-    <button class="sidebar-item" id="perfilAlumnoButton">
-        <span class="sidebar-icon"></span>
-        <span>Mi perfil</span>
-    </button>
+                </button>
 
 
-    <!-- TESIS -->
+                <!-- MI PERFIL -->
+
+                <button
+                    class="sidebar-item"
+                    id="perfilAlumnoButton">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Mi perfil
+                    </span>
+
+                </button>
+
+
+               <!-- TESIS -->
+
+<div id="tesisSection" class="tesis-section">
 
     <button
         class="sidebar-item"
@@ -91,13 +137,11 @@
         <span
             class="sidebar-arrow"
             id="tesisArrow">
-            ˄
+            ⌄
         </span>
 
     </button>
 
-
-    <!-- SUBMENU TESIS -->
 
     <div
         class="sidebar-submenu"
@@ -112,100 +156,95 @@
 
         </button>
 
+    </div>
 
-        <button
-            class="sidebar-subitem"
-            id="comiteTutorialButton">
+</div>
 
-            Comité tutorial
+                <!-- ENCUESTAS -->
 
-        </button>
+                <button
+                    class="sidebar-item"
+                    id="encuestasButton">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Encuestas y formularios
+                    </span>
+
+                </button>
+
+
+                <!-- REPORTES -->
+
+                <button
+                    class="sidebar-item"
+                    id="reportesAlumnoButton">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Reportes
+                    </span>
+
+                </button>
+
+
+                <!-- SEPARADOR -->
+
+                <div class="sidebar-separator"></div>
+
+
+                <!-- AYUDA -->
+
+                <button
+                    class="sidebar-item"
+                    id="ayudaAlumnoButton">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Ayuda
+                    </span>
+
+                </button>
+
+
+                <!-- CERRAR SESIÓN -->
+
+                <button
+                    class="sidebar-item logout"
+                    id="cerrarSesionAlumnoButton">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Cerrar sesión
+                    </span>
+
+                </button>
+
+
+            </aside>
+
+
+            <!-- =========================
+                 ÁREA DE CONTENIDO
+            ========================== -->
+
+            <main
+                class="student-content"
+                id="contentArea">
+
+            </main>
+
+
+        </div>
 
     </div>
 
 
-    <!-- ENCUESTAS -->
-
-    <button
-        class="sidebar-item"
-        id="encuestasButton">
-
-        <span class="sidebar-icon"></span>
-
-        <span>
-            Encuestas y formularios
-        </span>
-
-    </button>
-
-
-    <!-- REPORTES -->
-
-    <button
-        class="sidebar-item"
-        id="reportesAlumnoButton">
-
-        <span class="sidebar-icon"></span>
-
-        <span>
-            Reportes
-        </span>
-
-    </button>
-
-
-    <!-- SEPARADOR -->
-
-    <div class="sidebar-separator"></div>
-
-
-    <!-- AYUDA -->
-
-    <button
-        class="sidebar-item"
-        id="ayudaAlumnoButton">
-
-        <span class="sidebar-icon"></span>
-
-        <span>Ayuda</span>
-
-    </button>
-
-
-    <!-- CERRAR SESIÓN -->
-
-    <button
-        class="sidebar-item logout"
-        id="cerrarSesionAlumnoButton">
-
-        <span class="sidebar-icon"></span>
-
-        <span>Cerrar sesión</span>
-
-    </button>
-
-</aside>
-
-        </aside>
-
-
-        <!-- =========================
-             ÁREA DE CONTENIDO
-        ========================== -->
-        <main class="content" id="contentArea">
-
-            <!--
-                Inicialmente esta área queda vacía.
-                El contenido aparecerá cuando
-                seleccionemos una opción del menú.
-            -->
-
-        </main>
-
-    </div>
-
-
-    <script src="js/api.js"></script><script src="js/sesion.js"></script><script src="js/coordinador.js"></script><script src="js/usuarios.js"></script>
+    <script src="js/alumno.js"></script>
 
 </body>
 </html>

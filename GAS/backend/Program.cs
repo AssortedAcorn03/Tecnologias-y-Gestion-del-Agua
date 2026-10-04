@@ -5,8 +5,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.RateLimiting;
+using Microsoft.Extensions.FileProviders;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    WebRootPath = "../frontend/vistas"
+});
 var connectionString = builder.Configuration.GetConnectionString("GasDb")
     ?? throw new InvalidOperationException("Configura ConnectionStrings:GasDb con dotnet user-secrets.");
 builder.Services.AddDbContext<GasDbContext>(options => options.UseMySQL(connectionString));

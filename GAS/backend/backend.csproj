@@ -5,8 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>61228dc0-c906-4a1f-82a8-b5cd9f4f1ed8</UserSecretsId>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+     <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
   </PropertyGroup>
-
+   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">

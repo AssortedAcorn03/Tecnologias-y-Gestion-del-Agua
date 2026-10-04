@@ -351,6 +351,7 @@
 }
 
 
+
 /* ==================================================
    RESPONSIVE
 ================================================== */
@@ -400,6 +401,1002 @@
 
     .student-content {
         padding: 15px;
+    }
+
+}
+/* ==================================================
+   MI PERFIL
+================================================== */
+
+.profile-page {
+    width: 100%;
+    max-width: 1100px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   ENCABEZADO DEL PERFIL
+================================================== */
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-header h2 {
+    margin: 0 0 6px;
+
+    color: #102a72;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.profile-header p {
+    margin: 0;
+
+    color: #4f5d75;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   TARJETA DE INFORMACIÓN
+================================================== */
+
+.profile-card {
+    width: 100%;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 6px;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+
+    margin-bottom: 20px;
+}
+
+
+/* TÍTULO DE LA TARJETA */
+
+.profile-card-title {
+    margin-bottom: 20px;
+
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+.profile-card-title h3 {
+    margin: 0;
+
+    color: #06256d;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.profile-fields {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px 20px;
+}
+
+
+.profile-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.profile-field label {
+    color: #06256d;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.profile-field input {
+    width: 100%;
+
+    height: 38px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dce2eb;
+
+    border-radius: 5px;
+
+    background: #f8f9fb;
+
+    color: #33415c;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+/* ==================================================
+   OPCIONES
+================================================== */
+
+.profile-options {
+    width: 100%;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 6px;
+}
+
+
+/* TÍTULO */
+
+.profile-options-title {
+    margin-bottom: 18px;
+}
+
+.profile-options-title h3 {
+    margin: 0;
+
+    color: #06256d;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.profile-buttons {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.profile-action-button {
+    min-width: 220px;
+
+    min-height: 40px;
+
+    padding: 0 18px;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    color: #0645c0;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.profile-action-button:hover {
+    background: #0b4edb;
+
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 850px) {
+
+    .profile-fields {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-fields {
+        grid-template-columns: 1fr;
+    }
+
+
+    .profile-buttons {
+        flex-direction: column;
+    }
+
+
+    .profile-action-button {
+        width: 100%;
+    }
+
+}
+.tesis-section {
+    display: none;
+}
+
+.tesis-section.visible {
+    display: block;
+}
+/* ==================================================
+   AGREGAR ESTADO DE TITULACIÓN
+================================================== */
+
+.degree-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+.degree-header {
+    margin-bottom: 20px;
+}
+
+
+.degree-header h2 {
+    margin: 0 0 6px;
+
+    color: #102a72;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+
+.degree-header p {
+    margin: 0;
+
+    color: #4f5d75;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   TARJETA
+================================================== */
+
+.degree-card {
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 6px;
+}
+
+
+.degree-card h3 {
+    margin: 0 0 8px;
+
+    color: #06256d;
+
+    font-size: 15px;
+}
+
+
+.degree-description {
+    margin: 0 0 20px;
+
+    color: #5d687b;
+
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   OPCIONES
+================================================== */
+
+.degree-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.degree-option {
+    min-height: 110px;
+
+    padding: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #dce2eb;
+
+    border-radius: 6px;
+
+    color: #06256d;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.degree-option:hover {
+    border-color: #0b4edb;
+
+    background: #f5f8ff;
+}
+
+
+.degree-option strong {
+    font-size: 13px;
+}
+
+
+.degree-option span {
+    color: #5d687b;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+@media (max-width: 700px) {
+
+    .degree-options {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ==================================================
+   MI TESIS
+================================================== */
+
+.thesis-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.thesis-header {
+    margin-bottom: 18px;
+}
+
+.thesis-header h2 {
+    margin: 0 0 6px;
+
+    color: #102a72;
+
+    font-size: 23px;
+
+    font-weight: 600;
+}
+
+.thesis-header p {
+    margin: 0;
+
+    color: #4f5d75;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   TARJETAS
+================================================== */
+
+.thesis-card {
+    width: 100%;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 7px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ==================================================
+   ENCABEZADO DE TARJETA
+================================================== */
+
+.thesis-card-header {
+    margin-bottom: 18px;
+}
+
+.thesis-card-header h3 {
+    margin: 0 0 7px;
+
+    color: #0645c0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+.thesis-card-header p {
+    margin: 0;
+
+    color: #52617a;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   DATOS DEL TESISTA
+================================================== */
+
+.thesis-student-fields {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+.thesis-readonly-field {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.thesis-readonly-field label {
+    width: 145px;
+
+    flex-shrink: 0;
+
+    color: #06256d;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.readonly-wrapper {
+    position: relative;
+
+    flex: 1;
+}
+
+
+.readonly-wrapper input {
+    width: 100%;
+
+    height: 39px;
+
+    padding: 0 40px 0 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 5px;
+
+    background: #f6f7f9;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+.readonly-icon {
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 12px;
+
+    opacity: 0.6;
+}
+
+
+/* ==================================================
+   FORMULARIO DE TESIS
+================================================== */
+
+.thesis-form-group {
+    position: relative;
+
+    margin-bottom: 20px;
+}
+
+.thesis-form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+.thesis-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #06256d;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.thesis-form-group label span {
+    color: #e00000;
+}
+
+
+/* INPUT */
+
+.thesis-form-group input[type="text"] {
+    width: 100%;
+
+    height: 39px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    color: #33415c;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+.thesis-form-group input[type="text"]:focus {
+    border-color: #0b4edb;
+
+    box-shadow: 0 0 0 2px rgba(11, 78, 219, 0.08);
+}
+
+
+/* TEXTAREA */
+
+.thesis-form-group textarea {
+    width: 100%;
+
+    min-height: 80px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    resize: vertical;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    color: #33415c;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+.thesis-form-group textarea:focus {
+    border-color: #0b4edb;
+
+    box-shadow: 0 0 0 2px rgba(11, 78, 219, 0.08);
+}
+
+
+/* ==================================================
+   CONTADOR DE CARACTERES
+================================================== */
+
+.character-counter {
+    margin-top: 5px;
+
+    color: #69758a;
+
+    font-size: 9px;
+
+    text-align: right;
+}
+
+
+/* ==================================================
+   CARGA DE ARCHIVO
+================================================== */
+
+.file-upload-area {
+    min-height: 65px;
+
+    padding: 10px 14px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border: 1px dashed #bfc9da;
+
+    border-radius: 5px;
+
+    background: #fbfcfe;
+}
+
+
+.file-upload-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.upload-icon {
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #edf3ff;
+
+    color: #0b4edb;
+
+    font-size: 20px;
+}
+
+
+.file-upload-info strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #173d85;
+
+    font-size: 11px;
+}
+
+
+.file-upload-info span {
+    display: block;
+
+    color: #68758a;
+
+    font-size: 9px;
+}
+
+
+/* BOTÓN EXAMINAR */
+
+.browse-button {
+    min-width: 82px;
+
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    color: #0645c0;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.browse-button:hover {
+    background: #edf3ff;
+}
+
+
+/* ARCHIVO SELECCIONADO */
+
+.selected-file-name {
+    margin-top: 7px;
+
+    color: #52617a;
+
+    font-size: 10px;
+}
+
+
+/* ==================================================
+   ESTADO DE SEGUIMIENTO
+================================================== */
+
+.thesis-followup-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px 25px;
+}
+
+
+/* ==================================================
+   AVISO
+================================================== */
+
+.thesis-information {
+    margin-top: 18px;
+
+    padding: 11px 13px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    border: 1px solid #cbdcff;
+
+    border-radius: 5px;
+
+    background: #f2f6ff;
+
+    color: #1747a0;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+.thesis-information-icon {
+    width: 17px;
+
+    height: 17px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   BOTONES FINALES
+================================================== */
+
+.thesis-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 5px;
+
+    margin-bottom: 25px;
+}
+
+
+.thesis-cancel-button,
+.thesis-save-button {
+    min-width: 125px;
+
+    height: 40px;
+
+    padding: 0 18px;
+
+    border-radius: 5px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* CANCELAR */
+
+.thesis-cancel-button {
+    border: 1px solid #0b4edb;
+
+    background: #ffffff;
+
+    color: #0645c0;
+}
+
+
+.thesis-cancel-button:hover {
+    background: #edf3ff;
+}
+
+
+/* REGISTRAR */
+
+.thesis-save-button {
+    border: 1px solid #0b4edb;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+}
+
+
+.thesis-save-button:hover {
+    background: #063eaf;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 750px) {
+
+    .thesis-readonly-field {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+
+    .thesis-readonly-field label {
+        width: auto;
+    }
+
+
+    .thesis-followup-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .file-upload-area {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .browse-button {
+        width: 100%;
+    }
+
+
+    .thesis-actions {
+        flex-direction: column;
+    }
+
+
+    .thesis-cancel-button,
+    .thesis-save-button {
+        width: 100%;
     }
 
 }
