@@ -1,1 +1,46 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Recuperar acceso</title><link rel="stylesheet" href="css/seguridad.css"></head><body class="security"><header>UASLP · Plataforma de Posgrado en Agua</header><main><h1>Recuperar acceso</h1><p>Recibe por correo un enlace para restablecer tu contraseña.</p><form id="recuperar"><label>Correo electrónico<input id="correo" type="email" maxlength="100" autocomplete="email" required></label><button>Enviar instrucciones</button></form><form id="restablecer" hidden><label>Nueva contraseña (12 a 128 caracteres, letras y números)<input id="nueva" type="password" minlength="12" maxlength="128" autocomplete="new-password" required></label><label>Confirmar contraseña<input id="confirmacion" type="password" autocomplete="new-password" required></label><button>Guardar contraseña</button></form><p role="status" id="mensaje"></p><a href="login.html">Volver al inicio de sesión</a></main><script src="js/api.js"></script><script src="js/recuperar.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Recuperar acceso</title>
+  <link rel="stylesheet" href="css/seguridad.css">
+</head>
+<body class="security">
+  <header>UASLP · Plataforma de Posgrado en Agua</header>
+
+  <main>
+    <h1>Recuperar acceso</h1>
+    <p>Recibe por correo un enlace para restablecer tu contraseña.</p>
+
+    <!-- Formulario para solicitar el enlace de recuperación -->
+    <form id="recuperar">
+      <label>
+        Correo electrónico
+        <input id="correo" type="email" maxlength="100" autocomplete="email" required>
+      </label>
+      <button type="submit">Enviar instrucciones</button>
+    </form>
+
+    <!-- Formulario para ingresar la nueva contraseña (oculto por defecto) -->
+    <form id="restablecer" hidden>
+      <label>
+        Nueva contraseña (12 a 128 caracteres, letras y números)
+        <input id="nueva" type="password" minlength="12" maxlength="128" autocomplete="new-password" required>
+      </label>
+      <label>
+        Confirmar contraseña
+        <input id="confirmacion" type="password" autocomplete="new-password" required>
+      </label>
+      <button type="submit">Guardar contraseña</button>
+    </form>
+
+    <p role="status" id="mensaje"></p>
+    <a href="login.html">Volver al inicio de sesión</a>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/recuperar.js"></script>
+</body>
+</html>
