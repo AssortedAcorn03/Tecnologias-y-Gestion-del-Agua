@@ -1,0 +1,226 @@
+/* ==================================================
+   PANEL DEL egresado
+================================================== */
+
+
+/* ==================================================
+   ESTRUCTURA GENERAL
+================================================== */
+
+.student-panel {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #ffffff;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.student-header {
+    height: 74px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #06256d;
+
+    color: white;
+}
+
+
+/* CONTENEDOR DEL ENCABEZADO */
+
+.student-header-content {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    box-sizing: border-box;
+}
+
+
+/* LOGO */
+
+.student-logo-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.student-logo {
+    width: 150px;
+
+    object-fit: contain;
+}
+
+
+/* TÍTULO */
+
+.student-title-area {
+    flex: 1;
+
+    margin-left: 20px;
+}
+
+.student-title-area h1 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+.student-title-area p {
+    margin: 4px 0 0;
+
+    font-size: 11px;
+
+    opacity: 0.9;
+}
+
+
+/* INFORMACIÓN DEL USUARIO */
+
+.student-user-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.student-user-area span {
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+================================================== */
+
+.student-main {
+    flex: 1;
+
+    display: flex;
+
+    min-height: calc(100vh - 74px);
+}
+
+
+/* ==================================================
+   MENÚ LATERAL
+================================================== */
+
+.student-sidebar {
+    width: 220px;
+
+    flex-shrink: 0;
+
+    padding: 14px 10px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e2e6ed;
+}
+
+
+/* ==================================================
+   ELEMENTOS DEL MENÚ
+================================================== */
+
+.sidebar-item {
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    margin-bottom: 3px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #06256d;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.sidebar-item:hover {
+    background: #f2f6ff;
+}
+
+
+/* ==================================================
+   ELEMENTO ACTIVO
+================================================== */
+
+.sidebar-item.active {
+    background: #edf3ff;
+
+    color: #004bd4;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   ICONOS
+================================================== */
+
+.sidebar-icon {
+    width: 18px;
+
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   FLECHA
+================================================== */
+
+.sidebar-arrow {
+    margin-left: auto;
+
+    font-size: 11px;
+
+    transition: transform 0.2s ease;
+}
