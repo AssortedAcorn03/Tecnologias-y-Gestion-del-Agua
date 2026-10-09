@@ -4,7 +4,12 @@ body.security { margin:0; background:#f1f5f9; color:#19314c; font:16px system-ui
 .gas-panel { padding:24px; background:white; color:#19314c; font-family:system-ui,sans-serif; }
 .gas-panel form,.security form { display:grid; gap:14px; margin:20px 0; }
 .gas-panel label,.security label { display:grid; gap:6px; }
-.gas-panel input,.gas-panel select,.security input { padding:10px; border:1px solid #aabaca; border-radius:5px; font:inherit; }
+.gas-panel input,.gas-panel select,.gas-panel textarea,.security input { padding:10px; border:1px solid #aabaca; border-radius:5px; font:inherit; }
+/* El lote de claves se pega desde una hoja de cálculo: ancho completo y sin redimensionado lateral. */
+.gas-panel textarea { width:100%; resize:vertical; }
+/* Agrupadores del diálogo de alta de alumnos. */
+.gas-panel fieldset { border:1px solid #d3dde6; border-radius:8px; margin:0 0 12px; padding:12px; }
+.gas-panel fieldset legend { padding:0 6px; font-weight:600; }
 .gas-panel button,.security button { padding:10px 16px; background:#174a7e; color:white; border:0; border-radius:5px; cursor:pointer; margin:4px; }
 button:disabled { opacity:.5; cursor:wait; }
 .gas-panel .toolbar { display:flex; flex-wrap:wrap; gap:10px; }

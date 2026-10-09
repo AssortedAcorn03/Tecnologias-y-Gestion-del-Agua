@@ -13,6 +13,24 @@ public static class Seguridad
     public static string Token() => Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
     public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(token)));
     public static bool PasswordValida(string? p) => p is { Length: >= 12 and <= 128 } && p.Any(char.IsLetter) && p.Any(char.IsDigit);
+
+    // Alfabeto sin caracteres ambiguos (O/0, l/1/I): estas contraseñas se dictan
+    // o se transcriben a mano, así que confundirlos cuesta un intento fallido.
+    private const string AlfabetoInicial = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+    /// <summary>
+    /// Contraseña inicial legible para una cuenta recién creada: 16 caracteres en
+    /// grupos de cuatro separados por guiones. Se valida con el MISMO predicado que
+    /// usa el login, así que el generador no puede producir algo que el sistema
+    /// rechace. Se entrega una sola vez y la cuenta nace con requiere_cambio.
+    /// </summary>
+    public static string PasswordInicial() {
+        while (true) {
+            var c = RandomNumberGenerator.GetString(AlfabetoInicial, 16);
+            var p = string.Join('-', c[..4], c[4..8], c[8..12], c[12..]);
+            if (PasswordValida(p)) return p;   // en la práctica acierta al primer intento
+        }
+    }
     public static bool Verificar(usuario u, string p) {
         try { return new PasswordHasher<usuario>().VerifyHashedPassword(u, u.contrasena_hash, p) != PasswordVerificationResult.Failed; }
         catch (FormatException) { return false; }

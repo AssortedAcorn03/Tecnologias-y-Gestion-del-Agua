@@ -110,6 +110,26 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         return Ok(new { mensaje = "Usuario desactivado. Su información se conservó." });
     }
 
+    // Sin SMTP configurado, /api/auth/recuperar responde 503, así que una contraseña
+    // extraviada dejaría la cuenta inservible. Esto la repone: la muestra una sola vez,
+    // fuerza el cambio al entrar y cierra las sesiones abiertas de esa cuenta.
+    [HttpPost("{id:int}/password-temporal")]
+    public async Task<IActionResult> PasswordTemporal(int id) {
+        await using var tx = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.ReadCommitted);
+        await Candado();
+        var u = (await db.usuarios.FromSqlInterpolated($"SELECT * FROM usuario WHERE id_usuario = {id} FOR UPDATE").ToListAsync()).SingleOrDefault();
+        if (u == null) return NotFound();
+        if (u.activo != true) return BadRequest(new { mensaje = "La cuenta está desactivada. Reactívala antes de reponer su contraseña." });
+        var password = Seguridad.PasswordInicial();
+        u.contrasena_hash = new PasswordHasher<usuario>().HashPassword(u, password);
+        u.requiere_cambio = true;
+        u.intentos_fallidos = 0;
+        u.bloqueado_hasta = null;
+        await Seguridad.Invalidar(db, id);
+        await db.SaveChangesAsync(); await tx.CommitAsync();
+        return Ok(new { passwordInicial = password, mensaje = "Contraseña temporal generada. Entrégala por un medio seguro; se muestra una sola vez." });
+    }
+
     private static void Aplicar(usuario u, UsuarioInput i) {
         u.correo = i.Correo.Trim().ToLowerInvariant(); u.nombre = i.Nombre.Trim();
         u.clave_institucional = string.IsNullOrWhiteSpace(i.ClaveInstitucional) ? null : i.ClaveInstitucional.Trim().ToUpperInvariant();

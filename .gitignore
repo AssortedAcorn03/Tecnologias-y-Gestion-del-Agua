@@ -8,3 +8,9 @@ GAS/frontend/.env*
 
 # Material local: credenciales, notas y borradores. No se versiona.
 Extras/
+
+# Guía de pruebas de la importación: material de trabajo interno, no se sube.
+# Ya queda cubierta por Extras/, pero se nombra aquí para que siga ignorada
+# si alguien la mueve de carpeta.
+GUIA_PRUEBAS_IMPORTACION.md
+**/GUIA_PRUEBAS_IMPORTACION.md
