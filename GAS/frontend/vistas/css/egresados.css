@@ -1,0 +1,875 @@
+/* ==================================================
+   PANEL DEL egresado
+================================================== */
+
+
+/* ==================================================
+   ESTRUCTURA GENERAL
+================================================== */
+
+.student-panel {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #ffffff;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.student-header {
+    height: 74px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #06256d;
+
+    color: white;
+}
+
+
+/* CONTENEDOR DEL ENCABEZADO */
+
+.student-header-content {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    box-sizing: border-box;
+}
+
+
+/* LOGO */
+
+.student-logo-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.student-logo {
+    width: 150px;
+
+    object-fit: contain;
+}
+
+
+/* TÍTULO */
+
+.student-title-area {
+    flex: 1;
+
+    margin-left: 20px;
+}
+
+.student-title-area h1 {
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+.student-title-area p {
+    margin: 4px 0 0;
+
+    font-size: 11px;
+
+    opacity: 0.9;
+}
+
+
+/* INFORMACIÓN DEL USUARIO */
+
+.student-user-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.student-user-area span {
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+================================================== */
+
+.student-main {
+    flex: 1;
+
+    display: flex;
+
+    min-height: calc(100vh - 74px);
+}
+
+
+/* ==================================================
+   MENÚ LATERAL
+================================================== */
+
+.student-sidebar {
+    width: 220px;
+
+    flex-shrink: 0;
+
+    padding: 14px 10px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e2e6ed;
+}
+
+
+/* ==================================================
+   ELEMENTOS DEL MENÚ
+================================================== */
+
+.sidebar-item {
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    margin-bottom: 3px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #06256d;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.sidebar-item:hover {
+    background: #f2f6ff;
+}
+
+
+/* ==================================================
+   ELEMENTO ACTIVO
+================================================== */
+
+.sidebar-item.active {
+    background: #edf3ff;
+
+    color: #004bd4;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   ICONOS
+================================================== */
+
+.sidebar-icon {
+    width: 18px;
+
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   FLECHA
+================================================== */
+
+.sidebar-arrow {
+    margin-left: auto;
+
+    font-size: 11px;
+
+    transition: transform 0.2s ease;
+}
+/* ==================================================
+   PERFIL DEL EGRESADO
+================================================== */
+
+.graduate-profile-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+/* ==================================================
+   ENCABEZADO DEL PERFIL
+================================================== */
+
+.graduate-profile-header {
+    margin-bottom: 16px;
+}
+
+.graduate-profile-header h2 {
+    margin: 0 0 5px;
+
+    color: #06256d;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.graduate-profile-header p {
+    margin: 0;
+
+    color: #52617a;
+
+    font-size: 10px;
+}
+
+
+/* ==================================================
+   TARJETAS
+================================================== */
+
+.graduate-profile-card {
+    margin-bottom: 15px;
+
+    padding: 18px;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   ENCABEZADO DE TARJETA
+================================================== */
+
+.graduate-profile-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.graduate-profile-card-header h3 {
+    margin: 0 0 4px;
+
+    color: #06256d;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.graduate-profile-card-header p {
+    margin: 0;
+
+    color: #66758c;
+
+    font-size: 9px;
+}
+
+
+/* ==================================================
+   GRID DE INFORMACIÓN
+================================================== */
+
+.graduate-profile-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px 20px;
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.graduate-profile-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.graduate-profile-field label {
+    color: #06256d;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.graduate-profile-field input {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #f8f9fb;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+/* Campos bloqueados */
+
+.graduate-profile-field input:read-only {
+    cursor: default;
+}
+
+
+/* ==================================================
+   BOTÓN ACTUALIZAR
+================================================== */
+
+.graduate-profile-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 20px;
+}
+
+
+.graduate-update-button {
+    min-width: 115px;
+
+    height: 32px;
+
+    padding: 0 14px;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 4px;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.graduate-update-button:hover {
+    background: #063eaf;
+
+    border-color: #063eaf;
+}
+
+
+/* ==================================================
+   BOTÓN EN ENCABEZADO
+================================================== */
+
+.graduate-profile-card-header
+.graduate-update-button {
+    margin-left: 20px;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 750px) {
+
+    .graduate-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graduate-profile-card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .graduate-profile-card-header
+    .graduate-update-button {
+        margin-left: 0;
+    }
+
+}
+/* ==================================================
+   ACTUALIZACIÓN DE DATOS PERSONALES
+================================================== */
+
+.graduate-update-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.graduate-update-header {
+    margin-bottom: 15px;
+}
+
+.graduate-update-header h2 {
+    margin: 0 0 5px;
+
+    color: #06256d;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.graduate-update-header p {
+    margin: 0;
+
+    color: #52617a;
+
+    font-size: 10px;
+}
+
+
+/* ==================================================
+   AVISO INFORMATIVO
+================================================== */
+
+.graduate-update-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 36px;
+
+    margin-bottom: 15px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5e2fb;
+
+    border-radius: 5px;
+
+    background: #eff5ff;
+
+    color: #0645b8;
+
+    font-size: 9px;
+}
+
+
+.graduate-info-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 15px;
+
+    height: 15px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #1460d9;
+
+    border-radius: 50%;
+
+    color: #1460d9;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   TARJETA
+================================================== */
+
+.graduate-update-card {
+    padding: 15px;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+.graduate-update-card h3 {
+    margin: 0 0 18px;
+
+    color: #06256d;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   GRID
+================================================== */
+
+.graduate-update-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px 20px;
+}
+
+
+/* ==================================================
+   CAMPOS
+================================================== */
+
+.graduate-update-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.graduate-field-full {
+    grid-column: 1 / -1;
+}
+
+
+.graduate-update-field label {
+    color: #06256d;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.graduate-update-field label span {
+    color: #e53935;
+}
+
+
+.graduate-update-field input {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d8dee8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+.graduate-update-field input:focus {
+    border-color: #2364d2;
+
+    box-shadow: 0 0 0 2px rgba(35, 100, 210, 0.08);
+}
+
+
+/* ==================================================
+   CAMPO BLOQUEADO
+================================================== */
+
+.graduate-input-lock {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.graduate-input-lock input {
+    background: #f1f3f6;
+
+    color: #68758a;
+
+    padding-right: 35px;
+}
+
+
+.graduate-input-lock span {
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 10px;
+
+    color: #6d7889;
+}
+
+
+.graduate-update-field small {
+    color: #65738a;
+
+    font-size: 8px;
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.graduate-update-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+
+.graduate-cancel-button,
+.graduate-save-button {
+    height: 32px;
+
+    padding: 0 16px;
+
+    border-radius: 4px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+/* CANCELAR */
+
+.graduate-cancel-button {
+    border: 1px solid #2364d2;
+
+    background: #ffffff;
+
+    color: #0645b8;
+}
+
+
+.graduate-cancel-button:hover {
+    background: #f2f6ff;
+}
+
+
+/* AGREGAR CAMBIOS */
+
+.graduate-save-button {
+    border: 1px solid #0b4edb;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+}
+
+
+.graduate-save-button:hover {
+    background: #063eaf;
+
+    border-color: #063eaf;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .graduate-update-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graduate-field-full {
+        grid-column: auto;
+    }
+
+}
+/* ==================================================
+   SELECT DE ACTUALIZACIÓN LABORAL
+================================================== */
+
+.graduate-update-select {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d8dee8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+.graduate-update-select:focus {
+    border-color: #2364d2;
+
+    box-shadow: 0 0 0 2px rgba(35, 100, 210, 0.08);
+}
+
+
+/* ==================================================
+   CAMPOS DESHABILITADOS
+================================================== */
+
+.graduate-update-field input:disabled,
+.graduate-update-field select:disabled {
+    background: #f1f3f6;
+
+    color: #8993a3;
+
+    border-color: #e0e4ea;
+
+    cursor: not-allowed;
+}
+
+
+/* ==================================================
+   MENSAJE DE SITUACIÓN LABORAL
+================================================== */
+
+.graduate-labor-message {
+    margin-top: 18px;
+
+    padding: 10px 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d5e2fb;
+
+    border-radius: 5px;
+
+    background: #eff5ff;
+
+    color: #0645b8;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   MENSAJE CUANDO ESTÁ DESEMPLEADO
+================================================== */
+
+.graduate-labor-message-warning {
+    border-color: #f1dfb5;
+
+    background: #fff8e8;
+
+    color: #946200;
+}

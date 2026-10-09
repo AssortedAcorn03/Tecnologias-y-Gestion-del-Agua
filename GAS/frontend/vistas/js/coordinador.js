@@ -453,6 +453,472 @@ function mostrarRegistrarEgresado() {
     });
 
 }
+// ==================================================
+// CONSULTAR EGRESADOS
+// ==================================================
+
+consultarEgresadoButton.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+
+    // Quitar selección anterior
+    document
+        .querySelectorAll(".sidebar-item, .sidebar-subitem")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+    // Marcar opción seleccionada
+    consultarEgresadoButton.classList.add("active");
+
+    mostrarConsultaEgresados();
+
+});
+// ==================================================
+// VISTA CONSULTA DE EGRESADOS
+// ==================================================
+
+function mostrarConsultaEgresados() {
+
+    contentArea.innerHTML = `
+
+        <div class="graduate-consult-page">
+
+            <!-- ==========================================
+                 ENCABEZADO
+            =========================================== -->
+
+            <div class="graduate-consult-header">
+
+                <h2>
+                    Egresados
+                </h2>
+
+                <p>
+                    Consulta y administra la información de los
+                    egresados del posgrado.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 BÚSQUEDA
+            =========================================== -->
+
+            <section class="graduate-search-card">
+
+                <div class="graduate-card-title">
+
+                    <h3>
+                        Búsqueda de egresados
+                    </h3>
+
+                    <div class="search-actions">
+
+                        <button
+                            type="button"
+                            id="limpiarFiltrosEgresados"
+                            class="clear-filters-button">
+
+                            <span>⌯</span>
+                            Limpiar filtros
+
+                        </button>
+
+                        <button
+                            type="button"
+                            id="buscarEgresadosButton"
+                            class="search-button">
+
+                            <span>⌕</span>
+                            Buscar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="graduate-search-grid">
+
+                    <!-- NOMBRE -->
+
+                    <div class="graduate-filter">
+
+                        <label>
+                            Nombre
+                        </label>
+
+                        <div class="filter-input-icon">
+
+                            <input
+                                type="text"
+                                id="filtroNombreEgresado"
+                                placeholder="Ej. Juan Pérez Martínez">
+
+                            <span>
+                                ♙
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENERACIÓN -->
+
+                    <div class="graduate-filter">
+
+                        <label>
+                            Generación
+                        </label>
+
+                        <select id="filtroGeneracionEgresado">
+
+                            <option value="">
+                                Seleccionar generación
+                            </option>
+
+                            <option value="2020-2022">
+                                2020-2022
+                            </option>
+
+                            <option value="2021-2023">
+                                2021-2023
+                            </option>
+
+                            <option value="2022-2024">
+                                2022-2024
+                            </option>
+
+                            <option value="2023-2025">
+                                2023-2025
+                            </option>
+
+                            <option value="2024-2026">
+                                2024-2026
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ESTADO -->
+
+                    <div class="graduate-filter">
+
+                        <label>
+                            Estado del egresado
+                        </label>
+
+                        <select id="filtroEstadoEgresado">
+
+                            <option value="">
+                                Seleccionar estado
+                            </option>
+
+                            <option value="activo">
+                                Activo
+                            </option>
+
+                            <option value="inactivo">
+                                Inactivo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SITUACIÓN LABORAL -->
+
+                    <div class="graduate-filter">
+
+                        <label>
+                            Situación laboral
+                        </label>
+
+                        <select id="filtroSituacionLaboral">
+
+                            <option value="">
+                                Seleccionar situación
+                            </option>
+
+                            <option value="con-trabajo">
+                                Con trabajo
+                            </option>
+
+                            <option value="sin-trabajo">
+                                Sin trabajo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- IDENTIFICADOR -->
+
+                    <div class="graduate-filter graduate-id-filter">
+
+                        <label>
+                            Identificador del egresado
+                        </label>
+
+                        <div class="id-search-container">
+
+                            <input
+                                type="text"
+                                id="filtroIdentificadorEgresado"
+                                placeholder="Ej. 201812345">
+
+                            <button
+                                type="button"
+                                id="buscarIdentificadorEgresado"
+                                class="small-search-button">
+
+                                ⌕
+
+                            </button>
+
+                            <button
+                                type="button"
+                                id="limpiarIdentificadorEgresado"
+                                class="small-clear-button">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 RESULTADOS
+            =========================================== -->
+
+            <section class="graduate-results-card">
+
+                <div class="results-header">
+
+                    <h3>
+                        Resultados
+                    </h3>
+
+                    <span id="totalEgresados">
+                        Total de egresados: 0
+                    </span>
+
+                </div>
+
+
+                <div class="graduate-table-container">
+
+                    <table class="graduate-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Identificador
+                                </th>
+
+                                <th>
+                                    Nombre completo
+                                </th>
+
+                                <th>
+                                    Generación
+                                </th>
+
+                                <th>
+                                    Estado del egresado
+                                </th>
+
+                                <th>
+                                    Situación laboral
+                                </th>
+
+                                <th>
+                                    Última actualización
+                                </th>
+
+                                <th>
+                                    Acciones
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="egresadosTableBody">
+
+                            <!--
+                                De momento permanece vacío.
+                                Posteriormente aquí se mostrarán
+                                los egresados.
+                            -->
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- ======================================
+                     PAGINACIÓN
+                ======================================= -->
+
+                <div class="graduate-pagination">
+
+                    <span id="egresadosPaginationText">
+                        No hay registros para mostrar
+                    </span>
+
+                    <div class="pagination-buttons">
+
+                        <button
+                            type="button"
+                            disabled>
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="pagination-active">
+                            1
+                        </button>
+
+                        <button
+                            type="button">
+                            2
+                        </button>
+
+                        <button
+                            type="button">
+                            3
+                        </button>
+
+                        <button
+                            type="button">
+                            ...
+                        </button>
+
+                        <button
+                            type="button">
+                            26
+                        </button>
+
+                        <button
+                            type="button">
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 NOTA
+            =========================================== -->
+
+            <div class="graduate-note">
+
+                <span class="note-icon">
+                    i
+                </span>
+
+                <span>
+                    Puedes exportar el listado de egresados
+                    desde la sección de Reportes.
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    // ==================================================
+    // LIMPIAR FILTROS
+    // ==================================================
+
+    const limpiarFiltros =
+        document.getElementById("limpiarFiltrosEgresados");
+
+    limpiarFiltros.addEventListener("click", function () {
+
+        document.getElementById(
+            "filtroNombreEgresado"
+        ).value = "";
+
+        document.getElementById(
+            "filtroGeneracionEgresado"
+        ).value = "";
+
+        document.getElementById(
+            "filtroEstadoEgresado"
+        ).value = "";
+
+        document.getElementById(
+            "filtroSituacionLaboral"
+        ).value = "";
+
+        document.getElementById(
+            "filtroIdentificadorEgresado"
+        ).value = "";
+
+    });
+
+
+    // ==================================================
+    // LIMPIAR IDENTIFICADOR
+    // ==================================================
+
+    document
+        .getElementById("limpiarIdentificadorEgresado")
+        .addEventListener("click", function () {
+
+            document.getElementById(
+                "filtroIdentificadorEgresado"
+            ).value = "";
+
+        });
+
+
+    // ==================================================
+    // BUSCAR
+    // ==================================================
+
+    document
+        .getElementById("buscarEgresadosButton")
+        .addEventListener("click", function () {
+
+            // De momento no se realiza ninguna búsqueda.
+            // La funcionalidad se agregará posteriormente.
+
+            console.log("Búsqueda de egresados");
+
+        });
+
+}
+
 // --------------------------------------------------
 // MENÚ ALUMNOS
 // --------------------------------------------------

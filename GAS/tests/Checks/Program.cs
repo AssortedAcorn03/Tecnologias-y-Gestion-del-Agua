@@ -18,4 +18,17 @@ Check(Seguridad.Hash(token).Length == 64 && Seguridad.Hash(token) != token, "sto
 using var db = new GasDbContext(new DbContextOptionsBuilder<GasDbContext>().UseMySQL("Server=localhost;Database=testing;User=test;Password=unused").Options);
 var schema = db.Database.GenerateCreateScript();
 Check(schema.Contains("sesion_usuario") && schema.Contains("clave_institucional"), "EF model includes security schema");
+
+// Las PK asignadas por la universidad no deben tratarse como identidad: si alguien
+// re-scaffoldea y pierde ApplyConfigurationsFromAssembly en SeguridadDb.cs, esto falla
+// antes de que un alumno se inserte con clave 0 (ver Data/ModeloAcademico.cs).
+foreach (var (tipo, propiedad) in new (Type, string)[] {
+    (typeof(alumno), nameof(alumno.clave_alumno)),
+    (typeof(profesor), nameof(profesor.rpe)),
+    (typeof(egresado), nameof(egresado.clave_alumno)) })
+{
+    var pk = db.Model.FindEntityType(tipo)!.FindProperty(propiedad)!;
+    Check(pk.ValueGenerated == Microsoft.EntityFrameworkCore.Metadata.ValueGenerated.Never,
+        $"{tipo.Name}.{propiedad} no se trata como identidad");
+}
 Console.WriteLine("All checks passed.");

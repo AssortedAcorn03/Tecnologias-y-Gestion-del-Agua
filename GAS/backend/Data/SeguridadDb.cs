@@ -14,5 +14,9 @@ public partial class GasDbContext
             e.Property(x => x.Id).HasMaxLength(64);
             e.HasOne<usuario>().WithMany().HasForeignKey(x => x.UsuarioId);
         });
+        // Registra las IEntityTypeConfiguration<> del proyecto (ver Data/ModeloAcademico.cs).
+        // Este hook solo puede implementarse una vez por assembly, así que esta línea es el
+        // punto de extensión: una configuración nueva se recoge sola, sin tocar este archivo.
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(GasDbContext).Assembly);
     }
 }

@@ -46,10 +46,16 @@ ON DUPLICATE KEY UPDATE nombre = VALUES(nombre), descripcion = VALUES(descripcio
 -- -------------------------------------------------------------
 -- CAT estado académico
 -- -------------------------------------------------------------
+-- Los cuatro estados del diagrama de estados del AMyD (RF-01.4).
+-- OJO: el TEXTO del AMyD lista solo tres (Activo, Titulado, Baja); el diagrama
+-- distingue baja temporal de definitiva, que es lo que manda porque define las
+-- transiciones. El id 3 era 'Baja' a secas y nadie lo referenciaba, así que se
+-- reutiliza como definitiva, que es lo que significaba su descripción.
 INSERT INTO CAT_estado_academico (id_estado_academico, nombre, descripcion) VALUES
-  (1, 'Activo',   'Alumno inscrito y cursando el programa'),
-  (2, 'Titulado', 'Alumno que concluyó su proceso de titulación'),
-  (3, 'Baja',     'Alumno separado del programa')
+  (1, 'Activo',          'Alumno inscrito y cursando el programa'),
+  (2, 'Titulado',        'Alumno que concluyó su proceso de titulación'),
+  (3, 'Baja definitiva', 'Alumno separado del programa de forma permanente'),
+  (4, 'Baja temporal',   'Alumno con suspensión temporal; puede reingresar')
 ON DUPLICATE KEY UPDATE nombre = VALUES(nombre), descripcion = VALUES(descripcion);
 
 -- -------------------------------------------------------------
@@ -139,6 +145,35 @@ INSERT INTO CAT_formato_reporte (id_formato_reporte, nombre) VALUES
   (2, 'Excel'),
   (3, 'CSV')
 ON DUPLICATE KEY UPDATE nombre = VALUES(nombre);
+
+-- =============================================================
+-- DATOS OPERATIVOS (no son catálogos CAT_, pero el alta de alumnos
+-- los necesita como llaves foráneas obligatorias).
+-- =============================================================
+
+-- -------------------------------------------------------------
+-- Generaciones del programa
+-- `generacion.id_programa` es NOT NULL: todas apuntan al id 1,
+-- la Maestría en Tecnología y Gestión del Agua.
+-- -------------------------------------------------------------
+INSERT INTO generacion (id_generacion, id_programa, anio_ingreso, anio_egreso_estimado, nombre_generacion) VALUES
+  (1, 1, 2024, 2026, '2024-2026'),
+  (2, 1, 2025, 2027, '2025-2027'),
+  (3, 1, 2026, 2028, '2026-2028')
+ON DUPLICATE KEY UPDATE id_programa = VALUES(id_programa), anio_ingreso = VALUES(anio_ingreso),
+  anio_egreso_estimado = VALUES(anio_egreso_estimado), nombre_generacion = VALUES(nombre_generacion);
+
+-- -------------------------------------------------------------
+-- Periodos académicos
+-- Necesarios para `alumno_detalle`, que registra el semestre que
+-- cursa cada alumno en cada periodo (único por clave_alumno + periodo).
+-- -------------------------------------------------------------
+INSERT INTO periodo_academico (id_periodo, nombre, fecha_inicio, fecha_fin, tipo_periodo) VALUES
+  (1, '2025-2026 Otoño',     '2025-08-01', '2025-12-15', 'Semestral'),
+  (2, '2025-2026 Primavera', '2026-01-15', '2026-06-15', 'Semestral'),
+  (3, '2026-2027 Otoño',     '2026-08-01', '2026-12-15', 'Semestral')
+ON DUPLICATE KEY UPDATE nombre = VALUES(nombre), fecha_inicio = VALUES(fecha_inicio),
+  fecha_fin = VALUES(fecha_fin), tipo_periodo = VALUES(tipo_periodo);
 
 -- =============================================================
 -- LIMPIEZA (opcional): solo si ya corriste la versión anterior.

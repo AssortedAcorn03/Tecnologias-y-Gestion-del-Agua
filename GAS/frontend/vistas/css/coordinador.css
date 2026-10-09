@@ -3328,3 +3328,645 @@ body {
     }
 
 }
+/* ==================================================
+   CONSULTA DE EGRESADOS
+================================================== */
+
+.graduate-consult-page {
+    width: 100%;
+    max-width: 1100px;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.graduate-consult-header {
+    margin-bottom: 14px;
+}
+
+.graduate-consult-header h2 {
+    margin: 0 0 5px;
+
+    color: #102a72;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+.graduate-consult-header p {
+    margin: 0;
+
+    color: #52617a;
+
+    font-size: 10px;
+}
+
+
+/* ==================================================
+   TARJETA DE BÚSQUEDA
+================================================== */
+
+.graduate-search-card {
+    padding: 13px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+}
+
+
+.graduate-card-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+
+.graduate-card-title h3 {
+    margin: 0;
+
+    color: #102a72;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   BOTONES DE BÚSQUEDA
+================================================== */
+
+.search-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.clear-filters-button,
+.search-button {
+    height: 30px;
+
+    padding: 0 12px;
+
+    border-radius: 4px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.clear-filters-button {
+    border: 1px solid #cbd5e5;
+
+    background: #ffffff;
+
+    color: #30466e;
+}
+
+
+.clear-filters-button:hover {
+    border-color: #0b4edb;
+
+    color: #0b4edb;
+}
+
+
+.search-button {
+    border: 1px solid #0b4edb;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+
+    min-width: 68px;
+}
+
+
+.search-button:hover {
+    background: #063eaf;
+}
+
+
+/* ==================================================
+   GRID DE FILTROS
+================================================== */
+
+.graduate-search-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.1fr
+        1fr
+        1fr;
+
+    gap: 12px 16px;
+}
+
+
+.graduate-filter {
+    min-width: 0;
+}
+
+
+.graduate-filter label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #06256d;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.graduate-filter input,
+.graduate-filter select {
+    width: 100%;
+
+    height: 31px;
+
+    padding: 0 9px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #52617a;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+.graduate-filter input:focus,
+.graduate-filter select:focus {
+    border-color: #0b4edb;
+
+    box-shadow:
+        0 0 0 2px rgba(11, 78, 219, 0.07);
+}
+
+
+.graduate-filter input::placeholder {
+    color: #9aa5b5;
+}
+
+
+/* ==================================================
+   INPUT CON ICONO
+================================================== */
+
+.filter-input-icon {
+    position: relative;
+}
+
+
+.filter-input-icon input {
+    padding-right: 30px;
+}
+
+
+.filter-input-icon span {
+    position: absolute;
+
+    right: 9px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #66758c;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   IDENTIFICADOR
+================================================== */
+
+.graduate-id-filter {
+    grid-column: span 2;
+}
+
+
+.id-search-container {
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.id-search-container input {
+    flex: 1;
+}
+
+
+.small-search-button,
+.small-clear-button {
+    width: 34px;
+
+    height: 31px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #30466e;
+
+    cursor: pointer;
+}
+
+
+.small-search-button:hover,
+.small-clear-button:hover {
+    border-color: #0b4edb;
+
+    color: #0b4edb;
+}
+
+
+/* ==================================================
+   RESULTADOS
+================================================== */
+
+.graduate-results-card {
+    border: 1px solid #e1e6ef;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+}
+
+
+.results-header {
+    height: 43px;
+
+    padding: 0 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #e5e9f0;
+}
+
+
+.results-header h3 {
+    margin: 0;
+
+    color: #102a72;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.results-header span {
+    color: #52617a;
+
+    font-size: 9px;
+}
+
+
+/* ==================================================
+   TABLA
+================================================== */
+
+.graduate-table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.graduate-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+
+.graduate-table th {
+    height: 30px;
+
+    padding: 0 8px;
+
+    background: #fafbfc;
+
+    border-bottom: 1px solid #e1e6ef;
+
+    color: #06256d;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+.graduate-table td {
+    height: 37px;
+
+    padding: 0 8px;
+
+    border-bottom: 1px solid #edf0f5;
+
+    color: #30466e;
+
+    font-size: 8px;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+.graduate-table tbody tr:hover {
+    background: #fafcff;
+}
+
+
+/* ==================================================
+   ESTADO
+================================================== */
+
+.graduate-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 3px 7px;
+
+    border-radius: 4px;
+
+    font-size: 8px;
+}
+
+
+.graduate-status.active {
+    border: 1px solid #b7e4c7;
+
+    background: #eaf8ef;
+
+    color: #16803c;
+}
+
+
+.graduate-status.inactive {
+    border: 1px solid #d9dfe8;
+
+    background: #f4f6f8;
+
+    color: #657184;
+}
+
+
+/* ==================================================
+   BOTONES DE ACCIONES
+================================================== */
+
+.graduate-action-button {
+    width: 25px;
+
+    height: 25px;
+
+    margin: 0 2px;
+
+    border: 1px solid #cbd8ed;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #0b4edb;
+
+    cursor: pointer;
+}
+
+
+.graduate-action-button:hover {
+    border-color: #0b4edb;
+
+    background: #f1f6ff;
+}
+
+
+/* ==================================================
+   PAGINACIÓN
+================================================== */
+
+.graduate-pagination {
+    min-height: 48px;
+
+    padding: 0 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.graduate-pagination > span {
+    color: #52617a;
+
+    font-size: 9px;
+}
+
+
+.pagination-buttons {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.pagination-buttons button {
+    width: 27px;
+
+    height: 27px;
+
+    border: 1px solid #d9dfe8;
+
+    border-radius: 4px;
+
+    background: #ffffff;
+
+    color: #30466e;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+.pagination-buttons button:hover:not(:disabled) {
+    border-color: #0b4edb;
+
+    color: #0b4edb;
+}
+
+
+.pagination-buttons button:disabled {
+    color: #aab2bf;
+
+    cursor: default;
+}
+
+
+.pagination-buttons .pagination-active {
+    border-color: #0b4edb;
+
+    background: #0b4edb;
+
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   NOTA INFORMATIVA
+================================================== */
+
+.graduate-note {
+    min-height: 34px;
+
+    margin-top: 10px;
+
+    padding: 0 11px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid #cbdcff;
+
+    border-radius: 4px;
+
+    background: #f1f6ff;
+
+    color: #1747a0;
+
+    font-size: 9px;
+}
+
+
+.note-icon {
+    width: 15px;
+
+    height: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid #0b4edb;
+
+    border-radius: 50%;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 850px) {
+
+    .graduate-search-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .graduate-id-filter {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .graduate-search-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graduate-id-filter {
+        grid-column: span 1;
+    }
+
+    .graduate-card-title {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .graduate-pagination {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 10px 12px;
+    }
+
+}
