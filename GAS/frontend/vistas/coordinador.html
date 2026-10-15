@@ -126,16 +126,48 @@
                 <!-- TESIS -->
                 <button class="menu-item expandable" type="button">
                     <span class="menu-icon"></span>
-                    <span class="menu-text">Tesis</span>
+                    <span class="menu-text">Tesistas</span>
                     <span class="arrow">⌄</span>
                 </button>
 
 
-                <!-- COMITÉS -->
-                <button class="menu-item" type="button">
+                <!-- COMITÉS TUTORIALES -->
+                <button
+                    class="menu-item expandable"
+                    id="comitesTutorialesMenu"
+                    type="button">
+
                     <span class="menu-icon"></span>
                     <span class="menu-text">Comités tutoriales</span>
+                    <span class="arrow" id="comitesTutorialesArrow">⌄</span>
+
                 </button>
+
+                <!-- SUBMENÚ COMITÉS TUTORIALES -->
+                <div
+                    class="submenu"
+                    id="comitesTutorialesSubmenu"
+                    style="display: none;">
+
+                    <button
+                        class="submenu-item"
+                        id="altaComiteButton"
+                        type="button">
+
+                        Alta de comité
+
+                    </button>
+
+                    <button
+                        class="submenu-item"
+                        id="gestionComitesButton"
+                        type="button">
+
+                        Gestión de comités
+
+                    </button>
+
+                </div>
 
 
                 <!-- ENCUESTAS -->

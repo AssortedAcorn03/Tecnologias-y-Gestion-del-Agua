@@ -630,6 +630,101 @@
 
 
 /* ==================================================
+   REQUISITOS DEL EXAMEN TOEFL
+================================================== */
+
+.toefl-dialog {
+    width: min(92vw, 720px);
+    max-height: 88vh;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    color: #33415c;
+    box-shadow: 0 12px 35px rgba(6, 37, 109, 0.25);
+}
+
+.toefl-dialog::backdrop {
+    background: rgba(6, 37, 109, 0.5);
+}
+
+.toefl-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 22px;
+    background: #06256d;
+    color: #ffffff;
+}
+
+.toefl-dialog-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.toefl-dialog-close {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.toefl-dialog-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.toefl-dialog-content {
+    padding: 22px 26px 24px;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.toefl-dialog-content ol {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.toefl-dialog-content li {
+    padding-left: 7px;
+    margin-bottom: 16px;
+}
+
+.toefl-dialog-content li:last-child {
+    margin-bottom: 0;
+}
+
+.toefl-dialog-content p {
+    margin: 9px 0 0;
+}
+
+.toefl-dialog-notes {
+    margin-top: 20px;
+    padding: 13px 15px;
+    border-left: 3px solid #0b4edb;
+    background: #f4f7fd;
+    color: #4f5d75;
+    font-size: 12px;
+}
+
+.toefl-dialog-notes p {
+    margin: 0 0 8px;
+}
+
+.toefl-dialog-notes p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==================================================
    RESPONSIVE
 ================================================== */
 
@@ -660,6 +755,24 @@
     }
 
 }
+
+@media (max-width: 600px) {
+
+    .toefl-dialog-header {
+        padding: 16px;
+    }
+
+    .toefl-dialog-header h2 {
+        font-size: 15px;
+    }
+
+    .toefl-dialog-content {
+        padding: 18px 16px 20px;
+        font-size: 12px;
+    }
+
+}
+
 .tesis-section {
     display: none;
 }

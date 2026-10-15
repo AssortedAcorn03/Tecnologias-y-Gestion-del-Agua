@@ -104,7 +104,7 @@ perfilAlumnoButton.addEventListener("click", function () {
                     <div class="graduate-profile-field">
 
                         <label>
-                            Clave del alumno
+                            Clave del egresado
                         </label>
 
                         <input

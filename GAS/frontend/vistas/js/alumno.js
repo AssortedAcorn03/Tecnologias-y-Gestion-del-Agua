@@ -939,7 +939,111 @@ perfilAlumnoButton.addEventListener("click", function () {
 
     seguimientoToeflButton.addEventListener("click", function () {
 
-        console.log("Seguimiento TOEFL");
+        const dialogId = "seguimientoToeflDialog";
+        let seguimientoToeflDialog =
+            document.getElementById(dialogId);
+
+        if (!seguimientoToeflDialog) {
+            seguimientoToeflDialog = document.createElement("dialog");
+            seguimientoToeflDialog.id = dialogId;
+            seguimientoToeflDialog.className = "toefl-dialog";
+            seguimientoToeflDialog.setAttribute(
+                "aria-labelledby",
+                "seguimientoToeflDialogTitle"
+            );
+
+            seguimientoToeflDialog.innerHTML = `
+
+                <div class="toefl-dialog-header">
+
+                    <h2 id="seguimientoToeflDialogTitle">
+                        Requisitos para el examen
+                    </h2>
+
+                    <button
+                        type="button"
+                        class="toefl-dialog-close"
+                        aria-label="Cerrar requisitos para el examen">
+                        ×
+                    </button>
+
+                </div>
+
+                <div class="toefl-dialog-content">
+
+                    <ol>
+
+                        <li>
+                            Realizar pago del examen por
+                            <strong>56.50 dólares (*)</strong> en cualquier
+                            sucursal <strong>Banamex</strong> a la cuenta
+                            <strong>4536-9000083</strong>.
+
+                            <p>
+                                El pago deberá realizarse únicamente
+                                <strong>en ventanilla (**)</strong> dentro del
+                                periodo de fechas marcado en el mes de su
+                                interés.
+                            </p>
+
+                            <p>
+                                Favor de solicitar al cajero que anote el
+                                nombre completo del participante en la
+                                referencia.
+                            </p>
+                        </li>
+
+                        <li>
+                            Traer el comprobante de pago original a la oficina
+                            de administración de Centro de Idiomas en Zona
+                            Universitaria (entre Facultad del Hábitat y
+                            Ciencias Químicas), entre 8am y 2pm de lunes a
+                            viernes antes de la fecha límite.
+                        </li>
+
+                        <li>
+                            Presentarse 15 minutos antes de la hora señalada
+                            del día del examen con lápiz del No. 2HB, goma e
+                            identificación.
+                        </li>
+
+                    </ol>
+
+                    <div class="toefl-dialog-notes">
+
+                        <p>
+                            (*) El costo podría variar según lo informe la
+                            unidad gestora de exámenes y, de ser así, se
+                            publicaría de inmediato en esta página.
+                        </p>
+
+                        <p>
+                            (**) A menos que se especifique que se pague
+                            directamente en oficinas de Centro de Idiomas.
+                        </p>
+
+                    </div>
+                    </font></div><div style="text-align: left;">
+                     </div><p style="text-align: center; line-height: 1;" class="titulo1"><span style="font-size: 24px; color: rgb(0, 74, 152); font-family: OpenSans-Bold;">FECHAS DE EXAMEN TOEFL AÑO 2026</span></p><table class="table paginas-tb__striped JCLRFlex JColResizer table-bordered" id="JColResizer0" style="text-align: center; width: 876.094px; min-width: 843.891px;"><tbody><tr><td style="text-align: center; width: 298.047px;"><b><font color="#003771">Fecha de examen</font></b></td><td style="text-align: center; width: 304.297px;"><p><b><font color="#003771"><span style="font-size: 18px;">Periodo para entregar comprobante de pago original en Dirección de C.I.U</span></font></b></p></td><td style="text-align: center; width: 272.75px;"><p class="titulo2" style="line-height: 1;"><b><span style="font-size: 18px; font-family: OpenSans-Light;">Entrega</span></b><b style="font-family: OpenSans-Light; font-size: 18px; background-color: var(--bs-table-bg);">&nbsp;de Certificados<br></b><span style="font-size: 18px; color: rgb(32, 128, 203); font-family: OpenSans-Light; background-color: var(--bs-table-bg); font-weight: var(--bs-body-font-weight);">Acudir a oficinas de C.I.U. en Zona Univ. de 7am a 3pm L-V</span></p><p></p></td></tr><tr><td style="text-align: center; width: 298.047px;">Junio 1</td><td style="text-align: center; width: 304.297px;"><b>-<br></b></td><td style="text-align: center; width: 272.75px;"><b>Junio 16</b></td></tr><tr><td style="text-align: center; width: 298.047px;">Junio 26</td><td style="text-align: center; width: 304.297px;"><b>-</b></td><td style="text-align: center; width: 272.75px;"><b>Julio 16</b></td></tr><tr><td style="text-align: center; width: 298.047px;">Julio 23</td><td style="text-align: center; width: 304.297px;"><b>-</b></td><td style="text-align: center; width: 272.75px;"><b>Octubre 07</b></td></tr><tr><td style="text-align: center; width: 298.047px;">Agosto 28</td><td style="text-align: center; width: 304.297px;"><b>-</b></td><td style="text-align: center; width: 272.75px;"><b>Octubre 07</b></td></tr><tr><td style="text-align: center; width: 298.047px;">Septiembre 25</td><td style="text-align: center; width: 304.297px;"><b>-</b></td><td style="text-align: center; width: 272.75px;"><b>Pendiente</b></td></tr><tr><td style="text-align: center; width: 298.047px;"><b>Octubre 30</b></td><td style="text-align: center; width: 304.297px;"><b>12 a 16 de octubre</b></td><td style="text-align: center; width: 272.75px;"><b>-</b></td></tr><tr><td style="text-align: center; width: 298.047px;"><b>Noviembre 27</b></td><td style="text-align: center; width: 304.297px;"><b>9 a 13 de noviembre</b></td><td style="text-align: center; width: 272.75px;"><b>-</b></td></tr></tbody></table><div style="text-align: left;"><font color="#2080cb"><b>° Ultima actualización: Julio 16, 2026</b></font></div><div style="text-align: left;"><br></div><div style="text-align: left;"><img src="https://adminportal.uaslp.mx//ImgEntidad/59/Paginas/28-11-2025_96_Icono pdf_file_icon_256313.png" class="img-fluid p-2" style=""><a href="https://www.ets.org/pdfs/toefl-itp-test-taker-handbook.pdf"><b>Manual de referencia para presentar el examen TOEFL ITP</b></a></div><div style="text-align: left;"><br></div><p style="text-align: left;" class="descripcion-azul"><b>NOTAS:
+
+                    </b></p><div style="text-align: left;">
+</div><ul><li>El examen está sujeto a un mínimo de 20 candidatos. Si el candidato no se presenta al examen o llega tarde NO hay devolución de pago, ni cambio de fecha.</li><li> Si el candidato es de otra ciudad o de otro estado, favor de mandar su recibo de pago escaneado al correo <b>ciu.certificaciones@uaslp.mx</b>, confirmar vía telefónica que haya sido recibido y el día del examen TRAER EL RECIBO ORIGINAL DE PAGO. </li><li>El pago del examen deberá realizarse exclusivamente en el periodo especificado en la lista siguiente (en el mismo mes en que se aplicará el examen).</li><li style="">Horario regular de aplicación de examen: 10:00 y 15:00 hrs.</li></ul><p style="text-align: left;"><font style="" color="#003771"><b>Más información, al teléfono 444-8261313 <u>extensión 1614 </u>de lunes a viernes en horario de 8am-2pm. Podrá enviar también un correo electrónico a ciu.certificaciones@uaslp.mx&nbsp;<br></b></font><br></p><div style="text-align: left;">
+</div><div style="text-align: left;">
+
+                </div>
+
+            `;
+
+            document.body.appendChild(seguimientoToeflDialog);
+
+            seguimientoToeflDialog
+                .querySelector(".toefl-dialog-close")
+                .addEventListener("click", function () {
+                    seguimientoToeflDialog.close();
+                });
+        }
+
+        seguimientoToeflDialog.showModal();
 
     });
 

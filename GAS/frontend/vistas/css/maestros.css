@@ -1,0 +1,965 @@
+
+/* ==================================================
+   PANEL DEL MAESTRO
+================================================== */
+
+
+/* ==================================================
+   ESTRUCTURA GENERAL
+================================================== */
+
+.teacher-panel {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: #06256d;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.teacher-header {
+    width: 100%;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    background: #06256d;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.teacher-header-content {
+    width: 100%;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 28px 0 20px;
+}
+
+
+/* LOGO */
+
+.teacher-logo-area {
+    width: 220px;
+    min-width: 180px;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.teacher-logo {
+    display: block;
+    width: 175px;
+    max-width: 100%;
+    max-height: 62px;
+    object-fit: contain;
+}
+
+
+/* TÍTULO DEL PORTAL */
+
+.teacher-title-area {
+    flex: 1;
+    min-width: 0;
+    margin-left: 25px;
+}
+
+.teacher-title-area h1 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.teacher-title-area p {
+    margin: 5px 0 0;
+    font-size: 11px;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+
+/* INFORMACIÓN DEL MAESTRO */
+
+.teacher-user-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.user-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+
+.user-information {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-information strong {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.user-information span {
+    font-size: 11px;
+}
+
+.user-menu-button {
+    padding: 8px;
+    margin-left: 5px;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+================================================== */
+
+.teacher-main {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 74px);
+    width: 100%;
+}
+
+
+/* ==================================================
+   MENÚ LATERAL
+================================================== */
+
+.teacher-sidebar {
+    width: 220px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 10px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-right: 1px solid #e2e6ed;
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   ELEMENTOS PRINCIPALES DEL MENÚ
+================================================== */
+
+.sidebar-item {
+    width: 100%;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    margin-bottom: 3px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #06256d;
+    font-family: inherit;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background: #f2f6ff;
+}
+
+.sidebar-item.active {
+    background: #edf3ff;
+    color: #004bd4;
+    font-weight: 600;
+}
+
+
+/* ESPACIO PARA LOS ICONOS PERSONALIZADOS */
+
+.sidebar-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   FLECHAS DE LOS SUBMENÚS
+================================================== */
+
+.sidebar-arrow {
+    margin-left: auto;
+    font-size: 11px;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-item[aria-expanded="true"] .sidebar-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ==================================================
+   SUBMENÚS
+================================================== */
+
+.sidebar-submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 0 0 5px 0;
+    padding-left: 10px;
+}
+
+.sidebar-subitem {
+    width: 100%;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 0 18px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #06256d;
+    font-family: inherit;
+    font-size: 11px;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-subitem:hover {
+    background: #f2f6ff;
+}
+
+.sidebar-subitem.active {
+    background: #e5eeff;
+    color: #004bd4;
+    font-weight: 600;
+}
+
+
+/* PUNTO DECORATIVO DEL SUBMENÚ */
+
+.sidebar-subitem-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #004bd4;
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   SEPARADOR DEL MENÚ
+================================================== */
+
+.sidebar-separator {
+    height: 1px;
+    margin: 14px 8px;
+    background: #e2e6ed;
+}
+
+
+/* AYUDA AL FINAL DEL MENÚ */
+
+#ayudaMaestroButton {
+    margin-top: auto;
+}
+
+
+/* CERRAR SESIÓN */
+
+.sidebar-item.logout {
+    margin-top: 8px;
+    color: #e53935;
+}
+
+.sidebar-item.logout:hover {
+    background: #fff1f1;
+}
+
+
+/* ==================================================
+   ÁREA DE CONTENIDO
+================================================== */
+
+.teacher-content {
+    flex: 1;
+    min-width: 0;
+    padding: 24px 28px;
+    box-sizing: border-box;
+    background: #ffffff;
+    overflow-x: auto;
+}
+
+
+/* ==================================================
+   TÍTULOS GENERALES DE LAS VISTAS
+================================================== */
+
+.teacher-content h2 {
+    margin: 0 0 10px;
+    color: #06256d;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.teacher-content h3 {
+    margin: 0 0 12px;
+    color: #06256d;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.teacher-content p {
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   TARJETAS Y PANELES
+================================================== */
+
+.teacher-card {
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.teacher-card + .teacher-card {
+    margin-top: 16px;
+}
+
+
+/* ==================================================
+   PESTAÑAS
+================================================== */
+
+.teacher-tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid #dce5f2;
+    border-radius: 6px 6px 0 0;
+    border-bottom: 1px solid #dce5f2;
+    overflow-x: auto;
+}
+
+.teacher-tab {
+    min-height: 48px;
+    padding: 0 24px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: #ffffff;
+    color: #06256d;
+    font-family: inherit;
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.teacher-tab:hover {
+    background: #f5f8ff;
+}
+
+.teacher-tab.active {
+    color: #0055df;
+    border-bottom-color: #0055df;
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   MENSAJES INFORMATIVOS
+================================================== */
+
+.teacher-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    border: 1px solid #d5e5ff;
+    border-radius: 6px;
+    background: #f0f6ff;
+    color: #004bd4;
+    font-size: 12px;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+.teacher-info p {
+    margin: 0;
+}
+
+
+/* ==================================================
+   DISTRIBUCIÓN EN DOS COLUMNAS
+================================================== */
+
+.teacher-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.teacher-columns > * {
+    min-width: 0;
+}
+
+
+/* ==================================================
+   TABLAS
+================================================== */
+
+.teacher-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #dce5f2;
+    border-radius: 5px;
+}
+
+.teacher-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.teacher-table th {
+    padding: 12px 10px;
+    background: #f1f6fc;
+    color: #06256d;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.teacher-table td {
+    padding: 11px 10px;
+    border-top: 1px solid #e6edf5;
+    color: #17366f;
+    vertical-align: middle;
+}
+
+.teacher-table tbody tr:hover {
+    background: #f7faff;
+}
+
+
+/* ==================================================
+   CAMPOS DE BÚSQUEDA Y FORMULARIOS
+================================================== */
+
+.teacher-content input,
+.teacher-content select,
+.teacher-content textarea {
+    width: 100%;
+    min-height: 36px;
+    padding: 8px 10px;
+    border: 1px solid #d8e0eb;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #17366f;
+    font-family: inherit;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.teacher-content textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.teacher-content input:focus,
+.teacher-content select:focus,
+.teacher-content textarea:focus {
+    outline: none;
+    border-color: #1760ed;
+    box-shadow: 0 0 0 2px rgba(23, 96, 237, 0.1);
+}
+
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.teacher-button {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid #0755e9;
+    border-radius: 5px;
+    background: #0755e9;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.teacher-button:hover {
+    background: #0644bd;
+}
+
+.teacher-button.secondary {
+    background: #ffffff;
+    color: #0755e9;
+}
+
+.teacher-button.secondary:hover {
+    background: #f0f6ff;
+}
+
+
+/* ==================================================
+   ETIQUETAS DE ESTADO
+================================================== */
+
+.teacher-status {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 5px;
+    background: #e7f7ed;
+    color: #168044;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.teacher-status.finished {
+    background: #edf2f8;
+    color: #53657e;
+}
+
+
+/* ==================================================
+   DISEÑO RESPONSIVO
+================================================== */
+
+@media (min-width: 1500px) {
+    .teacher-content {
+        padding: 28px 34px;
+    }
+
+    .teacher-content h2 {
+        font-size: 28px;
+    }
+
+    .teacher-sidebar {
+        width: 240px;
+        min-width: 240px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .teacher-sidebar {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .teacher-content {
+        padding: 20px;
+    }
+
+    .teacher-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .teacher-logo-area {
+        width: 170px;
+        min-width: 140px;
+    }
+
+    .teacher-title-area {
+        margin-left: 12px;
+    }
+
+    .teacher-user-area {
+        margin-left: 12px;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .teacher-header-content {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .teacher-header,
+    .teacher-header-content {
+        min-height: auto;
+    }
+
+    .teacher-logo-area {
+        width: auto;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .teacher-logo {
+        width: 105px;
+    }
+
+    .teacher-title-area {
+        margin-left: 5px;
+    }
+
+    .teacher-title-area h1 {
+        font-size: 14px;
+    }
+
+    .teacher-title-area p {
+        font-size: 9px;
+    }
+
+    .teacher-user-area {
+        margin-left: auto;
+    }
+
+    .user-information {
+        display: none;
+    }
+
+    .teacher-main {
+        min-height: calc(100vh - 74px);
+    }
+
+    .teacher-sidebar {
+        width: 165px;
+        min-width: 165px;
+        padding: 10px 6px;
+    }
+
+    .sidebar-item {
+        padding: 0 8px;
+        gap: 7px;
+        font-size: 10px;
+    }
+
+    .sidebar-subitem {
+        padding-left: 10px;
+        font-size: 10px;
+    }
+
+    .teacher-content {
+        padding: 16px 12px;
+    }
+
+    .teacher-content h2 {
+        font-size: 20px;
+    }
+
+    .teacher-card {
+        padding: 12px;
+    }
+
+    .teacher-tab {
+        padding: 0 14px;
+        font-size: 11px;
+    }
+}
+
+/* ==================================================
+   GESTIÓN DEL COMITÉ TUTORIAL
+================================================== */
+
+.committee-page {
+    width: 100%;
+    min-width: 0;
+    color: #08245f;
+}
+
+.committee-page-title {
+    margin: 0 0 14px;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.committee-notice,
+.committee-bottom-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1px solid #d5e5ff;
+    border-radius: 7px;
+    background: #f0f6ff;
+    color: #0754cf;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.committee-notice p {
+    margin: 0;
+}
+
+.committee-notice-icon,
+.committee-bottom-notice > span {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.committee-top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.committee-card {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid #dce5f2;
+    border-radius: 7px;
+    background: #fff;
+}
+
+.committee-card h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #082d78;
+}
+
+.committee-description {
+    margin: 0 0 12px;
+    color: #50668c;
+    font-size: 12px;
+}
+
+.committee-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+    border: 1px solid #d4e0f3;
+    border-radius: 5px;
+}
+
+.committee-search span {
+    color: #2160cb;
+    font-size: 20px;
+}
+
+.committee-search input {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #17376e;
+    font: inherit;
+    font-size: 12px;
+}
+
+.committee-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.committee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.committee-table th,
+.committee-table td {
+    padding: 10px 8px;
+    border: 1px solid #e0e9f6;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.committee-table th {
+    background: #f2f6fc;
+    color: #0a2d70;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.committee-table tbody tr {
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.committee-table tbody tr:hover {
+    background: #f2f7ff;
+}
+
+.committee-table .selected-committee-row {
+    background: #e5f2ff;
+}
+
+.committee-table input[type="radio"] {
+    accent-color: #0755df;
+    cursor: pointer;
+}
+
+.committee-status {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.status-active {
+    color: #07804c;
+    background: #d9f5e7;
+    border: 1px solid #b5e8ce;
+}
+
+.status-finished {
+    color: #315e9e;
+    background: #eaf2ff;
+    border: 1px solid #d4e4ff;
+}
+
+.committee-selected-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+    background: #edf4ff;
+    border-radius: 6px 6px 0 0;
+    font-size: 14px;
+}
+
+.committee-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 16px 12px;
+    border: 1px solid #e0e9f6;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+}
+
+.committee-info-grid > div + div {
+    padding-left: 16px;
+    border-left: 1px solid #e0e9f6;
+}
+
+.committee-info-grid p {
+    margin: 0 0 6px;
+    color: #365784;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.committee-info-grid p strong {
+    color: #082d78;
+}
+
+.committee-info-grid p:has(strong) {
+    margin-top: 8px;
+}
+
+.committee-full-button {
+    width: calc(100% - 24px);
+    min-height: 42px;
+    margin: 14px 12px 0;
+    border: none;
+    border-radius: 5px;
+    background: #0758e8;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.committee-full-button:hover {
+    background: #0348c4;
+}
+
+.committee-history-card h3 {
+    margin-bottom: 12px;
+}
+
+.committee-history-table {
+    min-width: 700px;
+}
+
+.committee-history-table th,
+.committee-history-table td {
+    padding: 10px;
+}
+
+.committee-bottom-notice {
+    align-items: center;
+    margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.committee-empty {
+    padding: 20px !important;
+    color: #64748b;
+    text-align: center !important;
+}
+
+
+/* ==================================================
+   DISEÑO RESPONSIVO
+================================================== */
+
+@media (max-width: 1100px) {
+    .committee-top-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 650px) {
+    .committee-page-title {
+        font-size: 22px;
+    }
+
+    .committee-card {
+        padding: 10px;
+    }
+
+    .committee-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .committee-info-grid > div + div {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid #e0e9f6;
+        padding-top: 10px;
+    }
+}

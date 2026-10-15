@@ -1942,6 +1942,387 @@ body {
 }
 
 /* ==================================================
+   GESTIÓN DE COMITÉS TUTORIALES
+================================================== */
+
+.coordinator-committee-page {
+    width: 100%;
+    min-height: 100%;
+    color: #06256d;
+}
+
+.coordinator-committee-notice,
+.coordinator-committee-bottom-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background: #f0f6ff;
+    border: 1px solid #d7e5ff;
+    border-radius: 5px;
+    color: #16458a;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.coordinator-committee-notice > span,
+.coordinator-committee-bottom-notice > span {
+    color: #1261d6;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.coordinator-committee-notice p {
+    margin: 0;
+}
+
+.coordinator-committee-notice p + p {
+    margin-top: 3px;
+}
+
+.coordinator-committee-top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 10px;
+}
+
+.coordinator-committee-card {
+    min-width: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    border: 1px solid #dfe7f2;
+    border-radius: 5px;
+}
+
+.coordinator-committee-card h3 {
+    margin: 0 0 7px;
+    color: #0644a8;
+    font-size: 12px;
+}
+
+.coordinator-committee-description {
+    margin: 0 0 8px;
+    color: #526581;
+    font-size: 10px;
+}
+
+.coordinator-committee-search {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.coordinator-committee-search span {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1261d6;
+    font-size: 13px;
+}
+
+.coordinator-committee-search input {
+    width: 100%;
+    height: 28px;
+    padding: 0 9px 0 27px;
+    border: 1px solid #cbd9ed;
+    border-radius: 4px;
+    outline: none;
+    color: #27364d;
+    font-size: 10px;
+}
+
+.coordinator-committee-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.coordinator-committee-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.coordinator-committee-table th,
+.coordinator-committee-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid #e3eaf4;
+    color: #344d75;
+    font-size: 9px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.coordinator-committee-table th {
+    background: #f3f7fd;
+    color: #173b82;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.coordinator-committee-table th:first-child {
+    width: 28px;
+}
+
+.coordinator-committee-empty {
+    padding: 20px 8px !important;
+    color: #71809a !important;
+    text-align: center !important;
+}
+
+.coordinator-committee-details {
+    min-height: 132px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e8f3;
+    border-radius: 4px;
+    background: #fbfdff;
+}
+
+.coordinator-committee-details .coordinator-committee-empty {
+    padding: 15px !important;
+}
+
+.coordinator-committee-full-button {
+    width: 100%;
+    height: 28px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #0b63e5;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.coordinator-committee-full-button:disabled {
+    background: #9db9e8;
+    cursor: not-allowed;
+}
+
+.coordinator-committee-history {
+    margin-bottom: 10px;
+}
+
+.coordinator-committee-bottom-notice {
+    margin-bottom: 0;
+}
+
+@media (max-width: 850px) {
+    .coordinator-committee-top-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================================
+   ALTA DE COMITÉ TUTORIAL
+================================================== */
+
+.coordinator-committee-form-page {
+    width: 100%;
+    min-height: 100%;
+    color: #102a72;
+}
+
+.coordinator-committee-form-header {
+    margin-bottom: 14px;
+}
+
+.coordinator-committee-form-header h2 {
+    margin: 0 0 5px;
+    color: #172033;
+    font-size: 18px;
+}
+
+.coordinator-committee-back-button {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #0758d5;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.coordinator-committee-form-notice {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    border: 1px solid #d7e5ff;
+    border-radius: 5px;
+    background: #f0f6ff;
+    color: #16458a;
+    font-size: 10px;
+}
+
+.coordinator-committee-form-notice > span,
+.coordinator-committee-synodals-notice > span {
+    color: #1261d6;
+    font-size: 13px;
+}
+
+.coordinator-committee-form-notice p {
+    margin: 0;
+}
+
+.coordinator-committee-form-notice strong,
+.coordinator-committee-form-group label span {
+    color: #e00000;
+}
+
+.coordinator-committee-form-card {
+    padding: 15px;
+    border: 1px solid #dfe7f2;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.coordinator-committee-form-card h3 {
+    margin: 0 0 15px;
+    color: #173b82;
+    font-size: 13px;
+}
+
+.coordinator-committee-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px 22px;
+}
+
+.coordinator-committee-form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.coordinator-committee-form-group label {
+    margin-bottom: 6px;
+    color: #173b82;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.coordinator-committee-form-group small {
+    min-height: 25px;
+    margin: -2px 0 5px;
+    color: #64748b;
+    font-size: 8px;
+    line-height: 1.35;
+}
+
+.coordinator-committee-form-group input,
+.coordinator-committee-form-group select {
+    width: 100%;
+    height: 29px;
+    padding: 0 9px;
+    border: 1px solid #d6dce6;
+    border-radius: 4px;
+    outline: none;
+    background: #ffffff;
+    color: #526581;
+    font-size: 9px;
+}
+
+.coordinator-committee-form-group input:focus,
+.coordinator-committee-form-group select:focus {
+    border-color: #1261e8;
+    box-shadow: 0 0 0 2px rgba(18, 97, 232, 0.08);
+}
+
+.coordinator-committee-synodals-number {
+    max-width: 410px;
+    margin-top: 3px;
+}
+
+.coordinator-committee-synodals {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px 22px;
+    margin-top: 17px;
+    padding: 12px;
+    border: 1px solid #dfe7f2;
+    border-radius: 4px;
+}
+
+.coordinator-committee-synodals select:disabled {
+    background: #f1f3f6;
+    color: #b2bbc9;
+    cursor: not-allowed;
+}
+
+.coordinator-committee-synodals-notice {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    border-radius: 4px;
+    background: #f0f6ff;
+    color: #16458a;
+    font-size: 9px;
+}
+
+.coordinator-committee-date {
+    width: 29%;
+    min-width: 190px;
+    margin-top: 15px;
+}
+
+.coordinator-committee-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.coordinator-committee-cancel-button,
+.coordinator-committee-save-button {
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.coordinator-committee-cancel-button {
+    border: 1px solid #1261e8;
+    background: #ffffff;
+    color: #1261e8;
+}
+
+.coordinator-committee-save-button {
+    border: 1px solid #0758d5;
+    background: #0758d5;
+    color: #ffffff;
+}
+
+.coordinator-committee-cancel-button:hover {
+    background: #f3f7ff;
+}
+
+.coordinator-committee-save-button:hover {
+    background: #0048b8;
+}
+
+@media (max-width: 700px) {
+    .coordinator-committee-form-grid,
+    .coordinator-committee-synodals {
+        grid-template-columns: 1fr;
+    }
+
+    .coordinator-committee-synodals-notice {
+        grid-column: auto;
+    }
+
+    .coordinator-committee-date {
+        width: 100%;
+    }
+}
+
+/* ==================================================
    MENU ALUMNOS
 ================================================== */
 

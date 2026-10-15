@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portal de Maestros</title>
+
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/maestros.css">
+</head>
+
+<body>
+
+    <div class="teacher-panel">
+
+        <!-- =========================
+             ENCABEZADO
+        ========================== -->
+
+        <header class="teacher-header">
+
+            <div class="teacher-header-content">
+
+                <!-- LOGO -->
+
+                <div class="teacher-logo-area">
+
+                    <img
+                        class="teacher-logo"
+                        src="images/logoUASLP.PNG"
+                        alt="UASLP">
+
+                </div>
+
+
+                <!-- TÍTULO DEL PORTAL -->
+
+                <div class="teacher-title-area">
+
+                    <h1>
+                        PORTAL DE MAESTROS
+                    </h1>
+
+                    <p>
+                        MAESTRÍA EN TECNOLOGÍA Y GESTIÓN DEL AGUA
+                    </p>
+
+                </div>
+
+
+                <!-- INFORMACIÓN DEL MAESTRO -->
+
+                <div class="teacher-user-area">
+
+                    <div class="user-icon">
+                    </div>
+
+                    <div class="user-information">
+
+                        <strong>
+                            Nombre del maestro
+                        </strong>
+
+                        <span>
+                            Maestro
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="user-menu-button"
+                        id="userMenuButton"
+                        type="button"
+                        aria-label="Opciones de usuario">
+
+                        ▼
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             CONTENIDO PRINCIPAL
+        ========================== -->
+
+        <div class="teacher-main">
+
+
+            <!-- =========================
+                 MENÚ LATERAL
+            ========================== -->
+
+            <aside class="teacher-sidebar">
+
+
+                <!-- INICIO -->
+
+                <button
+                    class="sidebar-item"
+                    id="inicioMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Inicio
+                    </span>
+
+                </button>
+
+
+                <!-- MI INFORMACIÓN -->
+
+                <button
+                    class="sidebar-item"
+                    id="informacionMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Mi información
+                    </span>
+
+                </button>
+
+
+                <!-- =========================
+                     TESIS
+                ========================== -->
+
+                <button
+                    class="sidebar-item"
+                    id="tesisMenu"
+                    type="button"
+                    aria-expanded="false">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Tesis
+                    </span>
+
+                    <span
+                        class="sidebar-arrow"
+                        id="tesisArrow">
+
+                        ⌄
+
+                    </span>
+
+                </button>
+
+
+                <!-- SUBMENÚ TESIS -->
+
+                <div
+                    class="sidebar-submenu"
+                    id="tesisSubmenu"
+                    style="display: none;">
+
+                    <button
+                        class="sidebar-subitem"
+                        id="consultaTesisButton"
+                        type="button">
+
+                        <span class="sidebar-subitem-dot"></span>
+
+                        <span>
+                            Consulta de tesis
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     COMITÉ TUTORIAL
+                ========================== -->
+
+                <button
+                    class="sidebar-item"
+                    id="comiteTutorialMenu"
+                    type="button"
+                    aria-expanded="false">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Comité tutorial
+                    </span>
+
+                    <span
+                        class="sidebar-arrow"
+                        id="comiteTutorialArrow">
+
+                        ⌄
+
+                    </span>
+
+                </button>
+
+
+                <!-- SUBMENÚ COMITÉ TUTORIAL -->
+
+                <div
+                    class="sidebar-submenu"
+                    id="comiteTutorialSubmenu"
+                    style="display: none;">
+
+                    <button
+                        class="sidebar-subitem"
+                        id="gestionComiteButton"
+                        type="button">
+
+                        <span class="sidebar-subitem-dot"></span>
+
+                        <span>
+                            Gestión del comité
+                        </span>
+
+                    </button>
+
+                    
+
+                </div>
+
+
+                <!-- =========================
+                     EVALUACIONES
+                ========================== -->
+
+                <button
+                    class="sidebar-item"
+                    id="evaluacionesMenu"
+                    type="button"
+                    aria-expanded="false">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Evaluaciones
+                    </span>
+
+                    <span
+                        class="sidebar-arrow"
+                        id="evaluacionesArrow">
+
+                        ⌄
+
+                    </span>
+
+                </button>
+
+
+                <!-- SUBMENÚ EVALUACIONES -->
+
+                <div
+                    class="sidebar-submenu"
+                    id="evaluacionesSubmenu"
+                    style="display: none;">
+
+                    <button
+                        class="sidebar-subitem"
+                        id="evaluacionTesisButton"
+                        type="button">
+
+                        <span class="sidebar-subitem-dot"></span>
+
+                        <span>
+                            Evaluación de tesis
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- DOCUMENTOS -->
+
+                <button
+                    class="sidebar-item"
+                    id="documentosMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Documentos
+                    </span>
+
+                </button>
+
+
+                <!-- MENSAJES -->
+
+                <button
+                    class="sidebar-item"
+                    id="mensajesMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Mensajes
+                    </span>
+
+                </button>
+
+
+                <!-- SEPARADOR -->
+
+                <div class="sidebar-separator"></div>
+
+
+                <!-- AYUDA -->
+
+                <button
+                    class="sidebar-item"
+                    id="ayudaMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Ayuda
+                    </span>
+
+                </button>
+
+
+                <!-- CERRAR SESIÓN -->
+
+                <button
+                    class="sidebar-item logout"
+                    id="cerrarSesionMaestroButton"
+                    type="button">
+
+                    <span class="sidebar-icon"></span>
+
+                    <span>
+                        Cerrar sesión
+                    </span>
+
+                </button>
+
+
+            </aside>
+
+
+            <!-- =========================
+                 ÁREA DE CONTENIDO
+            ========================== -->
+
+            <main
+                class="teacher-content"
+                id="contentArea">
+
+            </main>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="js/maestros.js"></script>
+
+</body>
+</html>

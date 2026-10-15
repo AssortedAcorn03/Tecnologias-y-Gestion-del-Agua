@@ -19,6 +19,21 @@ const altaUsuarioButton = document.getElementById("altaUsuarioButton");
 const listadoUsuariosButton = document.getElementById("listadoUsuariosButton");
 
 // ==================================================
+// COMITÉS TUTORIALES
+// ==================================================
+
+const comitesTutorialesMenu =
+    document.getElementById("comitesTutorialesMenu");
+const comitesTutorialesSubmenu =
+    document.getElementById("comitesTutorialesSubmenu");
+const comitesTutorialesArrow =
+    document.getElementById("comitesTutorialesArrow");
+const altaComiteButton =
+    document.getElementById("altaComiteButton");
+const gestionComitesButton =
+    document.getElementById("gestionComitesButton");
+
+// ==================================================
 // EGRESADOS
 // ==================================================
 
@@ -29,6 +44,352 @@ const registrarEgresadoButton = document.getElementById("registrarEgresadoButton
 const consultarEgresadoButton = document.getElementById("consultarEgresadoButton");
 const modificarEgresadoButton = document.getElementById("modificarEgresadoButton");
 const contentArea = document.getElementById("contentArea");
+
+// ==================================================
+// MENÚ COMITÉS TUTORIALES
+// ==================================================
+
+comitesTutorialesMenu.addEventListener("click", function () {
+
+    const submenuVisible =
+        comitesTutorialesSubmenu.style.display !== "none";
+
+    comitesTutorialesSubmenu.style.display =
+        submenuVisible ? "none" : "flex";
+    comitesTutorialesArrow.textContent =
+        submenuVisible ? "⌄" : "⌃";
+
+});
+
+// ==================================================
+// ALTA DE COMITÉ
+// ==================================================
+
+altaComiteButton.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+    mostrarAltaComite();
+
+});
+
+function mostrarAltaComite() {
+
+    contentArea.innerHTML = `
+
+        <section class="coordinator-committee-form-page">
+
+            <div class="coordinator-committee-form-header">
+                <h2>Nuevo comité tutorial</h2>
+                <button
+                    type="button"
+                    class="coordinator-committee-back-button"
+                    id="backToCommitteesButton">
+                    ← &nbsp; Volver a comités tutoriales
+                </button>
+            </div>
+
+            <div class="coordinator-committee-form-notice">
+                <span>ⓘ</span>
+                <p>
+                    Completa la información del nuevo comité tutorial.
+                    Los campos marcados con <strong>*</strong> son obligatorios.
+                </p>
+            </div>
+
+            <section class="coordinator-committee-form-card">
+
+                <h3>Datos del comité tutorial</h3>
+
+                <div class="coordinator-committee-form-grid">
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="committeeIdentifier">
+                            Identificador del comité <span>*</span>
+                        </label>
+                        <input
+                            id="committeeIdentifier"
+                            type="text"
+                            placeholder="Ej. CT-2024-001">
+                    </div>
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="thesisKey">
+                            Clave del tesista <span>*</span>
+                        </label>
+                        <input
+                            id="thesisKey"
+                            type="text"
+                            placeholder="Ej. MTGA-2024-015">
+                    </div>
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="committeeDirector">
+                            Director <span>*</span>
+                        </label>
+                        <select id="committeeDirector">
+                            <option value="">Seleccionar director</option>
+                        </select>
+                    </div>
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="committeeCoDirector">
+                            Codirector
+                        </label>
+                        <select id="committeeCoDirector">
+                            <option value="">Seleccionar codirector</option>
+                        </select>
+                    </div>
+
+                    <div class="coordinator-committee-form-group coordinator-committee-synodals-number">
+                        <label for="synodalsNumber">
+                            Número de sinodales <span>*</span>
+                        </label>
+                        <small>
+                            Selecciona cuántos sinodales formarán parte del comité (máximo 3).
+                        </small>
+                        <select id="synodalsNumber">
+                            <option value="">Seleccionar número</option>
+                            <option value="1">1 sinodal</option>
+                            <option value="2">2 sinodales</option>
+                            <option value="3">3 sinodales</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="coordinator-committee-synodals">
+                    <div class="coordinator-committee-form-group">
+                        <label for="synodalOne">
+                            Sinodal 1 <span>*</span>
+                        </label>
+                        <select id="synodalOne" disabled>
+                            <option value="">Seleccionar sinodal 1</option>
+                        </select>
+                    </div>
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="synodalTwo">Sinodal 2</label>
+                        <select id="synodalTwo" disabled>
+                            <option value="">Seleccionar sinodal 2</option>
+                        </select>
+                    </div>
+
+                    <div class="coordinator-committee-form-group">
+                        <label for="synodalThree">Sinodal 3</label>
+                        <select id="synodalThree" disabled>
+                            <option value="">Seleccionar sinodal 3</option>
+                        </select>
+                    </div>
+
+                    <div class="coordinator-committee-synodals-notice">
+                        <span>ⓘ</span>
+                        Los campos de sinodales se habilitan de acuerdo al número seleccionado.
+                    </div>
+                </div>
+
+                <div class="coordinator-committee-form-group coordinator-committee-date">
+                    <label for="committeeDate">
+                        Fecha <span>*</span>
+                    </label>
+                    <input id="committeeDate" type="date">
+                </div>
+
+            </section>
+
+            <div class="coordinator-committee-form-actions">
+                <button
+                    type="button"
+                    class="coordinator-committee-cancel-button"
+                    id="cancelCommitteeButton">
+                    Cancelar
+                </button>
+                <button
+                    type="button"
+                    class="coordinator-committee-save-button">
+                    ▣ &nbsp; Guardar comité
+                </button>
+            </div>
+
+        </section>
+
+    `;
+
+    activarSubmenuComites(altaComiteButton);
+
+    document
+        .getElementById("backToCommitteesButton")
+        .addEventListener("click", mostrarGestionComites);
+
+    document
+        .getElementById("cancelCommitteeButton")
+        .addEventListener("click", mostrarGestionComites);
+
+    document
+        .getElementById("synodalsNumber")
+        .addEventListener("change", function (event) {
+            const selectedNumber = Number(event.target.value);
+            const synodalFields = [
+                document.getElementById("synodalOne"),
+                document.getElementById("synodalTwo"),
+                document.getElementById("synodalThree")
+            ];
+
+            synodalFields.forEach((field, index) => {
+                field.disabled = index >= selectedNumber;
+                if (field.disabled) {
+                    field.value = "";
+                }
+            });
+        });
+
+}
+
+// ==================================================
+// GESTIÓN DE COMITÉS
+// ==================================================
+
+gestionComitesButton.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+    mostrarGestionComites();
+
+});
+
+function mostrarGestionComites() {
+
+    contentArea.innerHTML = `
+
+        <section class="coordinator-committee-page">
+
+            <div class="coordinator-committee-notice">
+                <span>ⓘ</span>
+                <div>
+                    <p>
+                        El sistema permite agregar, reemplazar o remover
+                        integrantes del comité tutorial.
+                    </p>
+                    <p>
+                        Todas las modificaciones quedan reflejadas en el comité
+                        activo y se conserva la trazabilidad de los cambios.
+                    </p>
+                </div>
+            </div>
+
+            <div class="coordinator-committee-top-grid">
+
+                <section class="coordinator-committee-card">
+
+                    <h3>♧ &nbsp; Comités registrados</h3>
+
+                    <p class="coordinator-committee-description">
+                        Selecciona un comité para consultar su información
+                        y gestionar sus integrantes.
+                    </p>
+
+                    <div class="coordinator-committee-search">
+                        <span>⌕</span>
+                        <input
+                            type="search"
+                            placeholder="Buscar comité por nombre o periodo..."
+                        >
+                    </div>
+
+                    <div class="coordinator-committee-table-wrapper">
+                        <table class="coordinator-committee-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre del comité</th>
+                                    <th>Periodo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="coordinator-committee-empty">
+                                        No hay comités registrados.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+                <section class="coordinator-committee-card">
+
+                    <h3>♧ &nbsp; Información del comité seleccionado</h3>
+
+                    <div class="coordinator-committee-details">
+                        <p class="coordinator-committee-empty">
+                            Selecciona un comité para consultar su información.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="coordinator-committee-full-button"
+                        disabled>
+                        ▣ &nbsp; Ver información completa del comité ›
+                    </button>
+                </section>
+
+            </div>
+
+            <section class="coordinator-committee-card coordinator-committee-history">
+
+                <h3>Historial de cambios</h3>
+
+                <div class="coordinator-committee-table-wrapper">
+                    <table class="coordinator-committee-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Acción</th>
+                                <th>Integrante</th>
+                                <th>Rol anterior</th>
+                                <th>Rol nuevo</th>
+                                <th>Realizado por</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6" class="coordinator-committee-empty">
+                                    No hay cambios registrados.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <div class="coordinator-committee-bottom-notice">
+                <span>ⓘ</span>
+                Todas las modificaciones realizadas al comité tutorial
+                quedarán registradas para fines de control y seguimiento.
+            </div>
+
+        </section>
+
+    `;
+
+    activarSubmenuComites(gestionComitesButton);
+
+}
+
+function activarSubmenuComites(botonActivo) {
+
+    altaComiteButton.classList.toggle(
+        "active",
+        botonActivo === altaComiteButton
+    );
+    gestionComitesButton.classList.toggle(
+        "active",
+        botonActivo === gestionComitesButton
+    );
+
+}
 
 // ==================================================
 // MENÚ EGRESADOS

@@ -873,3 +873,186 @@
 
     color: #946200;
 }
+
+/* ==================================================
+   AJUSTE GENERAL DE TAMAÑO DEL PORTAL DE EGRESADOS
+================================================== */
+
+/* La vista debe aprovechar todo el espacio disponible */
+#contentArea {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+}
+
+/* Evitar que las vistas queden limitadas a 1100px */
+.graduate-profile-page,
+.graduate-update-page {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* ==================================================
+   ENCABEZADOS
+================================================== */
+
+.graduate-profile-header h2,
+.graduate-update-header h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.graduate-profile-header p,
+.graduate-update-header p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ==================================================
+   TARJETAS
+================================================== */
+
+.graduate-profile-card,
+.graduate-update-card {
+    width: 100%;
+    padding: 26px;
+    margin-bottom: 22px;
+    border-radius: 8px;
+}
+
+/* Títulos de las tarjetas */
+.graduate-profile-card-header h3,
+.graduate-update-card h3 {
+    font-size: 19px;
+}
+
+/* Descripciones de las tarjetas */
+.graduate-profile-card-header p {
+    font-size: 13px;
+}
+
+/* ==================================================
+   CAMPOS DEL PERFIL
+================================================== */
+
+.graduate-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 28px;
+}
+
+.graduate-profile-field {
+    gap: 8px;
+}
+
+.graduate-profile-field label,
+.graduate-update-field label {
+    font-size: 14px;
+}
+
+.graduate-profile-field input,
+.graduate-update-field input,
+.graduate-update-select {
+    height: 44px;
+    padding: 0 13px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* ==================================================
+   CAMPOS DE ACTUALIZACIÓN
+================================================== */
+
+.graduate-update-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
+}
+
+.graduate-update-field {
+    gap: 8px;
+}
+
+.graduate-update-field small {
+    font-size: 12px;
+}
+
+/* Avisos informativos */
+.graduate-update-info {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+/* Mensaje de situación laboral */
+.graduate-labor-message {
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ==================================================
+   BOTONES
+================================================== */
+
+.graduate-update-button,
+.graduate-cancel-button,
+.graduate-save-button {
+    min-height: 42px;
+    padding: 0 20px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 900px) {
+    #contentArea {
+        padding: 20px;
+    }
+
+    .graduate-profile-grid,
+    .graduate-update-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .graduate-profile-card,
+    .graduate-update-card {
+        padding: 18px;
+    }
+
+    .graduate-profile-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .graduate-profile-card-header .graduate-update-button {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    #contentArea {
+        padding: 12px;
+    }
+
+    .graduate-profile-header h2,
+    .graduate-update-header h2 {
+        font-size: 23px;
+    }
+
+    .graduate-update-actions {
+        flex-direction: column-reverse;
+    }
+
+    .graduate-update-actions button {
+        width: 100%;
+    }
+}
