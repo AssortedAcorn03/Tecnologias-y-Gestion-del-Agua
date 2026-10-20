@@ -42,7 +42,7 @@ const egresadosSubmenu = document.getElementById("egresadosSubmenu");
 const egresadosArrow = document.getElementById("egresadosArrow");
 const registrarEgresadoButton = document.getElementById("registrarEgresadoButton");
 const consultarEgresadoButton = document.getElementById("consultarEgresadoButton");
-const modificarEgresadoButton = document.getElementById("modificarEgresadoButton");
+const longitudinalidadButton = document.getElementById("longitudinalidadButton");
 const contentArea = document.getElementById("contentArea");
 
 // ==================================================
@@ -114,12 +114,13 @@ function mostrarAltaComite() {
 
                     <div class="coordinator-committee-form-group">
                         <label for="thesisKey">
-                            Clave del tesista <span>*</span>
+                            Matrícula del tesista <span>*</span>
                         </label>
                         <input
                             id="thesisKey"
                             type="text"
-                            placeholder="Ej. MTGA-2024-015">
+                            inputmode="numeric"
+                            placeholder="Ej. 300103">
                     </div>
 
                     <div class="coordinator-committee-form-group">
@@ -216,6 +217,65 @@ function mostrarAltaComite() {
 
     activarSubmenuComites(altaComiteButton);
 
+    const mensajeComite = document.createElement("p");
+    mensajeComite.id = "committeeFormMessage";
+    mensajeComite.setAttribute("role", "status");
+    mensajeComite.className = "error";
+    document.querySelector(".coordinator-committee-form-actions").before(mensajeComite);
+
+    const selectsProfesores = [
+        document.getElementById("committeeDirector"),
+        document.getElementById("committeeCoDirector"),
+        document.getElementById("synodalOne"),
+        document.getElementById("synodalTwo"),
+        document.getElementById("synodalThree")
+    ];
+    gasApi("/api/comites/profesores")
+        .then(profesores => {
+            profesores.forEach(profesor => selectsProfesores.forEach(select => {
+                select.append(new Option(`${profesor.nombre || "Sin nombre"} (RPE ${profesor.rpe})`, profesor.rpe));
+            }));
+        })
+        .catch(error => { mensajeComite.textContent = error.message; });
+
+    document
+        .querySelector(".coordinator-committee-save-button")
+        .addEventListener("click", async () => {
+            const numeroSinodales = Number(document.getElementById("synodalsNumber").value);
+            const sinodales = [
+                document.getElementById("synodalOne").value,
+                document.getElementById("synodalTwo").value,
+                document.getElementById("synodalThree").value
+            ].slice(0, numeroSinodales).map(Number);
+            const datos = {
+                identificador: document.getElementById("committeeIdentifier").value.trim(),
+                claveTesista: document.getElementById("thesisKey").value.trim(),
+                numeroSinodales,
+                directorRpe: Number(document.getElementById("committeeDirector").value),
+                codirectorRpe: document.getElementById("committeeCoDirector").value
+                    ? Number(document.getElementById("committeeCoDirector").value) : null,
+                sinodalesRpe: sinodales,
+                fecha: document.getElementById("committeeDate").value
+            };
+            if (!datos.identificador || !datos.claveTesista || !datos.numeroSinodales ||
+                !datos.directorRpe || sinodales.some(rpe => !rpe) || !datos.fecha) {
+                mensajeComite.textContent = "Completa todos los campos obligatorios.";
+                return;
+            }
+
+            const boton = document.querySelector(".coordinator-committee-save-button");
+            boton.disabled = true;
+            mensajeComite.textContent = "Guardando comité...";
+            try {
+                const respuesta = await gasApi("/api/comites", "POST", datos);
+                mensajeComite.textContent = respuesta.mensaje;
+                boton.disabled = true;
+            } catch (error) {
+                mensajeComite.textContent = error.message;
+                boton.disabled = false;
+            }
+        });
+
     document
         .getElementById("backToCommitteesButton")
         .addEventListener("click", mostrarGestionComites);
@@ -290,6 +350,7 @@ function mostrarGestionComites() {
                         <span>⌕</span>
                         <input
                             type="search"
+                            id="committeeSearch"
                             placeholder="Buscar comité por nombre o periodo..."
                         >
                     </div>
@@ -304,7 +365,7 @@ function mostrarGestionComites() {
                                     <th>Estado</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="committeeRows">
                                 <tr>
                                     <td colspan="4" class="coordinator-committee-empty">
                                         No hay comités registrados.
@@ -320,7 +381,7 @@ function mostrarGestionComites() {
 
                     <h3>♧ &nbsp; Información del comité seleccionado</h3>
 
-                    <div class="coordinator-committee-details">
+                    <div class="coordinator-committee-details" id="committeeDetails">
                         <p class="coordinator-committee-empty">
                             Selecciona un comité para consultar su información.
                         </p>
@@ -329,6 +390,7 @@ function mostrarGestionComites() {
                     <button
                         type="button"
                         class="coordinator-committee-full-button"
+                        id="committeeEditButton"
                         disabled>
                         ▣ &nbsp; Ver información completa del comité ›
                     </button>
@@ -352,7 +414,7 @@ function mostrarGestionComites() {
                                 <th>Realizado por</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="committeeHistoryRows">
                             <tr>
                                 <td colspan="6" class="coordinator-committee-empty">
                                     No hay cambios registrados.
@@ -375,6 +437,136 @@ function mostrarGestionComites() {
     `;
 
     activarSubmenuComites(gestionComitesButton);
+
+    const filas = document.getElementById("committeeRows");
+    const detalles = document.getElementById("committeeDetails");
+    const buscador = document.getElementById("committeeSearch");
+    const editar = document.getElementById("committeeEditButton");
+    let comites = [];
+    let seleccionado = null;
+    let profesores = [];
+
+    function celda(texto) {
+        const td = document.createElement("td");
+        td.textContent = texto || "—";
+        return td;
+    }
+
+    function pintarDetalle(comite) {
+        seleccionado = comite;
+        detalles.replaceChildren();
+        const titulo = document.createElement("h4");
+        titulo.textContent = comite.identificador || `Comité ${comite.id}`;
+        const info = document.createElement("p");
+        info.textContent = `Tesista: ${comite.tesista || "—"} · Matrícula: ${comite.matricula}`;
+        const integrantes = document.createElement("ul");
+        comite.integrantes.forEach(integrante => {
+            const li = document.createElement("li");
+            li.textContent = `${integrante.rol}: ${integrante.nombre} (RPE ${integrante.rpe})`;
+            integrantes.append(li);
+        });
+        detalles.append(titulo, info, integrantes);
+        editar.disabled = false;
+    }
+
+    function pintarTabla(lista) {
+        filas.replaceChildren();
+        if (!lista.length) {
+            const row = document.createElement("tr");
+            const empty = document.createElement("td");
+            empty.colSpan = 4;
+            empty.className = "coordinator-committee-empty";
+            empty.textContent = "No hay comités registrados.";
+            row.append(empty);
+            filas.append(row);
+            return;
+        }
+        lista.forEach(comite => {
+            const row = document.createElement("tr");
+            const selector = document.createElement("td");
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = "Seleccionar";
+            button.addEventListener("click", () => pintarDetalle(comite));
+            selector.append(button);
+            row.append(selector, celda(comite.identificador || `Comité ${comite.id}`),
+                celda(comite.matricula), celda(comite.estado));
+            filas.append(row);
+        });
+    }
+
+    async function cargarComites() {
+        try {
+            const termino = buscador.value.trim();
+            const respuesta = await gasApi("/api/comites" +
+                (termino ? `?buscar=${encodeURIComponent(termino)}` : ""));
+            comites = respuesta.comites;
+            pintarTabla(comites);
+        } catch (error) {
+            filas.replaceChildren();
+            const row = document.createElement("tr");
+            const empty = document.createElement("td");
+            empty.colSpan = 4;
+            empty.className = "coordinator-committee-empty";
+            empty.textContent = error.message;
+            row.append(empty);
+            filas.append(row);
+        }
+    }
+
+    async function editarIntegrantes() {
+        if (!seleccionado) return;
+        if (!profesores.length) profesores = await gasApi("/api/comites/profesores");
+        const escapar = valor => String(valor ?? "").replace(/[&<>"']/g, caracter => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+        }[caracter]));
+        const activo = seleccionado.integrantes.filter(i => i.rol === "Director" ||
+            i.rol === "Codirector" || i.rol === "Asesor");
+        const director = activo.find(i => i.rol === "Director");
+        const codirector = activo.find(i => i.rol === "Codirector");
+        const sinodales = activo.filter(i => i.rol === "Asesor");
+        const opciones = (valor, vacio) => `<option value="">${vacio}</option>` +
+            profesores.map(p => `<option value="${p.rpe}" ${p.rpe === valor ? "selected" : ""}>${escapar(p.nombre || "Sin nombre")} (RPE ${p.rpe})</option>`).join("");
+        detalles.innerHTML = `<h4>Gestionar integrantes</h4>
+            <label>Director<select id="editCommitteeDirector">${opciones(director?.rpe, "Seleccionar director")}</select></label>
+            <label>Codirector<select id="editCommitteeCoDirector">${opciones(codirector?.rpe, "Sin codirector")}</select></label>
+            <label>Sinodal 1<select id="editCommitteeSynodal1">${opciones(sinodales[0]?.rpe, "Seleccionar sinodal")}</select></label>
+            <label>Sinodal 2<select id="editCommitteeSynodal2">${opciones(sinodales[1]?.rpe, "Sin sinodal")}</select></label>
+            <label>Sinodal 3<select id="editCommitteeSynodal3">${opciones(sinodales[2]?.rpe, "Sin sinodal")}</select></label>
+            <p id="committeeEditMessage" role="status" class="error"></p>
+            <button type="button" id="saveCommitteeMembers">Guardar integrantes</button>`;
+        document.getElementById("saveCommitteeMembers").addEventListener("click", async event => {
+            const value = id => document.getElementById(id).value;
+            const sinodalesRpe = ["editCommitteeSynodal1", "editCommitteeSynodal2", "editCommitteeSynodal3"]
+                .map(value).filter(Boolean).map(Number);
+            const datos = {
+                directorRpe: Number(value("editCommitteeDirector")),
+                codirectorRpe: value("editCommitteeCoDirector") ? Number(value("editCommitteeCoDirector")) : null,
+                sinodalesRpe
+            };
+            const mensaje = document.getElementById("committeeEditMessage");
+            if (!datos.directorRpe || !sinodalesRpe.length) {
+                mensaje.textContent = "Selecciona el director y al menos un sinodal.";
+                return;
+            }
+            event.target.disabled = true;
+            try {
+                await gasApi(`/api/comites/${seleccionado.id}/integrantes`, "PUT", datos);
+                await cargarComites();
+                seleccionado = comites.find(c => c.id === seleccionado.id);
+                pintarDetalle(seleccionado);
+            } catch (error) {
+                mensaje.textContent = error.message;
+                event.target.disabled = false;
+            }
+        });
+    }
+
+    buscador.addEventListener("input", cargarComites);
+    editar.addEventListener("click", () => editarIntegrantes().catch(error => {
+        detalles.textContent = error.message;
+    }));
+    cargarComites();
 
 }
 
@@ -511,6 +703,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="altaClaveAlumno"
                             placeholder="Ej. 201812345">
 
                     </div>
@@ -525,6 +718,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="altaIdentificadorEgresado"
                             placeholder="Ej. MTGA-2024-015">
 
                     </div>
@@ -545,6 +739,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="altaNombre"
                             placeholder="Ej. Juan">
 
                     </div>
@@ -559,6 +754,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="altaApellidoPaterno"
                             placeholder="Ej. Pérez">
 
                     </div>
@@ -572,6 +768,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="altaApellidoMaterno"
                             placeholder="Ej. Martínez">
 
                     </div>
@@ -590,22 +787,10 @@ function mostrarRegistrarEgresado() {
                             <span>*</span>
                         </label>
 
-                        <select>
+                        <select id="altaGeneracion">
 
                             <option value="">
                                 Seleccionar generación
-                            </option>
-
-                            <option>
-                                2022-2024
-                            </option>
-
-                            <option>
-                                2023-2025
-                            </option>
-
-                            <option>
-                                2024-2026
                             </option>
 
                         </select>
@@ -695,6 +880,7 @@ function mostrarRegistrarEgresado() {
 
                                 <input
                                     type="text"
+                                    id="areaProfesionalEgresado"
                                     placeholder="Ej. Ingeniería y desarrollo"
                                     disabled>
 
@@ -709,6 +895,7 @@ function mostrarRegistrarEgresado() {
 
                                 <input
                                     type="text"
+                                    id="ciudadEgresado"
                                     placeholder="Ej. San Luis Potosí, S.L.P."
                                     disabled>
 
@@ -736,6 +923,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="email"
+                            id="correoEgresado"
                             placeholder="Ej. juan.perez@correo.com">
 
                     </div>
@@ -749,6 +937,7 @@ function mostrarRegistrarEgresado() {
 
                         <input
                             type="text"
+                            id="telefonoEgresado"
                             placeholder="Ej. 444 123 4567 / LinkedIn / WhatsApp">
 
                     </div>
@@ -783,6 +972,8 @@ function mostrarRegistrarEgresado() {
 
             </div>
 
+            <p id="altaEgresadoMessage" role="status" class="error"></p>
+
         </div>
 
     `;
@@ -811,6 +1002,53 @@ function mostrarRegistrarEgresado() {
 
         }
 
+        ["empresaEgresado", "areaProfesionalEgresado", "ciudadEgresado"]
+            .forEach(id => { document.getElementById(id).disabled = !empleado.checked; });
+
+    });
+
+    const generaciones = document.getElementById("altaGeneracion");
+    const mensaje = document.getElementById("altaEgresadoMessage");
+    const guardar = document.querySelector(".graduate-save-button");
+    const cancelar = document.querySelector(".graduate-cancel-button");
+
+    gasApi("/api/generaciones")
+        .then(lista => lista.forEach(g => generaciones.append(new Option(
+            g.nombre || g.anioIngreso, g.id
+        ))))
+        .catch(error => { mensaje.textContent = error.message; });
+
+    cancelar.addEventListener("click", () => mostrarConsultaEgresados());
+    guardar.addEventListener("click", async () => {
+        const data = {
+            claveAlumno: Number(document.getElementById("altaClaveAlumno").value),
+            identificadorEgresado: document.getElementById("altaIdentificadorEgresado").value.trim(),
+            nombre: document.getElementById("altaNombre").value.trim(),
+            apellidoPaterno: document.getElementById("altaApellidoPaterno").value.trim(),
+            apellidoMaterno: document.getElementById("altaApellidoMaterno").value.trim() || null,
+            generacionId: Number(generaciones.value),
+            correo: document.getElementById("correoEgresado").value.trim(),
+            telefono: document.getElementById("telefonoEgresado").value.trim() || null,
+            empleado: empleado.checked,
+            empresa: document.getElementById("empresaEgresado").value.trim() || null,
+            areaProfesional: document.getElementById("areaProfesionalEgresado").value.trim() || null,
+            ciudad: document.getElementById("ciudadEgresado").value.trim() || null
+        };
+        if (!data.claveAlumno || !data.identificadorEgresado || !data.nombre ||
+            !data.apellidoPaterno || !data.generacionId || !data.correo) {
+            mensaje.textContent = "Completa todos los campos obligatorios.";
+            return;
+        }
+        guardar.disabled = true;
+        mensaje.textContent = "Guardando egresado...";
+        try {
+            const respuesta = await gasApi("/api/egresados", "POST", data);
+            mensaje.textContent = `${respuesta.mensaje} Contraseña inicial: ${respuesta.passwordInicial}`;
+            guardar.disabled = true;
+        } catch (error) {
+            mensaje.textContent = error.message;
+            guardar.disabled = false;
+        }
     });
 
 }
@@ -1244,6 +1482,7 @@ function mostrarConsultaEgresados() {
         document.getElementById(
             "filtroIdentificadorEgresado"
         ).value = "";
+        cargarEgresados();
 
     });
 
@@ -1259,6 +1498,7 @@ function mostrarConsultaEgresados() {
             document.getElementById(
                 "filtroIdentificadorEgresado"
             ).value = "";
+            cargarEgresados();
 
         });
 
@@ -1270,16 +1510,566 @@ function mostrarConsultaEgresados() {
     document
         .getElementById("buscarEgresadosButton")
         .addEventListener("click", function () {
-
-            // De momento no se realiza ninguna búsqueda.
-            // La funcionalidad se agregará posteriormente.
-
-            console.log("Búsqueda de egresados");
+            cargarEgresados();
 
         });
 
+    async function cargarEgresados() {
+        const cuerpo = document.getElementById("egresadosTableBody");
+        const total = document.getElementById("totalEgresados");
+        const paginacion = document.getElementById("egresadosPaginationText");
+        cuerpo.replaceChildren();
+        paginacion.textContent = "Cargando egresados...";
+
+        try {
+            const nombre = document.getElementById("filtroNombreEgresado").value.trim();
+            const identificador = document.getElementById("filtroIdentificadorEgresado").value.trim();
+            const termino = nombre || identificador;
+            const respuesta = await gasApi("/api/egresados" +
+                (termino ? `?buscar=${encodeURIComponent(termino)}` : ""));
+            let lista = respuesta.egresados;
+            const estado = document.getElementById("filtroEstadoEgresado").value;
+            const situacion = document.getElementById("filtroSituacionLaboral").value;
+
+            if (estado === "activo") lista = lista.filter(e => e.localizable);
+            if (estado === "inactivo") lista = lista.filter(e => !e.localizable);
+            if (situacion === "con-trabajo") lista = lista.filter(e => e.situacionLaboral === "Con trabajo");
+            if (situacion === "sin-trabajo") lista = lista.filter(e => e.situacionLaboral === "Sin trabajo");
+
+            total.textContent = `Total de egresados: ${lista.length}`;
+            paginacion.textContent = lista.length
+                ? `Mostrando ${lista.length} egresado(s)`
+                : "No hay registros para mostrar";
+
+            for (const egresado of lista) {
+                const fila = document.createElement("tr");
+                const valores = [
+                    egresado.identificador,
+                    egresado.nombre,
+                    egresado.generacion,
+                    egresado.localizable ? "Localizable" : "No localizable",
+                    egresado.situacionLaboral,
+                    egresado.ultimaActualizacion
+                        ? new Date(egresado.ultimaActualizacion).toLocaleDateString("es-MX")
+                        : null
+                ];
+                valores.forEach(valor => {
+                    const celda = document.createElement("td");
+                    celda.textContent = valor || "—";
+                    fila.append(celda);
+                });
+
+                const acciones = document.createElement("td");
+                if (egresado.localizable && egresado.matricula) {
+                    const boton = document.createElement("button");
+                    boton.type = "button";
+                    boton.textContent = "Marcar no localizable";
+                    boton.addEventListener("click", async () => {
+                        if (!confirm(`¿Marcar a ${egresado.nombre} como no localizable?`)) return;
+                        boton.disabled = true;
+                        try {
+                            await gasApi(`/api/egresados/${egresado.matricula}/no-localizable`, "PUT");
+                            await cargarEgresados();
+                        } catch (error) {
+                            alert(error.message);
+                            boton.disabled = false;
+                        }
+                    });
+                    acciones.append(boton);
+                } else {
+                    acciones.textContent = "Sin acciones";
+                }
+                fila.append(acciones);
+                cuerpo.append(fila);
+            }
+        } catch (error) {
+            total.textContent = "No fue posible cargar los egresados";
+            paginacion.textContent = error.message;
+        }
+    }
+
+    cargarEgresados();
+
+}
+// ==================================================
+// LONGITUDINALIDAD DE EGRESADOS
+// ==================================================
+
+
+
+
+// ==================================================
+// MOSTRAR VISTA DE LONGITUDINALIDAD
+// ==================================================
+
+if (longitudinalidadButton) {
+
+    longitudinalidadButton.addEventListener("click", function () {
+
+        // Quitar selección de las opciones del menú
+        document.querySelectorAll(
+            ".sidebar-item, .sidebar-subitem"
+        ).forEach(item => {
+            item.classList.remove("active");
+        });
+
+        // Activar la opción seleccionada
+        longitudinalidadButton.classList.add("active");
+
+        // Mostrar la vista
+        contentArea.innerHTML = `
+
+            <section class="longitudinal-page">
+
+                <!-- ENCABEZADO -->
+                <header class="longitudinal-header">
+
+                    <h2>
+                        Seguimiento longitudinal de egresados
+                    </h2>
+
+                    <p>
+                        Permite consultar y dar seguimiento a la trayectoria
+                        académica, laboral y de contacto de los egresados.
+                    </p>
+
+                </header>
+
+
+                <!-- DISTRIBUCIÓN PRINCIPAL -->
+                <div class="longitudinal-layout">
+
+
+                    <!-- ==================================
+                         COLUMNA IZQUIERDA
+                         LISTADO DE EGRESADOS
+                    =================================== -->
+
+                    <section class="longitudinal-card">
+
+                        <div class="longitudinal-section-title">
+
+                            <span class="section-number">1</span>
+
+                            <h3>
+                                Selecciona un egresado
+                            </h3>
+
+                        </div>
+
+
+                        <!-- BÚSQUEDA -->
+                        <div class="longitudinal-search">
+
+                            <input
+                                type="search"
+                                id="buscarEgresadoLongitudinal"
+                                placeholder="Buscar por nombre, matrícula o generación..."
+                                aria-label="Buscar egresado">
+
+                        </div>
+
+
+                        <!-- TABLA -->
+                        <div class="longitudinal-table-wrapper">
+
+                            <table class="longitudinal-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Egresado</th>
+                                        <th>Matrícula</th>
+                                        <th>Generación</th>
+                                        <th>Situación laboral</th>
+                                        <th>Última actualización</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="longitudinalResultados">
+
+                                    <!--
+                                        Los registros se agregarán
+                                        cuando exista conexión
+                                        con la base de datos.
+                                    -->
+
+                                </tbody>
+
+                            </table>
+
+                            <div
+                                class="longitudinal-empty"
+                                id="longitudinalEmpty">
+
+                                No hay egresados para mostrar.
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PAGINACIÓN VISUAL -->
+                        <div class="longitudinal-pagination">
+
+                            <span id="longitudinalTotal">
+                                Mostrando 0 egresados
+                            </span>
+
+                            <div class="pagination-buttons">
+
+                                <button type="button" disabled>
+                                    ‹
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="pagination-current"
+                                    disabled>
+                                    1
+                                </button>
+
+                                <button type="button" disabled>
+                                    ›
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- ==================================
+                         COLUMNA DERECHA
+                         DETALLES DEL EGRESADO
+                    =================================== -->
+
+                    <section class="longitudinal-card">
+
+                        <!-- INFORMACIÓN GENERAL -->
+                        <div class="longitudinal-section-title">
+
+                            <span class="section-number">2</span>
+
+                            <h3>
+                                Información del egresado seleccionado
+                            </h3>
+
+                        </div>
+
+
+                        <div
+                            class="longitudinal-profile"
+                            id="longitudinalProfile">
+
+                            <div class="longitudinal-avatar">
+                                <!-- Espacio para el icono -->
+                            </div>
+
+                            <div class="longitudinal-profile-info">
+
+                                <h3>
+                                    Ningún egresado seleccionado
+                                </h3>
+
+                                <p>
+                                    Selecciona un egresado de la tabla
+                                    para consultar su información.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HISTORIAL LABORAL -->
+                        <details
+                            class="longitudinal-accordion"
+                            open>
+
+                            <summary>
+
+                                <span class="section-number">1</span>
+
+                                <span>
+                                    Historial laboral
+                                </span>
+
+                            </summary>
+
+                            <div class="longitudinal-accordion-content">
+
+                                <div class="longitudinal-table-wrapper">
+
+                                    <table class="longitudinal-table">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Periodo</th>
+                                                <th>Empresa / Institución</th>
+                                                <th>Puesto</th>
+                                                <th>Área</th>
+                                                <th>Tipo de empleo</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="longitudinalHistorialLaboral">
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                <p class="longitudinal-detail-empty">
+                                    Sin información laboral para mostrar.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- SITUACIÓN LABORAL -->
+                        <details class="longitudinal-accordion">
+
+                            <summary>
+
+                                <span class="section-number">2</span>
+
+                                <span>
+                                    Situación laboral
+                                </span>
+
+                            </summary>
+
+                            <div class="longitudinal-accordion-content">
+
+                                <p>
+                                    Selecciona un egresado para consultar
+                                    su situación laboral.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- ÚLTIMA ACTUALIZACIÓN -->
+                        <details class="longitudinal-accordion">
+
+                            <summary>
+
+                                <span class="section-number">3</span>
+
+                                <span>
+                                    Última actualización
+                                </span>
+
+                            </summary>
+
+                            <div class="longitudinal-accordion-content">
+
+                                <p>
+                                    No hay información disponible.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- RETROALIMENTACIÓN -->
+                        <details class="longitudinal-accordion">
+
+                            <summary>
+
+                                <span class="section-number">4</span>
+
+                                <span>
+                                    Retroalimentación
+                                </span>
+
+                            </summary>
+
+                            <div class="longitudinal-accordion-content">
+
+                                <p>
+                                    No hay retroalimentación disponible.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- INTENTOS DE CONTACTO -->
+                        <details class="longitudinal-accordion">
+
+                            <summary>
+
+                                <span class="section-number">5</span>
+
+                                <span>
+                                    Intentos de contacto
+                                </span>
+
+                            </summary>
+
+                            <div class="longitudinal-accordion-content">
+
+                                <p>
+                                    No hay intentos de contacto registrados.
+                                </p>
+
+                            </div>
+
+                        </details>
+
+
+                        <!-- EXPORTAR -->
+                        <div class="longitudinal-actions">
+
+                            <button
+                                type="button"
+                                id="exportarLongitudinalButton"
+                                class="longitudinal-export-button">
+
+                                Exportar información
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+        `;
+
+        // Inicializar los controles de la vista
+        inicializarLongitudinalidad();
+
+    });
+
 }
 
+
+// ==================================================
+// INICIALIZAR CONTROLES DE LONGITUDINALIDAD
+// ==================================================
+
+function inicializarLongitudinalidad() {
+
+    const buscador = document.getElementById(
+        "buscarEgresadoLongitudinal"
+    );
+
+    const exportarButton = document.getElementById(
+        "exportarLongitudinalButton"
+    );
+
+    const resultados = document.getElementById("longitudinalResultados");
+    const empty = document.getElementById("longitudinalEmpty");
+    const total = document.getElementById("longitudinalTotal");
+    let timer;
+
+    function celda(texto) {
+        const td = document.createElement("td");
+        td.textContent = texto || "—";
+        return td;
+    }
+
+    function mostrarDetalle(egresado) {
+        const perfil = document.getElementById("longitudinalProfile");
+        const historial = document.getElementById("longitudinalHistorialLaboral");
+        if (!perfil || !historial) return;
+
+        perfil.replaceChildren();
+        const info = document.createElement("div");
+        info.className = "longitudinal-profile-info";
+        const nombre = document.createElement("h3");
+        nombre.textContent = egresado.nombre;
+        const datos = document.createElement("p");
+        datos.textContent = `${egresado.correo} · Matrícula: ${egresado.matricula || "—"}`;
+        info.append(nombre, datos);
+        perfil.append(info);
+
+        historial.replaceChildren();
+        for (const empleo of egresado.empleos || []) {
+            const row = document.createElement("tr");
+            [empleo.periodo, empleo.empresa, empleo.puesto, empleo.area, empleo.tipo]
+                .forEach(value => row.append(celda(value)));
+            historial.append(row);
+        }
+    }
+
+    async function cargar() {
+        resultados.replaceChildren();
+        empty.textContent = "Cargando egresados...";
+        empty.hidden = false;
+        try {
+            const query = buscador.value.trim();
+            const respuesta = await gasApi("/api/egresados" +
+                (query ? `?buscar=${encodeURIComponent(query)}` : ""));
+            total.textContent = `Mostrando ${respuesta.total} egresado(s)`;
+            empty.hidden = respuesta.total !== 0;
+            empty.textContent = respuesta.total ? "" : "No hay egresados para mostrar.";
+
+            for (const egresado of respuesta.egresados) {
+                const row = document.createElement("tr");
+                row.append(
+                    celda(egresado.nombre),
+                    celda(egresado.matricula),
+                    celda(egresado.generacion),
+                    celda(egresado.situacionLaboral),
+                    celda(egresado.ultimaActualizacion
+                        ? new Date(egresado.ultimaActualizacion).toLocaleDateString("es-MX")
+                        : null)
+                );
+                const acciones = document.createElement("td");
+                const seleccionar = document.createElement("button");
+                seleccionar.type = "button";
+                seleccionar.textContent = "Seleccionar";
+                seleccionar.addEventListener("click", () => mostrarDetalle(egresado));
+                acciones.append(seleccionar);
+                row.append(acciones);
+                resultados.append(row);
+            }
+        } catch (error) {
+            empty.hidden = false;
+            empty.textContent = error.message;
+            total.textContent = "No fue posible cargar los egresados";
+        }
+    }
+
+    if (buscador) {
+        buscador.addEventListener("input", () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => cargar(), 250);
+        });
+    }
+
+    cargar();
+
+    // Exportación pendiente de implementar.
+    if (exportarButton) {
+
+        exportarButton.addEventListener("click", function () {
+
+            alert(
+                "La exportación estará disponible cuando se conecten los datos."
+            );
+
+        });
+
+    }
+
+}
 // --------------------------------------------------
 // MENÚ ALUMNOS
 // --------------------------------------------------

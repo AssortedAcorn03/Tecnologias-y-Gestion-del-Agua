@@ -4351,3 +4351,390 @@ body {
     }
 
 }
+/* ==================================================
+   LONGITUDINALIDAD DE EGRESADOS
+================================================== */
+
+.longitudinal-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    color: #08245f;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.longitudinal-header {
+    margin-bottom: 18px;
+}
+
+.longitudinal-header h2 {
+    margin: 0 0 6px;
+    color: #08245f;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.longitudinal-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   DISTRIBUCIÓN PRINCIPAL
+================================================== */
+
+.longitudinal-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+
+/* ==================================================
+   TARJETAS
+================================================== */
+
+.longitudinal-card {
+    min-width: 0;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #dce6f5;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   TÍTULOS DE SECCIÓN
+================================================== */
+
+.longitudinal-section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+}
+
+.longitudinal-section-title h3 {
+    margin: 0;
+    color: #08245f;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.section-number {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #075bea;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* ==================================================
+   BUSCADOR
+================================================== */
+
+.longitudinal-search {
+    margin-bottom: 13px;
+}
+
+.longitudinal-search input {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #cdddf7;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    color: #08245f;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.longitudinal-search input:focus {
+    border-color: #075bea;
+    box-shadow: 0 0 0 3px rgba(7, 91, 234, 0.08);
+}
+
+.longitudinal-search input::placeholder {
+    color: #8292ad;
+}
+
+
+/* ==================================================
+   TABLAS
+================================================== */
+
+.longitudinal-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.longitudinal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    text-align: left;
+}
+
+.longitudinal-table thead {
+    background: #f0f5fc;
+}
+
+.longitudinal-table th {
+    padding: 11px 8px;
+    border: 1px solid #dce6f5;
+    color: #08245f;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.longitudinal-table td {
+    padding: 11px 8px;
+    border: 1px solid #e3eaf5;
+    color: #35517f;
+    vertical-align: middle;
+}
+
+.longitudinal-table tbody tr:hover {
+    background: #f5f9ff;
+}
+
+
+/* ==================================================
+   TABLA VACÍA
+================================================== */
+
+.longitudinal-empty {
+    padding: 24px 12px;
+    color: #71819d;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #e3eaf5;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+
+/* ==================================================
+   PAGINACIÓN
+================================================== */
+
+.longitudinal-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 13px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.pagination-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pagination-buttons button {
+    min-width: 28px;
+    height: 29px;
+    border: 1px solid #dce6f5;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #08245f;
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.pagination-buttons button:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.pagination-buttons .pagination-current {
+    background: #075bea;
+    color: #ffffff;
+    border-color: #075bea;
+}
+
+
+/* ==================================================
+   PERFIL DEL EGRESADO
+================================================== */
+
+.longitudinal-profile {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px;
+    margin-bottom: 14px;
+    border: 1px solid #dce6f5;
+    border-radius: 6px;
+    background: #f9fbff;
+}
+
+.longitudinal-avatar {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e7f0ff;
+    border: 1px solid #d6e5ff;
+}
+
+.longitudinal-profile-info {
+    min-width: 0;
+}
+
+.longitudinal-profile-info h3 {
+    margin: 0 0 7px;
+    color: #08245f;
+    font-size: 14px;
+}
+
+.longitudinal-profile-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   APARTADOS DESPLEGABLES
+================================================== */
+
+.longitudinal-accordion {
+    margin-bottom: 9px;
+    border: 1px solid #dce6f5;
+    border-radius: 6px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.longitudinal-accordion summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    color: #08245f;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.longitudinal-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+.longitudinal-accordion summary::after {
+    content: "⌄";
+    margin-left: auto;
+    color: #075bea;
+    font-size: 16px;
+}
+
+.longitudinal-accordion[open] summary::after {
+    content: "⌃";
+}
+
+.longitudinal-accordion-content {
+    padding: 0 10px 12px;
+    border-top: 1px solid #edf1f8;
+}
+
+.longitudinal-accordion-content p {
+    margin: 12px 0 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.longitudinal-detail-empty {
+    padding: 10px 0;
+    margin: 0;
+    color: #71819d;
+    font-size: 11px;
+    text-align: center;
+}
+
+
+/* ==================================================
+   BOTÓN EXPORTAR
+================================================== */
+
+.longitudinal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 14px;
+}
+
+.longitudinal-export-button {
+    min-height: 36px;
+    padding: 0 14px;
+    border: 1px solid #075bea;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #075bea;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.longitudinal-export-button:hover {
+    background: #075bea;
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   DISEÑO RESPONSIVO
+================================================== */
+
+@media (max-width: 1100px) {
+
+    .longitudinal-layout {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .longitudinal-page {
+        padding: 4px;
+    }
+
+    .longitudinal-header h2 {
+        font-size: 21px;
+    }
+
+    .longitudinal-card {
+        padding: 10px;
+    }
+
+    .longitudinal-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
