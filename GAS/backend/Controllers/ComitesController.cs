@@ -29,13 +29,14 @@ public class ComitesController(GasDbContext db) : ControllerBase
     public async Task<IActionResult> Profesores(CancellationToken ct)
     {
         var profesores = await db.profesors
-            .AsNoTracking()
+            .AsNoTracking().Include(p=>p.profesor_detalles).ThenInclude(d=>d.id_usuarioNavigation)
+            .Where(p => p.profesor_detalles.Any(d => d.activo == true && d.id_usuarioNavigation != null && d.id_usuarioNavigation.activo == true && d.id_usuarioNavigation.id_rol_usuarioNavigation!.nombre == "Profesor"))
             .OrderBy(p => p.apellido_paterno)
             .ThenBy(p => p.nombre)
             .ToListAsync(ct);
         return Ok(profesores.Select(p => new {
             rpe = p.rpe,
-            nombre = string.Join(" ", new[] { p.nombre, p.apellido_paterno, p.apellido_materno }
+            nombre = p.profesor_detalles.FirstOrDefault(d=>d.activo==true)?.id_usuarioNavigation?.nombre ?? string.Join(" ", new[] { p.nombre, p.apellido_paterno, p.apellido_materno }
                 .Where(v => !string.IsNullOrWhiteSpace(v)))
         }));
     }
@@ -44,6 +45,11 @@ public class ComitesController(GasDbContext db) : ControllerBase
     public async Task<IActionResult> Crear(AltaComiteInput input, CancellationToken ct)
     {
         var identificador = input.Identificador.Trim();
+        if (input.NumeroSinodales != input.SinodalesRpe.Length || input.Fecha == default || input.Fecha.Date > DateTime.Today)
+            return BadRequest(new {mensaje="Revisa el número de sinodales y la fecha de asignación."});
+        await using var bloqueo = await db.Database.BeginTransactionAsync(ct);
+        await db.CAT_rol_comites.FromSqlRaw("SELECT * FROM CAT_rol_comite ORDER BY id_rol_comite FOR UPDATE").ToListAsync(ct);
+        if(await db.comites.AnyAsync(c=>c.tipo==identificador,ct))return Conflict(new {mensaje="El identificador del comité ya existe."});
         if (input.SinodalesRpe.Distinct().Count() != input.SinodalesRpe.Length)
             return BadRequest(new { mensaje = "No puedes repetir un profesor en los sinodales." });
         if (input.SinodalesRpe.Contains(input.DirectorRpe) ||
@@ -68,13 +74,13 @@ public class ComitesController(GasDbContext db) : ControllerBase
             .Distinct()
             .ToArray();
         var profesores = await db.profesors
-            .Where(p => rpes.Contains(p.rpe))
+            .Where(p => rpes.Contains(p.rpe) && p.profesor_detalles.Any(d=>d.activo==true && d.id_usuarioNavigation != null && d.id_usuarioNavigation.activo==true && d.id_usuarioNavigation.id_rol_usuarioNavigation!.nombre=="Profesor"))
             .Select(p => p.rpe)
             .ToListAsync(ct);
         if (profesores.Count != rpes.Length)
             return BadRequest(new { mensaje = "Uno o más profesores seleccionados no existen." });
 
-        await using var tx = await db.Database.BeginTransactionAsync(ct);
+        var tx = bloqueo;
         try
         {
             var comite = new comite {
@@ -181,9 +187,10 @@ public class ComitesController(GasDbContext db) : ControllerBase
                 .ToArray();
             if (rpes.Distinct().Count() != rpes.Length)
                 return BadRequest(new { mensaje = "Cada integrante debe ser un profesor distinto." });
-            var comite = await db.comites.SingleOrDefaultAsync(c => c.id_comite == id, ct);
+            await using var tx = await db.Database.BeginTransactionAsync(ct);
+            var comite = (await db.comites.FromSqlInterpolated($"SELECT * FROM comite WHERE id_comite={id} FOR UPDATE").ToListAsync(ct)).SingleOrDefault();
             if (comite == null) return NotFound(new { mensaje = "El comité no existe." });
-            var existentes = await db.profesors.Where(p => rpes.Contains(p.rpe)).Select(p => p.rpe).ToListAsync(ct);
+            var existentes = await db.profesors.Where(p => rpes.Contains(p.rpe) && p.profesor_detalles.Any(d=>d.activo==true && d.id_usuarioNavigation != null && d.id_usuarioNavigation.activo==true && d.id_usuarioNavigation.id_rol_usuarioNavigation!.nombre=="Profesor")).Select(p => p.rpe).ToListAsync(ct);
             if (existentes.Count != rpes.Distinct().Count())
                 return BadRequest(new { mensaje = "Uno o más profesores seleccionados no existen." });
             var roles = await db.CAT_rol_comites
@@ -193,7 +200,6 @@ public class ComitesController(GasDbContext db) : ControllerBase
                 input.CodirectorRpe.HasValue && !roles.ContainsKey("Codirector"))
                 return StatusCode(503, new { mensaje = "Faltan roles de comité en el catálogo." });
 
-            await using var tx = await db.Database.BeginTransactionAsync(ct);
             var actuales = await db.comite_profesors
                 .Where(cp => cp.id_comite == id && cp.activo == true)
                 .ToListAsync(ct);

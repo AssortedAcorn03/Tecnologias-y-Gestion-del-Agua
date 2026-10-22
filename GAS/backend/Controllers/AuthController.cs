@@ -133,7 +133,20 @@ public class AuthController(GasDbContext db, CorreoRecuperacion correo, ILogger<
         if (!Seguridad.Verificar(u, input.Actual)) return BadRequest(new { mensaje = "La contraseña actual no coincide." });
         if (input.Actual == input.Nueva) return BadRequest(new { mensaje = "Elige una contraseña diferente." });
         u.contrasena_hash = new PasswordHasher<usuario>().HashPassword(u, input.Nueva); u.requiere_cambio = false;
-        await Seguridad.Invalidar(db, id); await db.SaveChangesAsync(); await tx.CommitAsync();
-        await HttpContext.SignOutAsync(); return Ok(new { mensaje = "Contraseña actualizada. Inicia sesión de nuevo." });
+        // Invalida todas las sesiones anteriores y entrega una sesión NUEVA
+        // al navegador que acaba de verificar la contraseña actual.
+        var rol = await db.CAT_rol_usuarios.FindAsync(u.id_rol_usuario);
+        if (u.activo != true || rol?.activo != true) return Forbid();
+        await Seguridad.Invalidar(db, id);
+        var now = DateTime.UtcNow;
+        var sid = Seguridad.Token();
+        db.Sesiones.Add(new SesionUsuario { Id = sid, UsuarioId = id, Creada = now, UltimaActividad = now });
+        await db.SaveChangesAsync(); await tx.CommitAsync();
+        var claims = new[] { new Claim(ClaimsGas.IdUsuario, id.ToString()), new Claim(ClaimsGas.Correo, u.correo),
+            new Claim(ClaimsGas.Rol, rol.nombre), new Claim("sid", sid) };
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
+            new AuthenticationProperties { IsPersistent = false, ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8) });
+        return Ok(new { mensaje = "Contraseña actualizada.", rol = rol.nombre, requiereCambio = false });
     }
 }

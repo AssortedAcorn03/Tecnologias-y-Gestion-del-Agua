@@ -50,13 +50,18 @@ public class UsuariosController(GasDbContext db) : ControllerBase
     private async Task<string?> Validar(UsuarioInput input, int id) {
         if (string.IsNullOrWhiteSpace(input.Nombre)) return "El nombre es obligatorio.";
         if (!await db.CAT_rol_usuarios.AnyAsync(r => r.id_rol_usuario == input.RolId && r.activo == true)) return "Selecciona un rol activo.";
+        var rol = await db.CAT_rol_usuarios.Where(r=>r.id_rol_usuario==input.RolId).Select(r=>r.nombre).SingleAsync();
+        if (rol == Roles.Profesor && (!int.TryParse(input.ClaveInstitucional, out var rpe) || rpe <= 0 || rpe > 999999999 || rpe.ToString() != input.ClaveInstitucional?.Trim()))
+            return "Para un profesor, la clave institucional debe ser su RPE numérico positivo, sin ceros iniciales.";
+        var vinculo = await db.profesor_detalles.FirstOrDefaultAsync(p=>p.id_usuario==id && id!=0);
+        if (vinculo != null && input.ClaveInstitucional?.Trim() != vinculo.rpe.ToString()) return "No puedes cambiar el RPE de un profesor vinculado.";
         var email = input.Correo.Trim().ToLowerInvariant();
         var clave = string.IsNullOrWhiteSpace(input.ClaveInstitucional) ? null : input.ClaveInstitucional.Trim().ToUpperInvariant();
         if (await db.usuarios.AnyAsync(u => u.id_usuario != id && (u.correo == email || (clave != null && u.clave_institucional == clave)))) return "Ya existe un usuario con ese correo o clave, incluso si está inactivo.";
         // Verificar también las claves ya existentes en el modelo académico.
         if (int.TryParse(clave, out var claveNumero)) {
             if (await db.alumnos.AnyAsync(a => a.clave_alumno == claveNumero && a.id_usuario != id) ||
-                await db.profesor_detalles.AnyAsync(p => p.rpe == claveNumero && p.id_usuario != id))
+                await db.profesor_detalles.AnyAsync(p => p.rpe == claveNumero && p.id_usuario != null && p.id_usuario != id))
                 return "La clave ya está asociada a otro registro académico.";
         }
         return null;
@@ -72,7 +77,7 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         Aplicar(u, input);
         u.contrasena_hash = new PasswordHasher<usuario>().HashPassword(u, input.Password!);
         db.usuarios.Add(u);
-        try { await db.SaveChangesAsync(); await tx.CommitAsync(); }
+        try { await db.SaveChangesAsync(); await VincularProfesor(u); await db.SaveChangesAsync(); await tx.CommitAsync(); }
         catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 }) { return Conflict(new { mensaje = "Correo o clave institucional duplicados." }); }
         return Created($"/api/usuarios/{u.id_usuario}", new { id = u.id_usuario, mensaje = "Usuario creado. Deberá cambiar su contraseña inicial." });
     }
@@ -91,7 +96,7 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         if (error != null) return Conflict(new { mensaje = error });
         Aplicar(u, input);
         await Seguridad.Invalidar(db, id);
-        try { await db.SaveChangesAsync(); await tx.CommitAsync(); }
+        try { await db.SaveChangesAsync(); await VincularProfesor(u); await db.SaveChangesAsync(); await tx.CommitAsync(); }
         catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 }) { return Conflict(new { mensaje = "Correo o clave institucional duplicados." }); }
         return Ok(new { mensaje = "Usuario actualizado. Sus sesiones anteriores se cerraron." });
     }
@@ -130,6 +135,17 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         return Ok(new { passwordInicial = password, mensaje = "Contraseña temporal generada. Entrégala por un medio seguro; se muestra una sola vez." });
     }
 
+    private async Task VincularProfesor(usuario u) {
+        var rol=await db.CAT_rol_usuarios.Where(r=>r.id_rol_usuario==u.id_rol_usuario).Select(r=>r.nombre).SingleAsync();
+        var detalle=await db.profesor_detalles.SingleOrDefaultAsync(p=>p.id_usuario==u.id_usuario);
+        if(rol!=Roles.Profesor) { if(detalle!=null)detalle.activo=false; return; }
+        var rpe=int.Parse(u.clave_institucional!);
+        var profesor=await db.profesors.FindAsync(rpe);
+        if(profesor==null) { profesor=new profesor {rpe=rpe,nombre=u.nombre is null ? null : u.nombre[..Math.Min(50,u.nombre.Length)]}; db.profesors.Add(profesor); }
+        if(detalle==null) detalle=await db.profesor_detalles.SingleOrDefaultAsync(p=>p.rpe==rpe && p.id_usuario==null);
+        if(detalle==null) { detalle=new profesor_detalle {rpeNavigation=profesor,id_usuario=u.id_usuario}; db.profesor_detalles.Add(detalle); }
+        detalle.id_usuario=u.id_usuario; detalle.activo=u.activo; detalle.correo_institucional=u.correo;
+    }
     private static void Aplicar(usuario u, UsuarioInput i) {
         u.correo = i.Correo.Trim().ToLowerInvariant(); u.nombre = i.Nombre.Trim();
         u.clave_institucional = string.IsNullOrWhiteSpace(i.ClaveInstitucional) ? null : i.ClaveInstitucional.Trim().ToUpperInvariant();

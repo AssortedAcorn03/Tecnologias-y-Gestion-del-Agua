@@ -132,7 +132,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="MTGA-2023-001"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -156,7 +156,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="Javier Pérez Martínez"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -180,7 +180,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="Maestría en Tecnología y Gestión del Agua"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -204,7 +204,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="2023-2025"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -429,7 +429,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="15/05/2025"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -453,7 +453,7 @@ function mostrarMiTesis() {
 
                             <input
                                 type="text"
-                                value="15/05/2025"
+                                value=""
                                 readonly>
 
                             <span class="readonly-icon">
@@ -670,7 +670,7 @@ perfilAlumnoButton.addEventListener("click", function () {
 
                         <input
                             type="text"
-                            value="000000"
+                            value=""
                             readonly>
 
                     </div>
@@ -686,7 +686,7 @@ perfilAlumnoButton.addEventListener("click", function () {
 
                         <input
                             type="text"
-                            value="aaaaaaaaa"
+                            value=""
                             readonly>
 
                     </div>
@@ -702,7 +702,7 @@ perfilAlumnoButton.addEventListener("click", function () {
 
                         <input
                             type="text"
-                            value="aaaaaaa sssssss"
+                            value=""
                             readonly>
 
                     </div>
@@ -718,7 +718,7 @@ perfilAlumnoButton.addEventListener("click", function () {
 
                         <input
                             type="text"
-                            value="20--"
+                            value=""
                             readonly>
 
                     </div>

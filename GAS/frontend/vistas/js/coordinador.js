@@ -230,8 +230,11 @@ function mostrarAltaComite() {
         document.getElementById("synodalTwo"),
         document.getElementById("synodalThree")
     ];
+    mensajeComite.textContent = "Cargando profesores disponibles…";
     gasApi("/api/comites/profesores")
         .then(profesores => {
+            mensajeComite.textContent = "";
+            if (!profesores.length) mensajeComite.textContent = "No hay profesores disponibles. Da de alta un usuario con rol Profesor y su RPE en la clave institucional.";
             profesores.forEach(profesor => selectsProfesores.forEach(select => {
                 select.append(new Option(`${profesor.nombre || "Sin nombre"} (RPE ${profesor.rpe})`, profesor.rpe));
             }));
@@ -466,6 +469,9 @@ function mostrarGestionComites() {
             integrantes.append(li);
         });
         detalles.append(titulo, info, integrantes);
+        const seguimiento = document.createElement("section");
+        detalles.append(seguimiento);
+        gasTesisDetalle(comite.tesisId, seguimiento);
         editar.disabled = false;
     }
 
