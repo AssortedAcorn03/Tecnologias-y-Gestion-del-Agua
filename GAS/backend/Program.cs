@@ -74,8 +74,20 @@ app.Use(async (context, next) => {
             }
         }
     }
-    if (context.Request.Path == "/coordinador.html" &&
-        !(context.User.IsInRole(Roles.Administrador) || context.User.IsInRole(Roles.Coordinador))) {
+    // Guardas de página por rol. Antes solo protegían coordinador.html, así que
+    // cualquiera con sesión podía abrir los paneles de alumno y egresado escribiendo
+    // la URL. Hoy esas vistas ya consumen datos reales, así que importa.
+    // Administrador y Coordinador entran a todo: necesitan poder revisar lo que ve
+    // cada rol para dar soporte.
+    var gestor = context.User.IsInRole(Roles.Administrador) || context.User.IsInRole(Roles.Coordinador);
+    var vistaPorRol = new Dictionary<string, string> {
+        ["/coordinador.html"] = Roles.Coordinador,   // más el gestor, cubierto abajo
+        ["/alumno.html"]      = Roles.Alumno,
+        ["/egresados.html"]   = Roles.Egresado,
+        ["/maestros.html"]    = Roles.Profesor
+    };
+    if (vistaPorRol.TryGetValue(context.Request.Path.Value ?? "", out var rolRequerido)
+        && !gestor && !context.User.IsInRole(rolRequerido)) {
         context.Response.Redirect("/login.html"); return;
     }
     await next();
@@ -94,11 +106,23 @@ app.MapGet("/health/universidad", async (UniversidadExterna universidad) =>
 app.MapGet("/api/roles", async (GasDbContext db) => await db.CAT_rol_usuarios.Where(r => r.activo == true).OrderBy(r => r.id_rol_usuario).Select(r => new { id = r.id_rol_usuario, r.nombre }).ToListAsync()).RequireAuthorization("GestionUsuarios");
 // Catálogos que alimentan los selects del alta e importación de alumnos.
 app.MapGet("/api/programas", async (GasDbContext db) => await db.CAT_programa_academicos.Where(p => p.activo == true).OrderBy(p => p.nombre).Select(p => new { id = p.id_programa, p.nombre }).ToListAsync()).RequireAuthorization("GestionUsuarios");
-app.MapGet("/api/modalidades", async (GasDbContext db) => await db.CAT_modalidad_titulacions.Where(m => m.activo == true).OrderBy(m => m.id_modalidad).Select(m => new { id = m.id_modalidad, m.nombre }).ToListAsync()).RequireAuthorization("GestionUsuarios");
+// Abierto a cualquier sesión: el tesista elige modalidad al presentar su solicitud
+// de tesis (RF-01.10.1). Son dos valores públicos del plan de estudios, sin dato sensible.
+app.MapGet("/api/modalidades", async (GasDbContext db) => await db.CAT_modalidad_titulacions.Where(m => m.activo == true).OrderBy(m => m.id_modalidad).Select(m => new { id = m.id_modalidad, m.nombre }).ToListAsync()).RequireAuthorization();
 // CAT_estado_academico no tiene columna `activo`, a diferencia de los otros catálogos: no se filtra.
 app.MapGet("/api/estados-academicos", async (GasDbContext db) => await db.CAT_estado_academicos.OrderBy(e => e.id_estado_academico).Select(e => new { id = e.id_estado_academico, e.nombre }).ToListAsync()).RequireAuthorization("GestionUsuarios");
 // `generacion` y `periodo_academico` son datos operativos, no catálogos CAT_: se siembran en database/seed.sql.
 app.MapGet("/api/generaciones", async (GasDbContext db, int? programaId) => await db.generacions.Where(g => programaId == null || g.id_programa == programaId).OrderByDescending(g => g.anio_ingreso).Select(g => new { id = g.id_generacion, nombre = g.nombre_generacion, programaId = g.id_programa, anioIngreso = g.anio_ingreso }).ToListAsync()).RequireAuthorization("GestionUsuarios");
 app.MapGet("/api/periodos", async (GasDbContext db) => await db.periodo_academicos.OrderByDescending(p => p.fecha_inicio).Select(p => new { id = p.id_periodo, p.nombre, tipoPeriodo = p.tipo_periodo, fechaInicio = p.fecha_inicio, fechaFin = p.fecha_fin }).ToListAsync()).RequireAuthorization("GestionUsuarios");
+// Catálogos del módulo de egresados (RF-02.3, RF-02.4).
+app.MapGet("/api/situaciones-laborales", async (GasDbContext db) => await db.CAT_situacion_laborals.OrderBy(s => s.id_situacion_laboral).Select(s => new { id = s.id_situacion_laboral, s.nombre }).ToListAsync()).RequireAuthorization();
+app.MapGet("/api/estados-egresado", async (GasDbContext db) => await db.CAT_estado_egresados.OrderBy(e => e.id_estado_egresado).Select(e => new { id = e.id_estado_egresado, e.nombre }).ToListAsync()).RequireAuthorization("GestionUsuarios");
+// Catálogo de estados de tesis (RF-01.10). Abierto a cualquier sesión: el portal
+// del tesista lo muestra en modo lectura junto a su porcentaje de avance.
+app.MapGet("/api/estados-tesis", async (GasDbContext db) => await db.CAT_estado_teses.OrderBy(e => e.id_estado_tesis).Select(e => new { id = e.id_estado_tesis, e.nombre, e.descripcion }).ToListAsync()).RequireAuthorization();
+// Planta docente. Abierto a cualquier sesión porque el tesista necesita elegir a su
+// director al presentar la solicitud de tesis (RF-01.10.1). Solo expone nombre y RPE;
+// el correo y el resto viven en profesor_detalle y no salen de aquí.
+app.MapGet("/api/profesores", async (GasDbContext db) => await db.profesors.OrderBy(p => p.apellido_paterno).ThenBy(p => p.nombre).Select(p => new { rpe = p.rpe, nombre = (p.nombre + " " + p.apellido_paterno + " " + (p.apellido_materno ?? "")).Trim() }).ToListAsync()).RequireAuthorization();
 // GET /api/alumnos vive ahora en Controllers/AlumnosController.Listar, con paginación y filtros.
 app.Run();

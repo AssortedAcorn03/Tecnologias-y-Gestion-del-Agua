@@ -124,11 +124,42 @@
 
 
                 <!-- TESIS -->
-                <button class="menu-item expandable" type="button">
+                <button
+                    class="menu-item expandable"
+                    id="tesisMenu"
+                    type="button">
+
                     <span class="menu-icon"></span>
                     <span class="menu-text">Tesistas</span>
-                    <span class="arrow">⌄</span>
+                    <span class="arrow" id="tesisArrow">⌄</span>
+
                 </button>
+
+                <!-- SUBMENÚ TESIS -->
+                <div
+                    class="submenu"
+                    id="tesisSubmenu"
+                    style="display: none;">
+
+                    <button
+                        class="submenu-item"
+                        id="consultarTesisButton"
+                        type="button">
+
+                        Consultar tesis
+
+                    </button>
+
+                    <button
+                        class="submenu-item"
+                        id="registrarTesisButton"
+                        type="button">
+
+                        Registrar tesis
+
+                    </button>
+
+                </div>
 
 
                 <!-- COMITÉS TUTORIALES -->
@@ -304,7 +335,7 @@
     </div>
 
 
-    <script src="js/api.js"></script><script src="js/sesion.js"></script><script src="js/coordinador.js"></script><script src="js/usuarios.js"></script><script src="js/alumnos.js"></script>
+    <script src="js/api.js"></script><script src="js/sesion.js"></script><script src="js/coordinador.js"></script><script src="js/usuarios.js"></script><script src="js/alumnos.js"></script><script src="js/tesis.js"></script>
 
 </body>
 </html>

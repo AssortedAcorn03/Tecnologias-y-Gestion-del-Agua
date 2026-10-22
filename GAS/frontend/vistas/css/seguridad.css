@@ -19,3 +19,47 @@ button:disabled { opacity:.5; cursor:wait; }
 .gas-panel .error,.security [role=status] { color:#96351d; min-height:24px; }
 .gas-panel dialog { border:0; border-radius:12px; width:min(90vw,560px); max-height:90vh; overflow:auto; }
 .gas-panel dialog::backdrop { background:#0008; }
+
+/* =========================================================
+   Gestión de tesis (RF-01.10) — js/tesis.js
+   ========================================================= */
+
+/* Las cuatro tarjetas de la ficha: se apilan solas en pantalla estrecha. */
+.tesis-ficha { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-bottom:18px; }
+.tesis-card { border:1px solid #d3dde6; border-radius:8px; padding:14px; background:#fff; }
+.tesis-card h3 { margin:0 0 10px; font-size:1em; color:#1f4e79; }
+
+/* Pares etiqueta/valor. El valor puede ser largo (título, resumen). */
+.tesis-card dl { display:grid; grid-template-columns:auto 1fr; gap:6px 12px; margin:0; }
+.tesis-card dt { color:#64748b; font-size:.88em; }
+.tesis-card dd { margin:0; overflow-wrap:anywhere; }
+.tesis-card ul { margin:0; padding-left:18px; }
+
+
+/* Formulario de revisión en rejilla, igual que el resto de formularios largos. */
+.gas-form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+.gas-form-grid label { display:grid; gap:4px; }
+.gas-form-grid span { color:#b91c1c; }
+.gas-form-grid small { color:#64748b; }
+.gas-panel textarea { padding:10px; border:1px solid #aabaca; border-radius:5px; font:inherit; width:100%; resize:vertical; }
+
+/* Mensajes: rojo si falla, verde si se guardó. */
+.gas-panel #gasAvisoTesis { min-height:1.2em; color:#15803d; }
+.gas-panel #gasAvisoTesis.error { color:#b91c1c; }
+
+/* Bandeja de solicitudes de dirección (js/tesis-director.js). */
+.gas-panel .tesis-card + .tesis-card { margin-top:14px; }
+.gas-acciones { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; }
+.gas-motivo-bloque { margin-top:12px; }
+.gas-motivo-bloque label { display:grid; gap:4px; margin-bottom:8px; }
+.gas-motivo-bloque input { width:100%; }
+.gas-panel #gasAvisoDir { min-height:1.2em; color:#15803d; }
+.gas-panel #gasAvisoDir.error { color:#b91c1c; }
+
+/* Mi cuenta: la vuelta al panel va junto a Cerrar sesión, con el mismo aspecto
+   que ese botón para que se lean como un par de acciones y no como un enlace
+   perdido. Es un <a> y no un <button> porque navega a otra página. */
+.security .acciones-cuenta { display:flex; gap:8px; align-items:center; }
+.security #panel { padding:10px 16px; background:#174a7e; color:#fff; border-radius:5px;
+    text-decoration:none; margin:4px; font:inherit; line-height:normal; }
+.security #panel:hover { background:#133d69; }

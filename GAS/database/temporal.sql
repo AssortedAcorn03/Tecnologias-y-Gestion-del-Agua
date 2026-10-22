@@ -57,26 +57,34 @@ CREATE TABLE estudiante (
 -- -------------------------------------------------------------
 -- Datos de ejemplo
 --
--- Solo Karla y Patricia son candidatas reales a importarse:
---   · José y Pepe no son del posgrado, pero GAS ya no puede saberlo:
---     están aquí para recordar que la base de la universidad contiene a
---     TODO el alumnado, no solo al de la maestría.
---   · Mónica sí es del posgrado pero está dada de baja → la API la marca
---     no elegible por su estatus.
+-- Quince estudiantes. El correo institucional sigue el formato que asigna
+-- la universidad: A + clave de alumno + @alumnos.uaslp.mx
+--
+--   · Mónica (300105) y Hugo (300114) están dados de baja → la API los
+--     marca no elegibles por su estatus.
+--   · Paola (300113) figura como egresada → sí es elegible: el estatus solo
+--     bloquea la baja, y una egresada puede tener expediente en el posgrado.
+--   · Itzel (300115) no tiene apellido materno → ejercita la columna nula
+--     en toda la cadena.
 -- -------------------------------------------------------------
 INSERT INTO estudiante
   (clave_alumno, nombre, apellido_paterno, apellido_materno, correo_institucional,
    estatus) VALUES
-  (300101, 'José',     'Hernández', 'Castillo', 'jose.hernandez@alumnos.uaslp.mx',
-           'Inscrito'),
-  (300102, 'Pepe',     'Ramírez',   'Núñez',    'pepe.ramirez@alumnos.uaslp.mx',
-           'Inscrito'),
-  (300103, 'Karla',    'Guerrero',  'Medina',   'karla.guerrero@alumnos.uaslp.mx',
-           'Inscrito'),
-  (300104, 'Patricia', 'Soto',      'Álvarez',  'patricia.soto@alumnos.uaslp.mx',
-           'Inscrito'),
-  (300105, 'Mónica',   'Vázquez',   'Lara',     'monica.vazquez@alumnos.uaslp.mx',
-           'Baja')
+  (300101, 'José', 'Hernández', 'Castillo', 'A300101@alumnos.uaslp.mx', 'Inscrito'),
+  (300102, 'Pepe', 'Ramírez', 'Núñez', 'A300102@alumnos.uaslp.mx', 'Inscrito'),
+  (300103, 'Karla', 'Guerrero', 'Medina', 'A300103@alumnos.uaslp.mx', 'Inscrito'),
+  (300104, 'Patricia', 'Soto', 'Álvarez', 'A300104@alumnos.uaslp.mx', 'Inscrito'),
+  (300105, 'Mónica', 'Vázquez', 'Lara', 'A300105@alumnos.uaslp.mx', 'Baja'),
+  (300106, 'Diego', 'Martínez', 'Robles', 'A300106@alumnos.uaslp.mx', 'Inscrito'),
+  (300107, 'Fernanda', 'Ortiz', 'Delgado', 'A300107@alumnos.uaslp.mx', 'Inscrito'),
+  (300108, 'Luis', 'Campos', 'Treviño', 'A300108@alumnos.uaslp.mx', 'Inscrito'),
+  (300109, 'Alejandra', 'Zúñiga', 'Peña', 'A300109@alumnos.uaslp.mx', 'Inscrito'),
+  (300110, 'Ricardo', 'Salazar', 'Ibarra', 'A300110@alumnos.uaslp.mx', 'Inscrito'),
+  (300111, 'Mariana', 'Cervantes', 'Aguilar', 'A300111@alumnos.uaslp.mx', 'Inscrito'),
+  (300112, 'Sergio', 'Villalobos', 'Nájera', 'A300112@alumnos.uaslp.mx', 'Inscrito'),
+  (300113, 'Paola', 'Esquivel', 'Mendoza', 'A300113@alumnos.uaslp.mx', 'Egresado'),
+  (300114, 'Hugo', 'Barrera', 'Quintero', 'A300114@alumnos.uaslp.mx', 'Baja'),
+  (300115, 'Itzel', 'Lozano', NULL, 'A300115@alumnos.uaslp.mx', 'Inscrito')
 ON DUPLICATE KEY UPDATE
   nombre = VALUES(nombre), apellido_paterno = VALUES(apellido_paterno),
   apellido_materno = VALUES(apellido_materno), estatus = VALUES(estatus);

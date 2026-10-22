@@ -1056,3 +1056,32 @@
         width: 100%;
     }
 }
+
+/* =========================================================
+   Actualización de datos del egresado (RF-02.3, RF-02.4)
+   Clases que usa js/egresado-perfil.js y que no existían:
+   la tabla del historial, los mensajes de estado y el área
+   de texto de actividades.
+   ========================================================= */
+
+/* El historial puede tener más columnas que ancho disponible. */
+.graduate-update-page .table-scroll { overflow-x: auto; margin-bottom: 12px; }
+.graduate-update-page table { width: 100%; border-collapse: collapse; }
+.graduate-update-page th,
+.graduate-update-page td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; white-space: nowrap; }
+.graduate-update-page th { font-weight: 600; color: #1e3a5f; background: #f1f5f9; }
+.graduate-update-page tbody tr:hover { background: #f8fafc; }
+
+/* El mismo control visual que los input del formulario. */
+.graduate-update-field textarea {
+    padding: 10px; border: 1px solid #aabaca; border-radius: 5px;
+    font: inherit; width: 100%; resize: vertical;
+}
+
+/* Mensajes de resultado: rojo si es error, verde si salió bien. */
+.graduate-update-page #gasAviso { margin: 10px 0; min-height: 1.2em; color: #15803d; }
+.graduate-update-page #gasAviso.error { color: #b91c1c; }
+.graduate-update-page #gasSello { margin-top: 12px; color: #64748b; font-size: .9em; }
+
+/* Un campo deshabilitado debe parecerlo: los de identificación son de solo lectura. */
+.graduate-update-field input:disabled { background: #f1f5f9; color: #475569; cursor: not-allowed; }

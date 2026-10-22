@@ -42,6 +42,10 @@ public class ProfesorConfig : IEntityTypeConfiguration<profesor>
 /// </summary>
 public class EgresadoConfig : IEntityTypeConfiguration<egresado>
 {
-    public void Configure(EntityTypeBuilder<egresado> entity) =>
+    public void Configure(EntityTypeBuilder<egresado> entity)
+    {
         entity.Property(x => x.clave_alumno).ValueGeneratedNever();
+        // Columna añadida a mano por database/egresados.sql (RF-02.3).
+        entity.Property(x => x.otros_contactos).HasMaxLength(255);
+    }
 }

@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/maestros.css">
+    <!-- Estilos compartidos de los paneles conectados a la API (js/tesis-director.js). -->
+    <link rel="stylesheet" href="css/seguridad.css">
 </head>
 
 <body>
@@ -175,6 +177,32 @@
 
                         <span>
                             Consulta de tesis
+                        </span>
+
+                    </button>
+
+                    <button
+                        class="sidebar-subitem"
+                        id="solicitudesTesisButton"
+                        type="button">
+
+                        <span class="sidebar-subitem-dot"></span>
+
+                        <span>
+                            Solicitudes de dirección
+                        </span>
+
+                    </button>
+
+                    <button
+                        class="sidebar-subitem"
+                        id="misTesistasButton"
+                        type="button">
+
+                        <span class="sidebar-subitem-dot"></span>
+
+                        <span>
+                            Mis tesistas
                         </span>
 
                     </button>
@@ -376,7 +404,13 @@
          JAVASCRIPT
     ========================== -->
 
+    <!-- api.js y sesion.js son imprescindibles: dan gasApi, el control de
+         inactividad y el manejador del botón de cerrar sesión. Sin ellos la
+         página no tiene sesión ni puede hablar con el backend. -->
+    <script src="js/api.js"></script>
+    <script src="js/sesion.js"></script>
     <script src="js/maestros.js"></script>
+    <script src="js/tesis-director.js"></script>
 
 </body>
 </html>

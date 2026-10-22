@@ -1,5 +1,9 @@
 // ==================================================
 // PANEL DEL ALUMNO
+//
+// Ids de CAT_modalidad_titulacion, tal como los carga database/seed.sql.
+const MODALIDAD_TESIS = 1;
+const MODALIDAD_ARTICULO = 2;
 // ==================================================
 
 
@@ -910,11 +914,19 @@ perfilAlumnoButton.addEventListener("click", function () {
     // TESIS
     // ==========================================
 
-    tesisOption.addEventListener("click", function () {
+    tesisOption.addEventListener("click", async function () {
+
+        // La elección se guarda en la base: antes solo añadía una clase de CSS,
+        // así que el menú volvía a desaparecer al recargar la página.
+        try {
+            await gasApi("/api/tesis/mi-modalidad", "PUT", { modalidadId: MODALIDAD_TESIS });
+        } catch (error) {
+            alert(error.message);
+            return;
+        }
 
         activarMenuTesis();
 
-        // Por ahora regresamos a Mi perfil
         mostrarPerfilAlumno();
 
     });
@@ -924,13 +936,21 @@ perfilAlumnoButton.addEventListener("click", function () {
     // ARTÍCULO CIENTÍFICO
     // ==========================================
 
-    articuloOption.addEventListener("click", function () {
+    articuloOption.addEventListener("click", async function () {
 
-        // Por ahora solamente visual.
-        // Más adelante podemos crear
-        // los controles correspondientes.
+        try {
+            await gasApi("/api/tesis/mi-modalidad", "PUT", { modalidadId: MODALIDAD_ARTICULO });
+        } catch (error) {
+            alert(error.message);
+            return;
+        }
 
-        alert("Modalidad seleccionada: Artículo científico");
+        // Quien se titula por artículo no usa el módulo de tesis.
+        document.getElementById("tesisSection").classList.remove("visible");
+
+        alert("Modalidad registrada: Artículo científico");
+
+        mostrarPerfilAlumno();
 
     });
 

@@ -192,5 +192,40 @@ ON DUPLICATE KEY UPDATE nombre = VALUES(nombre), fecha_inicio = VALUES(fecha_ini
 -- DELETE FROM CAT_tipo_pregunta        WHERE id_tipo_pregunta    > 4;
 -- DELETE FROM CAT_tipo_reporte         WHERE id_tipo_reporte     > 5;
 
+-- -------------------------------------------------------------
+-- Profesores
+--
+-- Sin profesores no se puede asignar ningún comité tutorial, y sin comité
+-- no funciona nada de RF-03 ni la asignación de comité a la tesis
+-- (RF-01.10.6). La tabla estaba vacía y no existe ningún endpoint de alta
+-- de profesores, así que se siembran aquí.
+--
+-- OJO: estos son datos de ejemplo. El RPE (Registro de Personal) lo asigna
+-- la universidad, igual que la clave de alumno; hay que reemplazarlos por
+-- la planta docente real antes de usar el sistema de verdad.
+-- -------------------------------------------------------------
+INSERT INTO profesor (rpe, nombre, apellido_paterno, apellido_materno) VALUES
+  (100201, 'Ana',     'Torres',  'Ramírez'),
+  (100202, 'Carlos',  'Rivera',  'Morales'),
+  (100203, 'Laura',   'Gómez',   'Fernández'),
+  (100204, 'Roberto', 'Mendoza', 'Silva'),
+  (100205, 'Elena',   'Castro',  'Jiménez')
+ON DUPLICATE KEY UPDATE
+  nombre = VALUES(nombre), apellido_paterno = VALUES(apellido_paterno),
+  apellido_materno = VALUES(apellido_materno);
+
+-- Correo institucional del personal: inicial del primer nombre + inicial del
+-- segundo (si lo hay) + dos primeras letras de cada apellido, sin acentos.
+--   Ana Torres Ramírez      -> a + to + ra  -> atora
+--   Laura Gómez Fernández   -> l + go + fe  -> lgofe
+INSERT INTO profesor_detalle (id_profesor_detalle, rpe, correo_institucional, activo) VALUES
+  (1, 100201, 'atora@uaslp.mx', TRUE),   -- Ana Torres Ramírez
+  (2, 100202, 'crimo@uaslp.mx', TRUE),   -- Carlos Rivera Morales
+  (3, 100203, 'lgofe@uaslp.mx', TRUE),   -- Laura Gómez Fernández
+  (4, 100204, 'rmesi@uaslp.mx', TRUE),   -- Roberto Mendoza Silva
+  (5, 100205, 'ecaji@uaslp.mx', TRUE)    -- Elena Castro Jiménez
+ON DUPLICATE KEY UPDATE
+  correo_institucional = VALUES(correo_institucional), activo = VALUES(activo);
+
 -- El usuario de la aplicación y sus permisos se crean aparte, en
 -- ../Extras/crear-usuario.sql (fuera del repositorio, contiene credenciales).

@@ -55,8 +55,13 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         if (await db.usuarios.AnyAsync(u => u.id_usuario != id && (u.correo == email || (clave != null && u.clave_institucional == clave)))) return "Ya existe un usuario con ese correo o clave, incluso si está inactivo.";
         // Verificar también las claves ya existentes en el modelo académico.
         if (int.TryParse(clave, out var claveNumero)) {
-            if (await db.alumnos.AnyAsync(a => a.clave_alumno == claveNumero && a.id_usuario != id) ||
-                await db.profesor_detalles.AnyAsync(p => p.rpe == claveNumero && p.id_usuario != id))
+            // Solo se rechaza si el registro académico pertenece a OTRA cuenta. Antes
+            // se comparaba `id_usuario != id` a secas, y como EF Core aplica la
+            // semántica de C# (null != 0 es verdadero), un profesor o alumno todavía
+            // sin cuenta también coincidía: era imposible crear la primera cuenta de
+            // un profesor con su RPE.
+            if (await db.alumnos.AnyAsync(a => a.clave_alumno == claveNumero && a.id_usuario != null && a.id_usuario != id) ||
+                await db.profesor_detalles.AnyAsync(p => p.rpe == claveNumero && p.id_usuario != null && p.id_usuario != id))
                 return "La clave ya está asociada a otro registro académico.";
         }
         return null;
@@ -72,7 +77,18 @@ public class UsuariosController(GasDbContext db) : ControllerBase
         Aplicar(u, input);
         u.contrasena_hash = new PasswordHasher<usuario>().HashPassword(u, input.Password!);
         db.usuarios.Add(u);
-        try { await db.SaveChangesAsync(); await tx.CommitAsync(); }
+        try {
+            await db.SaveChangesAsync();
+            // La clave institucional de un profesor ES su RPE. `Validar` ya comprueba
+            // que no esté asignada a otra persona, pero nadie escribía el vínculo, así
+            // que `profesor_detalle.id_usuario` quedaba siempre en NULL y el profesor
+            // no podía ser reconocido como tal al iniciar sesión.
+            if (int.TryParse(u.clave_institucional, out var rpe)) {
+                var detalle = await db.profesor_detalles.SingleOrDefaultAsync(d => d.rpe == rpe && d.id_usuario == null);
+                if (detalle != null) { detalle.id_usuario = u.id_usuario; await db.SaveChangesAsync(); }
+            }
+            await tx.CommitAsync();
+        }
         catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 }) { return Conflict(new { mensaje = "Correo o clave institucional duplicados." }); }
         return Created($"/api/usuarios/{u.id_usuario}", new { id = u.id_usuario, mensaje = "Usuario creado. Deberá cambiar su contraseña inicial." });
     }
