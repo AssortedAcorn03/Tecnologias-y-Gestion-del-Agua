@@ -150,10 +150,7 @@ public class AlumnosController(GasDbContext db, UniversidadExterna universidad) 
         {
             if (existente.activo != true || existente.id_rol_usuario != rolAlumnoId)
                 return new ResultadoAlta(false, "Ese correo ya pertenece a otra cuenta.", null, null);
-            if (await db.alumnos.AnyAsync(a=>a.id_usuario==existente.id_usuario))
-                return new ResultadoAlta(false, "La cuenta ya está vinculada a otro alumno.", null, null);
             cuenta = existente;
-            cuenta.clave_institucional = identidad.ClaveAlumno.ToString();
             aviso = "Se reutilizó la cuenta existente; no se generó contraseña nueva.";
         }
         else

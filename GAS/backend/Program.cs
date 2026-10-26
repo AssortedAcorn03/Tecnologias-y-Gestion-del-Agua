@@ -34,10 +34,6 @@ builder.Services.AddRateLimiter(o => {
 });
 builder.Services.AddOpenApi();
 var app = builder.Build();
-var vistasPath = Path.GetFullPath(Path.Combine(app.Environment.ContentRootPath, "../frontend/vistas"));
-if (!File.Exists(Path.Combine(vistasPath, "login.html")))
-    throw new InvalidOperationException("No se encontraron las vistas en: " + vistasPath);
-Console.WriteLine("GAS CORRECCION 20261021-V4 | Vistas: " + vistasPath);
 
 // Creación LOCAL del primer administrador: sin endpoint público ni contraseña en código.
 if (args.Contains("--crear-admin")) {
@@ -82,23 +78,9 @@ app.Use(async (context, next) => {
         !(context.User.IsInRole(Roles.Administrador) || context.User.IsInRole(Roles.Coordinador))) {
         context.Response.Redirect("/login.html"); return;
     }
-    if ((context.Request.Path == "/alumno.html" && !context.User.IsInRole(Roles.Alumno)) ||
-        (context.Request.Path == "/maestros.html" && !context.User.IsInRole(Roles.Profesor))) {
-        context.Response.Redirect("/login.html"); return;
-    }
     await next();
 });
-// Un único proveedor físico evita servir copias antiguas de otros directorios.
-app.UseStaticFiles(new StaticFileOptions {
-    FileProvider = new PhysicalFileProvider(vistasPath),
-    OnPrepareResponse = context => {
-        var extension = Path.GetExtension(context.File.Name).ToLowerInvariant();
-        if (extension is ".html" or ".js" or ".css") {
-            context.Context.Response.Headers.CacheControl = "no-store, no-cache, must-revalidate";
-            context.Context.Response.Headers["X-GAS-Version"] = "20261021-V4";
-        }
-    }
-});
+app.UseStaticFiles();
 app.MapControllers();
 app.MapGet("/", () => Results.Redirect("/login.html"));
 app.Map("/error", () => Results.Problem("Ocurrió un error interno. Contacta al administrador."));
