@@ -780,6 +780,57 @@
 .tesis-section.visible {
     display: block;
 }
+
+/* Reportes visuales del tesista (js/tesis-alumno.js). */
+.advance-page { max-width:1100px; color:#12347f; font-family:Arial,sans-serif; }
+.advance-header { margin-bottom:12px; }
+.advance-header h2 { margin:0 0 4px; font-size:20px; }
+.advance-header p,.advance-card-description { margin:0; color:#31518f; font-size:11px; }
+.advance-card { margin-bottom:10px; padding:10px; border:1px solid #d6e0f5; border-radius:7px; background:#fff; }
+.advance-card h3 { margin:0 0 8px; color:#0738a0; font-size:15px; }
+.advance-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px 25px; }
+.advance-info-grid div { display:grid; grid-template-columns:135px 1fr; align-items:center; gap:8px; }
+.advance-info-grid strong,.advance-form label { color:#092d82; font-size:10px; }
+.advance-info-grid span { padding:6px 8px; border:1px solid #ccd7ed; border-radius:5px; background:#f7f8fb; color:#233d75; font-size:10px; }
+.advance-table-wrapper { overflow-x:auto; }
+.advance-table { width:100%; min-width:720px; border-collapse:collapse; color:#082b82; font-size:10px; }
+.advance-table th,.advance-table td { padding:6px 8px; border:1px solid #d6e0f5; text-align:center; }
+.advance-table th { background:#e9efff; font-weight:600; }
+.advance-table th:first-child,.advance-table td:first-child { text-align:left; }
+.advance-status { display:inline-block; min-width:78px; padding:3px 8px; border-radius:10px; }
+.advance-status.approved { background:#dce9ff; color:#1356cb; }
+.advance-status.corrections { background:#ffeac4; color:#9a6300; }
+.advance-status.review { background:#dce9ff; color:#1356cb; }
+.advance-detail-button { padding:3px 8px; border:1px solid #1254d8; border-radius:4px; background:#fff; color:#1254d8; font:inherit; cursor:pointer; }
+.advance-form { display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:8px 18px; margin:0; }
+.advance-form label { display:grid; gap:5px; }
+.advance-form select,.advance-form textarea { width:100%; box-sizing:border-box; padding:7px; border:1px solid #cbd6ed; border-radius:4px; color:#31518f; font:inherit; font-size:10px; }
+.advance-form textarea { resize:vertical; }
+.advance-file-picker { position:relative; min-height:72px; align-content:center; justify-items:center; padding:7px; border:1px dashed #b9c9ed; border-radius:5px; color:#1554da; text-align:center; }
+.advance-file-picker input { position:absolute; width:1px; height:1px; opacity:0; }
+.advance-upload-icon { font-size:25px; line-height:22px; }
+.advance-file-picker small { color:#5875b6; }
+.advance-file-name { max-width:100%; overflow:hidden; color:#31518f; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
+.advance-submit-button { align-self:end; justify-self:end; grid-column:3; padding:8px 14px; border:0; border-radius:4px; background:#064de0; color:#fff; font:inherit; font-size:10px; cursor:pointer; }
+.advance-notice { grid-column:1/-1; min-height:14px; margin:0; color:#16803c; font-size:10px; }
+.advance-progress-card { padding-bottom:14px; }
+.advance-steps { display:grid; grid-template-columns:repeat(4,1fr); margin:0 20px 20px; }
+.advance-step { position:relative; display:grid; justify-items:center; gap:3px; color:#203b80; font-size:9px; text-align:center; }
+.advance-step:not(:last-child)::after { position:absolute; top:10px; left:50%; width:100%; height:2px; background:#bac7e1; content:""; }
+.advance-step.completed:not(:last-child)::after { background:#0b4de0; }
+.advance-step span { z-index:1; display:grid; place-items:center; width:20px; height:20px; border:2px solid #b8c5df; border-radius:50%; background:#fff; color:#fff; }
+.advance-step.completed span,.advance-step.active span { border-color:#0b4de0; background:#0b4de0; }
+.advance-step strong { font-size:9px; }
+.advance-step small { font-size:8px; }
+.advance-progress-label { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px; color:#173b91; font-size:9px; }
+.advance-progress-bar { height:9px; overflow:hidden; border-radius:8px; background:#dce4f5; }
+.advance-progress-bar span { display:block; width:75%; height:100%; border-radius:inherit; background:#0b4de0; }
+@media (max-width:700px) {
+    .advance-info-grid,.advance-form { grid-template-columns:1fr; }
+    .advance-info-grid div { grid-template-columns:120px 1fr; }
+    .advance-submit-button { grid-column:auto; justify-self:start; }
+    .advance-progress-label { grid-template-columns:1fr; }
+}
 /* ==================================================
    AGREGAR ESTADO DE TITULACIÓN
 ================================================== */

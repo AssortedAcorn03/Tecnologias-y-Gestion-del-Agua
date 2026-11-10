@@ -66,6 +66,8 @@ public partial class GasDbContext : DbContext
 
     public virtual DbSet<intento_contacto> intento_contactos { get; set; }
 
+    public virtual DbSet<historial_comite> historial_comites { get; set; }
+
     public virtual DbSet<log_acceso> log_accesos { get; set; }
 
     public virtual DbSet<opcion_preguntum> opcion_pregunta { get; set; }
@@ -406,6 +408,32 @@ public partial class GasDbContext : DbContext
                 .HasForeignKey(d => d.rpe)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_cp_profesor");
+        });
+
+        modelBuilder.Entity<historial_comite>(entity =>
+        {
+            entity.HasKey(e => e.id_historial).HasName("PRIMARY");
+
+            entity.ToTable("historial_comite");
+
+            entity.HasIndex(e => e.id_comite, "fk_historial_comite");
+            entity.HasIndex(e => e.id_usuario, "fk_historial_usuario");
+
+            entity.Property(e => e.accion).HasMaxLength(30);
+            entity.Property(e => e.fecha_cambio)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("datetime");
+            entity.Property(e => e.observaciones).HasMaxLength(500);
+
+            entity.HasOne(d => d.id_comiteNavigation).WithMany()
+                .HasForeignKey(d => d.id_comite)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_historial_comite");
+
+            entity.HasOne(d => d.id_usuarioNavigation).WithMany()
+                .HasForeignKey(d => d.id_usuario)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("fk_historial_usuario");
         });
 
         modelBuilder.Entity<detalle_empleo>(entity =>

@@ -557,6 +557,322 @@
     color: #53657e;
 }
 
+/* ==================================================
+   REVISIÓN Y REGISTRO DE EVALUACIONES DE TESIS
+================================================== */
+
+.thesis-review-page,
+.evaluation-record-page {
+    width: 100%;
+    max-width: 1100px;
+    color: #0a2772;
+}
+
+.thesis-review-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0 18px;
+    border-bottom: 2px solid #dce5f5;
+}
+
+.thesis-review-heading-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border: 1px solid #b9d0ff;
+    border-radius: 12px;
+    background: #edf4ff;
+    color: #0755e9;
+    font-size: 34px;
+    line-height: 1;
+}
+
+.thesis-review-header h2,
+.evaluation-record-header h2 {
+    margin: 0 0 5px;
+    color: #111d64;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.thesis-review-header p,
+.evaluation-record-header p {
+    margin: 0;
+    color: #26478f;
+    font-size: 13px;
+}
+
+.thesis-review-notice {
+    align-items: center;
+    margin: 20px 0;
+    padding: 13px 15px;
+}
+
+.thesis-review-info-icon {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0755e9;
+    color: #fff;
+    font-weight: 700;
+}
+
+.thesis-review-card,
+.evaluation-record-card {
+    padding: 20px;
+    border: 1px solid #d7e0f0;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(24, 62, 132, 0.06);
+}
+
+.thesis-review-card h3,
+.evaluation-record-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px;
+    color: #091c70;
+    font-size: 17px;
+}
+
+.thesis-review-card h3 span {
+    margin-right: 10px;
+}
+
+.thesis-review-table-wrapper {
+    overflow-x: auto;
+}
+
+.thesis-review-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    font-size: 13px;
+}
+
+.thesis-review-table th {
+    padding: 11px 9px;
+    background: #e9efff;
+    color: #091c70;
+    text-align: left;
+}
+
+.thesis-review-table th:first-child {
+    border-radius: 7px 0 0 7px;
+}
+
+.thesis-review-table th:last-child {
+    border-radius: 0 7px 7px 0;
+}
+
+.thesis-review-table td {
+    padding: 12px 9px;
+    border-top: 1px solid #dbe5f5;
+    border-bottom: 1px solid #dbe5f5;
+    color: #071653;
+    vertical-align: middle;
+    background: #fbfcff;
+}
+
+.thesis-review-table td:first-child {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-left: 1px solid #dbe5f5;
+    border-radius: 7px 0 0 7px;
+}
+
+.thesis-review-table td:last-child {
+    border-right: 1px solid #dbe5f5;
+    border-radius: 0 7px 7px 0;
+}
+
+.thesis-document-icon {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 38px;
+    flex-shrink: 0;
+    border: 2px solid #7da3ff;
+    border-radius: 5px;
+    background: #eef4ff;
+    color: #1760ed;
+    font-size: 24px;
+}
+
+.thesis-review-button {
+    min-height: 35px;
+    padding: 7px 15px;
+}
+
+.thesis-review-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0 0;
+    color: #173c88;
+    font-size: 12px;
+}
+
+.evaluation-record-header {
+    margin-bottom: 18px;
+}
+
+.evaluation-record-header p + p {
+    margin-top: 5px;
+}
+
+.evaluation-record-notice {
+    align-items: center;
+    margin: 0 0 14px;
+    padding: 11px 13px;
+    font-size: 11px;
+}
+
+.evaluation-record-card + .evaluation-record-card {
+    margin-top: 16px;
+}
+
+.evaluation-record-card h3 small {
+    color: #526aa1;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.evaluation-system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 16px;
+}
+
+.evaluation-system-grid label,
+.evaluation-form-grid label {
+    display: grid;
+    gap: 6px;
+    color: #0a2772;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.evaluation-system-grid label {
+    padding: 11px;
+    border: 1px solid #e1e8f4;
+    border-radius: 7px;
+    background: #fbfcff;
+}
+
+.evaluation-system-grid input {
+    background: #f7f8fb;
+    color: #5b6d9a;
+}
+
+.evaluation-thesis-field {
+    grid-row: span 2;
+}
+
+.evaluation-thesis-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 5px 8px;
+    border: 1px solid #d8e0eb;
+    border-radius: 5px;
+    background: #f7f8fb;
+    color: #5b6d9a;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.evaluation-thesis-value span {
+    flex: 1;
+}
+
+.evaluation-thesis-value .teacher-button {
+    min-height: 30px;
+    padding: 5px 9px;
+    white-space: nowrap;
+}
+
+.evaluation-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 26px;
+}
+
+.evaluation-form-grid > label {
+    padding: 13px;
+    border: 1px solid #e1e8f4;
+    border-radius: 7px;
+    background: #fbfcff;
+}
+
+.evaluation-percent-field {
+    display: flex;
+}
+
+.evaluation-percent-field input {
+    border-radius: 5px 0 0 5px;
+}
+
+.evaluation-percent-field span {
+    display: grid;
+    place-items: center;
+    width: 35px;
+    border: 1px solid #d8e0eb;
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    color: #31518f;
+    font-size: 12px;
+}
+
+.evaluation-comments-field {
+    grid-column: 1 / -1;
+}
+
+.evaluation-comments-field textarea {
+    min-height: 115px;
+}
+
+.required-mark {
+    color: #d72525;
+}
+
+.evaluation-record-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #e1e8f4;
+}
+
+.evaluation-save-notice {
+    min-height: 18px;
+    margin: 7px 0 0;
+    color: #168044;
+    font-size: 12px;
+    text-align: right;
+}
+
+@media (max-width: 760px) {
+    .evaluation-system-grid,
+    .evaluation-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .evaluation-thesis-field,
+    .evaluation-comments-field {
+        grid-row: auto;
+        grid-column: auto;
+    }
+}
 
 /* ==================================================
    DISEÑO RESPONSIVO

@@ -526,7 +526,25 @@ public class TesisController(GasDbContext db) : ControllerBase
 
         t.ultima_actualizacion = DateTime.UtcNow;
 
-        try { await db.SaveChangesAsync(); await tx.CommitAsync(); }
+        try
+        {
+            await db.SaveChangesAsync();
+            var usuarioId = User.IdUsuarioRequerido();
+            db.historial_comites.AddRange(
+                db.comite_profesors.Local
+                    .Where(cp => cp.id_comiteNavigation == comite && cp.activo == true)
+                    .Select(cp => new historial_comite {
+                        id_comite = comite.id_comite,
+                        id_usuario = usuarioId,
+                        accion = "AGREGAR_INTEGRANTE",
+                        rpe_nuevo = cp.rpe,
+                        id_rol_nuevo = cp.id_rol_comite,
+                        fecha_cambio = DateTime.UtcNow,
+                        observaciones = "Integrante registrado con la creación del comité."
+                    }));
+            await db.SaveChangesAsync();
+            await tx.CommitAsync();
+        }
         catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 })
         { return Conflict(new { mensaje = "Esa tesis ya tiene un comité, o un integrante está repetido." }); }
 

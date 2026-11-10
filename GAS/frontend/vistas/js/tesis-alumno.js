@@ -206,4 +206,129 @@
             aviso(e.message);
         });
     }, true);
+
+    window.mostrarSubirAvance = function mostrarSubirAvance() {
+        area.innerHTML = `
+            <section class="advance-page">
+                <header class="advance-header">
+                    <h2>Reportes de tesis</h2>
+                    <p>Consulta el estado de tus reportes y el proceso de evaluación de tu investigación.</p>
+                </header>
+
+                <section class="advance-card">
+                    <h3>Información de la tesis</h3>
+                    <div class="advance-info-grid">
+                        <div>
+                            <strong>Título de la tesis</strong>
+                            <span>Evaluación de tecnologías sostenibles para la gestión del agua</span>
+                        </div>
+                        <div>
+                            <strong>Director de tesis</strong>
+                            <span>Dra. María Fernanda López</span>
+                        </div>
+                        <div>
+                            <strong>Clave del alumno</strong>
+                            <span>MTGA-2023-001</span>
+                        </div>
+                        <div>
+                            <strong>Estado de tesis</strong>
+                            <span>En desarrollo</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="advance-card">
+                    <h3>Historial de reportes</h3>
+                    <div class="advance-table-wrapper">
+                        <table class="advance-table">
+                            <thead>
+                                <tr>
+                                    <th>Reporte</th>
+                                    <th>Fecha de envío</th>
+                                    <th>Avance reportado</th>
+                                    <th>Estado de evaluación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Reporte 01 – Planteamiento del problema</td>
+                                    <td>15/06/2025</td>
+                                    <td>25 %</td>
+                                    <td><span class="advance-status approved">Aprobado</span></td>
+                                    <td><button type="button" class="advance-detail-button">◉ Ver detalle</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Reporte 02 – Marco teórico</td>
+                                    <td>15/07/2025</td>
+                                    <td>50 %</td>
+                                    <td><span class="advance-status corrections">Con correcciones</span></td>
+                                    <td><button type="button" class="advance-detail-button">◉ Ver detalle</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Reporte 03 – Metodología</td>
+                                    <td>15/08/2025</td>
+                                    <td>75 %</td>
+                                    <td><span class="advance-status review">En revisión</span></td>
+                                    <td><button type="button" class="advance-detail-button">◉ Ver detalle</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="advance-card">
+                    <h3>Subir nuevo reporte</h3>
+                    <p class="advance-card-description">Adjunta el documento con los avances de tu investigación.</p>
+                    <form id="advanceForm" class="advance-form">
+                        <label>
+                            Tipo de reporte <span>*</span>
+                            <select required>
+                                <option value="">Selecciona un tipo de reporte</option>
+                                <option>Reporte de avance</option>
+                                <option>Reporte final</option>
+                            </select>
+                        </label>
+                        <label>
+                            Descripción de avances <span>*</span>
+                            <textarea rows="3" required placeholder="Describe brevemente los avances realizados..."></textarea>
+                        </label>
+                        <label class="advance-file-picker">
+                            <input id="advanceFile" type="file" accept="application/pdf">
+                            <span class="advance-upload-icon">⇧</span>
+                            <strong>Selecciona un archivo PDF</strong>
+                            <small>Tamaño máximo: 10 MB</small>
+                            <span class="advance-file-name" id="advanceFileName">Ningún archivo seleccionado</span>
+                        </label>
+                        <button type="submit" class="advance-submit-button">➤ Enviar reporte</button>
+                        <p id="advanceNotice" class="advance-notice" role="status"></p>
+                    </form>
+                </section>
+
+                <section class="advance-card advance-progress-card">
+                    <h3>Proceso de evaluación</h3>
+                    <div class="advance-steps">
+                        <div class="advance-step completed"><span>✓</span><strong>Reporte enviado</strong><small>15/08/2025</small></div>
+                        <div class="advance-step active"><span>⌛</span><strong>En revisión</strong></div>
+                        <div class="advance-step"><span></span><strong>Correcciones</strong></div>
+                        <div class="advance-step"><span></span><strong>Aprobación</strong></div>
+                    </div>
+                    <div class="advance-progress-label">
+                        <strong>Nivel de avance de tesis</strong>
+                        <div class="advance-progress-bar"><span></span></div>
+                        <strong>75 % completado</strong>
+                    </div>
+                </section>
+            </section>`;
+
+        const fileInput = el("advanceFile");
+        const fileName = el("advanceFileName");
+        fileInput.addEventListener("change", () => {
+            fileName.textContent = fileInput.files[0]?.name || "Ningún archivo seleccionado";
+        });
+        el("advanceForm").addEventListener("submit", event => {
+            event.preventDefault();
+            el("advanceNotice").textContent = "Vista previa: el reporte está listo para enviarse.";
+        });
+    };
 })();

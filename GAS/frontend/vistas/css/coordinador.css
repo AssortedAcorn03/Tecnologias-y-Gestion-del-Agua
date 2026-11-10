@@ -1947,90 +1947,94 @@ body {
 
 .coordinator-committee-page {
     width: 100%;
-    min-height: 100%;
-    color: #06256d;
+    min-width: 0;
+    color: #08245f;
+}
+
+.coordinator-committee-page-title {
+    margin: 0 0 14px;
+    color: #08245f;
+    font-size: 27px;
+    font-weight: 700;
 }
 
 .coordinator-committee-notice,
 .coordinator-committee-bottom-notice {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px 12px;
-    margin-bottom: 10px;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1px solid #d5e5ff;
+    border-radius: 7px;
     background: #f0f6ff;
-    border: 1px solid #d7e5ff;
-    border-radius: 5px;
-    color: #16458a;
-    font-size: 10px;
-    line-height: 1.4;
-}
-
-.coordinator-committee-notice > span,
-.coordinator-committee-bottom-notice > span {
-    color: #1261d6;
+    color: #0754cf;
     font-size: 13px;
-    line-height: 1;
+    line-height: 1.6;
 }
 
 .coordinator-committee-notice p {
     margin: 0;
 }
 
-.coordinator-committee-notice p + p {
-    margin-top: 3px;
+.coordinator-committee-notice > span,
+.coordinator-committee-bottom-notice > span {
+    font-size: 19px;
+    font-weight: bold;
 }
 
 .coordinator-committee-top-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: 10px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 14px;
+    margin-bottom: 14px;
 }
 
 .coordinator-committee-card {
     min-width: 0;
-    padding: 10px;
-    margin-bottom: 10px;
-    background: #ffffff;
-    border: 1px solid #dfe7f2;
-    border-radius: 5px;
+    padding: 16px;
+    border: 1px solid #dce5f2;
+    border-radius: 7px;
+    background: #fff;
 }
 
 .coordinator-committee-card h3 {
-    margin: 0 0 7px;
-    color: #0644a8;
-    font-size: 12px;
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #082d78;
 }
 
 .coordinator-committee-description {
-    margin: 0 0 8px;
-    color: #526581;
-    font-size: 10px;
+    margin: 0 0 12px;
+    color: #50668c;
+    font-size: 12px;
 }
 
 .coordinator-committee-search {
-    position: relative;
-    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    margin-bottom: 12px;
+    border: 1px solid #d4e0f3;
+    border-radius: 5px;
 }
 
 .coordinator-committee-search span {
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #1261d6;
-    font-size: 13px;
+    color: #2160cb;
+    font-size: 20px;
 }
 
 .coordinator-committee-search input {
     width: 100%;
-    height: 28px;
-    padding: 0 9px 0 27px;
-    border: 1px solid #cbd9ed;
-    border-radius: 4px;
+    min-width: 0;
+    height: 36px;
+    border: none;
     outline: none;
-    color: #27364d;
-    font-size: 10px;
+    background: transparent;
+    color: #17376e;
+    font: inherit;
+    font-size: 12px;
 }
 
 .coordinator-committee-table-wrapper {
@@ -2041,60 +2045,156 @@ body {
 .coordinator-committee-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    font-size: 12px;
 }
 
 .coordinator-committee-table th,
 .coordinator-committee-table td {
-    padding: 7px 8px;
-    border-bottom: 1px solid #e3eaf4;
-    color: #344d75;
-    font-size: 9px;
+    padding: 10px 8px;
+    border: 1px solid #e0e9f6;
     text-align: left;
     vertical-align: middle;
 }
 
 .coordinator-committee-table th {
-    background: #f3f7fd;
-    color: #173b82;
-    font-size: 8px;
+    background: #f2f6fc;
+    color: #0a2d70;
     font-weight: 600;
+    white-space: nowrap;
 }
 
-.coordinator-committee-table th:first-child {
-    width: 28px;
+.coordinator-committee-table td:first-child {
+    width: 42px;
+}
+
+.coordinator-committee-table td:first-child button {
+    min-height: 28px;
+    padding: 3px 8px;
+    border: 1px solid #0758e8;
+    border-radius: 5px;
+    background: #fff;
+    color: #0758e8;
+    cursor: pointer;
+    font: inherit;
+}
+
+.coordinator-committee-table td:first-child button:hover {
+    background: #e5f2ff;
 }
 
 .coordinator-committee-empty {
-    padding: 20px 8px !important;
-    color: #71809a !important;
+    padding: 20px !important;
+    color: #64748b !important;
     text-align: center !important;
 }
 
 .coordinator-committee-details {
-    min-height: 132px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e0e8f3;
-    border-radius: 4px;
-    background: #fbfdff;
+    min-height: 0;
+    padding: 0;
+    border: 1px solid #e0e9f6;
+    border-radius: 6px;
+    background: #fff;
 }
 
-.coordinator-committee-details .coordinator-committee-empty {
-    padding: 15px !important;
+.coordinator-committee-details h4 {
+    margin: 0;
+    padding: 12px;
+    border-radius: 6px 6px 0 0;
+    background: #edf4ff;
+    color: #082d78;
+    font-size: 14px;
+}
+
+.coordinator-committee-details > p {
+    margin: 0;
+    padding: 12px;
+    color: #365784;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.coordinator-committee-details > ul {
+    margin: 0;
+    padding: 0 12px 12px 32px;
+    color: #365784;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.coordinator-committee-edit-form {
+    width: 100%;
+}
+
+.coordinator-committee-edit-field {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.35fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e9f6;
+    color: #082d78;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.coordinator-committee-edit-field select {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #d4e0f3;
+    border-radius: 5px;
+    background: #fff;
+    color: #365784;
+    font: inherit;
+    font-weight: 400;
+}
+
+.coordinator-committee-edit-form > .error {
+    margin: 10px 12px;
+}
+
+.coordinator-committee-edit-form > #saveCommitteeMembers {
+    min-height: 42px;
+    margin: 2px 12px 14px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 5px;
+    background: #0758e8;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.coordinator-committee-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 12px 12px;
+}
+
+.coordinator-committee-modify-button {
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid #0b63e5;
+    border-radius: 5px;
+    background: #fff;
+    color: #0b63e5;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 .coordinator-committee-full-button {
     width: 100%;
-    height: 28px;
-    margin-top: 8px;
+    min-height: 42px;
+    margin-top: 14px;
     border: none;
-    border-radius: 4px;
-    background: #0b63e5;
-    color: #ffffff;
+    border-radius: 5px;
+    background: #0758e8;
+    color: #fff;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .coordinator-committee-full-button:disabled {
@@ -2103,19 +2203,30 @@ body {
 }
 
 .coordinator-committee-history {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
 .coordinator-committee-bottom-notice {
+    align-items: center;
     margin-bottom: 0;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
     .coordinator-committee-top-grid {
         grid-template-columns: 1fr;
     }
 }
 
+@media (max-width: 650px) {
+    .coordinator-committee-card {
+        padding: 10px;
+    }
+
+    .coordinator-committee-edit-field {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}
 /* ==================================================
    ALTA DE COMITÉ TUTORIAL
 ================================================== */
@@ -4733,6 +4844,820 @@ body {
     }
 
     .longitudinal-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+/* ==================================================
+   REPORTES DEL COORDINADOR
+================================================== */
+
+.reports-page {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    color: #08245f;
+}
+
+
+/* ==================================================
+   ENCABEZADO
+================================================== */
+
+.reports-header {
+    margin-bottom: 20px;
+}
+
+.reports-header h2 {
+    margin: 0 0 6px;
+    color: #08245f;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.reports-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* ==================================================
+   TIPOS DE REPORTE
+================================================== */
+
+.reports-types-card {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #e0e7f0;
+    border-radius: 7px;
+}
+
+.reports-types-card h3 {
+    margin: 0 0 14px;
+    color: #08245f;
+    font-size: 14px;
+}
+
+.reports-types-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.report-type-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 126px;
+    padding: 18px 16px;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+.report-type-card-egresados {
+    border-color: #d7eee3;
+    background: linear-gradient(110deg, #f8fcfa, #ffffff);
+}
+
+.report-type-card-tesistas {
+    border-color: #d6e3fa;
+    background: linear-gradient(110deg, #f8faff, #ffffff);
+}
+
+.report-type-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+    border: 1px solid;
+    border-radius: 7px;
+}
+
+.report-type-icon-egresados {
+    border-color: #cce8d9;
+    color: #079447;
+}
+
+.report-type-icon-egresados::before,
+.report-type-icon-egresados::after,
+.report-type-icon-egresados span {
+    position: absolute;
+    display: block;
+    border: 2px solid currentColor;
+}
+
+.report-type-icon-egresados::before {
+    width: 10px;
+    height: 10px;
+    top: 13px;
+    left: 20px;
+    border-radius: 50%;
+}
+
+.report-type-icon-egresados::after {
+    width: 20px;
+    height: 10px;
+    bottom: 11px;
+    left: 16px;
+    border-radius: 12px 12px 0 0;
+}
+
+.report-type-icon-egresados span:first-child {
+    width: 8px;
+    height: 8px;
+    top: 18px;
+    left: 9px;
+    border-radius: 50%;
+}
+
+.report-type-icon-egresados span:last-child {
+    width: 13px;
+    height: 7px;
+    bottom: 11px;
+    left: 6px;
+    border-radius: 10px 10px 0 0;
+}
+
+.report-type-icon-tesistas {
+    border-color: #d7e3fa;
+    color: #0b51df;
+}
+
+.report-type-icon-tesistas::before {
+    content: "";
+    width: 25px;
+    height: 18px;
+    border: 2px solid currentColor;
+    transform: rotate(30deg) skewX(-10deg);
+}
+
+.report-type-icon-tesistas span {
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    bottom: 10px;
+    background: currentColor;
+}
+
+.report-type-content {
+    min-width: 0;
+}
+
+.report-type-content h4 {
+    margin: 0 0 5px;
+    font-size: 13px;
+}
+
+.report-type-card-egresados h4 {
+    color: #087a3e;
+}
+
+.report-type-card-tesistas h4 {
+    color: #073cb6;
+}
+
+.report-type-content p {
+    max-width: 440px;
+    margin: 0 0 11px;
+    color: #40577e;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.report-type-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 29px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.report-type-button span {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.report-type-button-egresados {
+    background: #07883f;
+}
+
+.report-type-button-egresados:hover {
+    background: #066e34;
+}
+
+.report-type-button-tesistas {
+    background: #0649d4;
+}
+
+.report-type-button-tesistas:hover {
+    background: #0438a2;
+}
+
+
+/* ==================================================
+   CONTENEDOR DEL HISTORIAL
+================================================== */
+
+.reports-history-card {
+    width: 100%;
+    padding: 14px;
+    background: #ffffff;
+    border: 1px solid #e0e7f0;
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   ENCABEZADO DEL HISTORIAL
+================================================== */
+
+.reports-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 14px;
+}
+
+.reports-history-header h3 {
+    margin: 0 0 6px;
+    color: #08245f;
+    font-size: 15px;
+}
+
+.reports-history-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   BOTÓN ACTUALIZAR
+================================================== */
+
+.reports-refresh-button {
+    min-height: 35px;
+    padding: 0 13px;
+    border: 1px solid #075bea;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #075bea;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.reports-refresh-button:hover {
+    background: #edf4ff;
+}
+
+
+/* ==================================================
+   TABLA
+================================================== */
+
+.reports-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e0e7f0;
+    border-radius: 5px;
+}
+
+.reports-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    font-size: 11px;
+    text-align: left;
+}
+
+.reports-table thead {
+    background: #f3f6fa;
+}
+
+.reports-table th {
+    padding: 13px 9px;
+    color: #08245f;
+    font-weight: 700;
+    border-bottom: 1px solid #dfe7f2;
+    white-space: nowrap;
+}
+
+.reports-table td {
+    padding: 12px 9px;
+    color: #40577e;
+    border-bottom: 1px solid #e6ebf2;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.reports-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.reports-table tbody tr:hover {
+    background: #f7faff;
+}
+
+
+/* ==================================================
+   FORMATOS DE ARCHIVO
+================================================== */
+
+.report-format {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.format-pdf {
+    color: #d92d35;
+    background: #fff0f0;
+    border: 1px solid #ffd0d0;
+}
+
+.format-excel {
+    color: #16834a;
+    background: #e9f8ef;
+    border: 1px solid #c7efd6;
+}
+
+.format-word {
+    color: #1763c5;
+    background: #edf4ff;
+    border: 1px solid #d2e3ff;
+}
+
+
+/* ==================================================
+   ACCIONES
+================================================== */
+
+.report-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.report-action-button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d4e0f2;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #075bea;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.report-action-button:hover {
+    background: #edf4ff;
+    border-color: #075bea;
+}
+
+
+/* ==================================================
+   PIE DE TABLA
+================================================== */
+
+.reports-table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 13px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.reports-pagination {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reports-pagination button {
+    min-width: 29px;
+    height: 29px;
+    border: 1px solid #dfe6f0;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #08245f;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.reports-pagination button:hover:not(:disabled) {
+    background: #edf4ff;
+}
+
+.reports-pagination button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.reports-pagination .current-page {
+    background: #075bea;
+    border-color: #075bea;
+    color: #ffffff;
+}
+
+.reports-pagination span {
+    padding: 0 5px;
+}
+
+
+/* ==================================================
+   GENERADORES DE REPORTES
+================================================== */
+
+.report-generator-page {
+    width: 100%;
+    padding: 8px;
+    color: #08245f;
+}
+
+.report-generator-header {
+    margin-bottom: 12px;
+}
+
+.report-generator-header h2 {
+    margin: 0 0 5px;
+    color: #0b419c;
+    font-size: 24px;
+}
+
+.report-generator-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.report-generator-notice,
+.report-criteria-notice {
+    padding: 8px 12px;
+    border: 1px solid #d5e5fb;
+    border-radius: 5px;
+    background: #f3f8ff;
+    color: #24559b;
+    font-size: 10px;
+}
+
+.report-generator-notice {
+    margin-bottom: 10px;
+}
+
+.report-generator-notice span {
+    margin-right: 7px;
+    color: #075bea;
+}
+
+.report-generator-card {
+    padding: 12px;
+    border: 1px solid #dfe7f2;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.report-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.report-section-heading span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #075bea;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.report-section-heading h3 {
+    margin: 0;
+    color: #08245f;
+    font-size: 12px;
+}
+
+.report-option-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.report-option-grid-egresados {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.report-option-grid-tesistas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.report-option-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: 78px;
+    padding: 12px 10px;
+    border: 1px solid #dce5f1;
+    border-radius: 5px;
+    color: #40577e;
+    cursor: pointer;
+}
+
+.report-option-card:hover,
+.report-option-card.selected {
+    border-color: #7ba8ff;
+    background: #f8fbff;
+}
+
+.report-option-card input {
+    position: absolute;
+    opacity: 0;
+}
+
+.report-option-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    flex: 0 0 22px;
+    color: #245bbd;
+    font-size: 17px;
+}
+
+.report-option-card strong,
+.report-option-card small {
+    display: block;
+}
+
+.report-option-card strong {
+    margin-bottom: 5px;
+    color: #08245f;
+    font-size: 10px;
+}
+
+.report-option-card small {
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.report-option-card b {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    color: #075bea;
+    font-size: 12px;
+}
+
+.report-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 700px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #dfe7f2;
+    border-radius: 5px;
+}
+
+.report-fields-grid-tesistas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: none;
+}
+
+.report-fields-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.report-fields-grid label > span {
+    color: #08245f;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.report-fields-grid label b {
+    color: #e11d48;
+}
+
+.report-fields-grid select,
+.report-fields-grid input {
+    width: 100%;
+    height: 32px;
+    padding: 0 9px;
+    border: 1px solid #d7e1ef;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #64748b;
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.report-generator-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 9px 0 16px;
+}
+
+.report-primary-button,
+.report-secondary-button,
+.report-export-button {
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.report-primary-button {
+    border: 1px solid #075bea;
+    background: #075bea;
+    color: #ffffff;
+}
+
+.report-primary-button:hover {
+    background: #0649bd;
+}
+
+.report-secondary-button {
+    border: 1px solid #75a3f4;
+    background: #ffffff;
+    color: #075bea;
+}
+
+.report-secondary-button:hover {
+    background: #f0f6ff;
+}
+
+.report-results-heading {
+    padding-top: 12px;
+    border-top: 1px solid #e6ebf2;
+}
+
+.report-preview-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 145px;
+    gap: 14px;
+}
+
+.report-preview-summary {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #dce9fb;
+    border-radius: 4px;
+    background: #f5f9ff;
+    color: #64748b;
+    font-size: 10px;
+}
+
+.report-empty-table-container {
+    overflow-x: auto;
+    border: 1px solid #dfe7f2;
+    border-radius: 4px;
+}
+
+.report-preview-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    font-size: 9px;
+}
+
+.report-preview-table th {
+    padding: 9px 7px;
+    background: #f3f6fa;
+    color: #08245f;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.report-preview-table td {
+    padding: 10px 7px;
+    border-top: 1px solid #e6ebf2;
+}
+
+.report-empty-message {
+    margin: 0;
+    padding: 15px;
+    color: #64748b;
+    font-size: 10px;
+    text-align: center;
+}
+
+.report-export-panel {
+    padding: 10px;
+    border: 1px solid #dfe7f2;
+    border-radius: 5px;
+}
+
+.report-export-panel h4 {
+    margin: 0 0 6px;
+    color: #08245f;
+    font-size: 11px;
+}
+
+.report-export-panel p {
+    margin: 0 0 10px;
+    color: #64748b;
+    font-size: 9px;
+    line-height: 1.4;
+}
+
+.report-export-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 7px;
+    border: 1px solid #e2555b;
+    background: #ffffff;
+    color: #d33a43;
+    text-align: left;
+}
+
+.report-export-button:nth-of-type(2) {
+    border-color: #4eb67b;
+    color: #16834a;
+}
+
+.report-export-button:nth-of-type(3) {
+    border-color: #6ea3eb;
+    color: #1763c5;
+}
+
+.report-export-panel .report-secondary-button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .reports-page {
+        padding: 4px;
+    }
+
+    .reports-header h2 {
+        font-size: 21px;
+    }
+
+    .reports-types-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-option-grid-egresados,
+    .report-option-grid-tesistas,
+    .report-fields-grid-tesistas {
+        grid-template-columns: 1fr;
+    }
+
+    .report-fields-grid,
+    .report-preview-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .reports-history-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .reports-table-footer {
         align-items: flex-start;
         flex-direction: column;
     }

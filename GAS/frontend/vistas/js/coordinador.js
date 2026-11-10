@@ -17,6 +17,7 @@ const agregarAlumnoButton = document.getElementById("agregarAlumnoButton");
 const consultarAlumnoButton = document.getElementById("consultarAlumnoButton");
 const altaUsuarioButton = document.getElementById("altaUsuarioButton");
 const listadoUsuariosButton = document.getElementById("listadoUsuariosButton");
+const reportesButton = document.getElementById("reportesButton");
 
 // ==================================================
 // COMITÉS TUTORIALES
@@ -321,6 +322,10 @@ function mostrarGestionComites() {
 
         <section class="coordinator-committee-page">
 
+            <h2 class="coordinator-committee-page-title">
+                Gestión del comité tutorial
+            </h2>
+
             <div class="coordinator-committee-notice">
                 <span>ⓘ</span>
                 <div>
@@ -441,7 +446,8 @@ function mostrarGestionComites() {
     const filas = document.getElementById("committeeRows");
     const detalles = document.getElementById("committeeDetails");
     const buscador = document.getElementById("committeeSearch");
-    const editar = document.getElementById("committeeEditButton");
+    const informacion = document.getElementById("committeeEditButton");
+    const historialFilas = document.getElementById("committeeHistoryRows");
     let comites = [];
     let seleccionado = null;
     let profesores = [];
@@ -466,7 +472,72 @@ function mostrarGestionComites() {
             integrantes.append(li);
         });
         detalles.append(titulo, info, integrantes);
-        editar.disabled = false;
+        informacion.disabled = false;
+        informacion.textContent = "▣  Ver información completa del comité ›";
+        cargarHistorial(comite.id);
+    }
+
+    function pintarHistorial(lista) {
+        historialFilas.replaceChildren();
+        if (!lista.length) {
+            const row = document.createElement("tr");
+            const empty = document.createElement("td");
+            empty.colSpan = 6;
+            empty.className = "coordinator-committee-empty";
+            empty.textContent = "No hay cambios registrados.";
+            row.append(empty);
+            historialFilas.append(row);
+            return;
+        }
+        lista.forEach(cambio => {
+            const row = document.createElement("tr");
+            const integrante = cambio.integranteNuevo || cambio.integranteAnterior || "—";
+            [new Date(cambio.fecha).toLocaleString(), cambio.accion, integrante,
+                cambio.rolAnterior, cambio.rolNuevo, cambio.realizadoPor]
+                .forEach(valor => row.append(celda(valor)));
+            historialFilas.append(row);
+        });
+    }
+
+    async function cargarHistorial(idComite) {
+        try {
+            pintarHistorial(await gasApi(`/api/comites/${idComite}/historial`));
+        } catch (error) {
+            pintarHistorial([]);
+            const row = historialFilas.querySelector(".coordinator-committee-empty");
+            if (row) row.textContent = error.message;
+        }
+    }
+
+    function mostrarInformacionCompleta() {
+        if (!seleccionado) return;
+        detalles.replaceChildren();
+        const titulo = document.createElement("h4");
+        titulo.textContent = seleccionado.identificador || `Comité ${seleccionado.id}`;
+        const info = document.createElement("p");
+        info.textContent = `Comité #${seleccionado.id} · Tesis #${seleccionado.tesisId} · Tesista: ${seleccionado.tesista || "—"} · Matrícula: ${seleccionado.matricula} · Estado: ${seleccionado.estado}`;
+        const integrantes = document.createElement("ul");
+        seleccionado.integrantes.forEach(integrante => {
+            const li = document.createElement("li");
+            const fecha = integrante.fecha
+                ? ` · Asignado: ${new Date(integrante.fecha).toLocaleDateString()}`
+                : "";
+            li.textContent = `${integrante.rol}: ${integrante.nombre} (RPE ${integrante.rpe})${fecha}`;
+            integrantes.append(li);
+        });
+        const acciones = document.createElement("div");
+        acciones.className = "coordinator-committee-detail-actions";
+        const modificar = document.createElement("button");
+        modificar.type = "button";
+        modificar.className = "coordinator-committee-modify-button";
+        modificar.textContent = "Modificar integrantes";
+        modificar.addEventListener("click", () => editarIntegrantes().catch(error => {
+            detalles.textContent = error.message;
+        }));
+        acciones.append(modificar);
+        detalles.append(titulo, info, integrantes, acciones);
+        informacion.disabled = true;
+        informacion.textContent = "Información completa";
     }
 
     function pintarTabla(lista) {
@@ -527,14 +598,16 @@ function mostrarGestionComites() {
         const sinodales = activo.filter(i => i.rol === "Asesor");
         const opciones = (valor, vacio) => `<option value="">${vacio}</option>` +
             profesores.map(p => `<option value="${p.rpe}" ${p.rpe === valor ? "selected" : ""}>${escapar(p.nombre || "Sin nombre")} (RPE ${p.rpe})</option>`).join("");
-        detalles.innerHTML = `<h4>Gestionar integrantes</h4>
-            <label>Director<select id="editCommitteeDirector">${opciones(director?.rpe, "Seleccionar director")}</select></label>
-            <label>Codirector<select id="editCommitteeCoDirector">${opciones(codirector?.rpe, "Sin codirector")}</select></label>
-            <label>Sinodal 1<select id="editCommitteeSynodal1">${opciones(sinodales[0]?.rpe, "Seleccionar sinodal")}</select></label>
-            <label>Sinodal 2<select id="editCommitteeSynodal2">${opciones(sinodales[1]?.rpe, "Sin sinodal")}</select></label>
-            <label>Sinodal 3<select id="editCommitteeSynodal3">${opciones(sinodales[2]?.rpe, "Sin sinodal")}</select></label>
+        detalles.innerHTML = `<div class="coordinator-committee-edit-form">
+            <h4>Gestionar integrantes</h4>
+            <label class="coordinator-committee-edit-field">Director<select id="editCommitteeDirector">${opciones(director?.rpe, "Seleccionar director")}</select></label>
+            <label class="coordinator-committee-edit-field">Codirector<select id="editCommitteeCoDirector">${opciones(codirector?.rpe, "Sin codirector")}</select></label>
+            <label class="coordinator-committee-edit-field">Sinodal 1<select id="editCommitteeSynodal1">${opciones(sinodales[0]?.rpe, "Seleccionar sinodal")}</select></label>
+            <label class="coordinator-committee-edit-field">Sinodal 2<select id="editCommitteeSynodal2">${opciones(sinodales[1]?.rpe, "Sin sinodal")}</select></label>
+            <label class="coordinator-committee-edit-field">Sinodal 3<select id="editCommitteeSynodal3">${opciones(sinodales[2]?.rpe, "Sin sinodal")}</select></label>
             <p id="committeeEditMessage" role="status" class="error"></p>
-            <button type="button" id="saveCommitteeMembers">Guardar integrantes</button>`;
+            <button type="button" id="saveCommitteeMembers">Guardar integrantes</button>
+        </div>`;
         document.getElementById("saveCommitteeMembers").addEventListener("click", async event => {
             const value = id => document.getElementById(id).value;
             const sinodalesRpe = ["editCommitteeSynodal1", "editCommitteeSynodal2", "editCommitteeSynodal3"]
@@ -563,9 +636,7 @@ function mostrarGestionComites() {
     }
 
     buscador.addEventListener("input", cargarComites);
-    editar.addEventListener("click", () => editarIntegrantes().catch(error => {
-        detalles.textContent = error.message;
-    }));
+    informacion.addEventListener("click", mostrarInformacionCompleta);
     cargarComites();
 
 }
@@ -3557,5 +3628,515 @@ function abrirEditarUsuario(usuario) {
 
 
     editUserPanel.classList.add("open");
+
+}
+// ==================================================
+// REPORTES DEL COORDINADOR
+// ==================================================
+
+function mostrarHistorialReportes() {
+
+    // Quitar selección anterior del menú
+    document.querySelectorAll(
+        ".sidebar-item, .sidebar-subitem"
+    ).forEach(item => {
+        item.classList.remove("active");
+    });
+
+    // Mostrar contenido
+    contentArea.innerHTML = `
+
+        <section class="reports-page">
+
+            <!-- ENCABEZADO -->
+            <header class="reports-header">
+
+                <h2>Reportes</h2>
+
+                <p>
+                    Genera y consulta reportes del sistema
+                    de acuerdo con tus necesidades.
+                </p>
+
+            </header>
+
+
+            <!-- TIPOS DE REPORTE -->
+            <section class="reports-types-card">
+
+                <h3>¿Qué tipo de reporte necesitas generar?</h3>
+
+                <div class="reports-types-grid">
+
+                    <article class="report-type-card report-type-card-egresados">
+
+                        <div class="report-type-icon report-type-icon-egresados" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="report-type-content">
+                            <h4>Reporte de egresados</h4>
+                            <p>
+                                Genera reportes con información de los egresados
+                                según distintos criterios como generación, estado,
+                                situación laboral, área profesional y localización.
+                            </p>
+                            <button
+                                type="button"
+                                class="report-type-button report-type-button-egresados"
+                                id="generarReporteEgresadosButton">
+                                Generar reporte de egresados
+                                <span aria-hidden="true">→</span>
+                            </button>
+                        </div>
+
+                    </article>
+
+                    <article class="report-type-card report-type-card-tesistas">
+
+                        <div class="report-type-icon report-type-icon-tesistas" aria-hidden="true">
+                            <span></span>
+                        </div>
+
+                        <div class="report-type-content">
+                            <h4>Reporte de tesistas</h4>
+                            <p>
+                                Genera reportes de avance por tesista,
+                                generación o maestro en general. Incluye porcentaje
+                                de avance, evaluaciones y estado de tesis.
+                            </p>
+                            <button
+                                type="button"
+                                class="report-type-button report-type-button-tesistas"
+                                id="generarReporteTesistasButton">
+                                Generar reporte de tesistas
+                                <span aria-hidden="true">→</span>
+                            </button>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- HISTORIAL DE REPORTES -->
+            <section class="reports-history-card">
+
+                <div class="reports-history-header">
+
+                    <div>
+                        <h3>Historial de reportes generados</h3>
+
+                        <p>
+                            Consulta los reportes que has generado recientemente.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="reports-refresh-button"
+                        id="actualizarReportesButton">
+
+                        ↻ Actualizar
+
+                    </button>
+
+                </div>
+
+
+                <!-- TABLA -->
+                <div class="reports-table-container">
+
+                    <table class="reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID del reporte</th>
+                                <th>Usuario que generó</th>
+                                <th>Fecha de generación</th>
+                                <th>Tipo de reporte</th>
+                                <th>Formato</th>
+                                <th>Filtros usados</th>
+                                <th>Ruta del archivo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportsTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PIE DE TABLA -->
+                <div class="reports-table-footer">
+
+                    <span id="reportsCounter">
+                        No hay reportes generados todavía
+                    </span>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    `;
+
+
+    // Inicializar controles
+    inicializarHistorialReportes();
+
+    document.getElementById("generarReporteEgresadosButton")
+        .addEventListener("click", function () {
+            mostrarReporteEgresados();
+        });
+
+    document.getElementById("generarReporteTesistasButton")
+        .addEventListener("click", function () {
+            mostrarReporteTesistas();
+        });
+
+}
+
+reportesButton.addEventListener("click", function () {
+    mostrarHistorialReportes();
+});
+
+function mostrarReporteEgresados() {
+
+    contentArea.innerHTML = `
+
+        <section class="report-generator-page">
+
+            <header class="report-generator-header">
+                <h2>Generación de reportes de egresados</h2>
+                <p>
+                    El sistema permite generar reportes con la información
+                    recopilada de las encuestas contestadas por los egresados.
+                </p>
+            </header>
+
+            <div class="report-generator-notice">
+                <span aria-hidden="true">ⓘ</span>
+                Selecciona un tipo de reporte y especifica los criterios requeridos para generar el reporte.
+            </div>
+
+            <section class="report-generator-card">
+                <div class="report-section-heading">
+                    <span>1</span>
+                    <h3>Selecciona el tipo de reporte</h3>
+                </div>
+
+                <div class="report-option-grid report-option-grid-egresados">
+                    <label class="report-option-card selected">
+                        <input type="radio" name="egresadosReportType" checked>
+                        <span class="report-option-icon">▦</span>
+                        <span>
+                            <strong>Por generación</strong>
+                            <small>Reporte de egresados agrupado por generación.</small>
+                        </span>
+                        <b aria-hidden="true">✓</b>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="egresadosReportType">
+                        <span class="report-option-icon">♙</span>
+                        <span>
+                            <strong>Por estado del egresado</strong>
+                            <small>Reporte según el estado actual del egresado.</small>
+                        </span>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="egresadosReportType">
+                        <span class="report-option-icon">▣</span>
+                        <span>
+                            <strong>Por situación laboral</strong>
+                            <small>Reporte basado en la situación laboral actual.</small>
+                        </span>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="egresadosReportType">
+                        <span class="report-option-icon">▥</span>
+                        <span>
+                            <strong>Por área profesional</strong>
+                            <small>Reporte según el área profesional.</small>
+                        </span>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="egresadosReportType">
+                        <span class="report-option-icon">⌖</span>
+                        <span>
+                            <strong>Localizables / No localizables</strong>
+                            <small>Reporte de egresados según su localización.</small>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="report-section-heading">
+                    <span>2</span>
+                    <h3>Especifica los criterios del reporte</h3>
+                </div>
+
+                <div class="report-criteria-notice">
+                    ⓘ Los criterios pueden variar dependiendo del tipo de reporte seleccionado.
+                </div>
+
+                <div class="report-fields-grid">
+                    <label>
+                        <span>Generación inicial <b>*</b></span>
+                        <select>
+                            <option value="">Seleccionar generación inicial</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Generación final <b>*</b></span>
+                        <select>
+                            <option value="">Seleccionar generación final</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="report-generator-actions">
+                    <button type="button" class="report-secondary-button" id="limpiarReporteEgresadosButton">⌫ Limpiar</button>
+                    <button type="button" class="report-primary-button" id="generarReporteEgresadosAction">↻ Generar reporte</button>
+                    <button type="button" class="report-primary-button report-chart-button">▥ Graficar</button>
+                </div>
+
+                <div class="report-section-heading report-results-heading">
+                    <span>3</span>
+                    <h3>Vista previa del reporte</h3>
+                </div>
+
+                <div class="report-preview-layout">
+                    <div class="report-preview-table-area">
+                        <div class="report-preview-summary">No hay criterios seleccionados ni resultados para mostrar.</div>
+                        <div class="report-empty-table-container">
+                            <table class="report-preview-table">
+                                <thead>
+                                    <tr>
+                                        <th>Generación</th>
+                                        <th>Total egresados</th>
+                                        <th>Activos</th>
+                                        <th>Titulados</th>
+                                        <th>Baja</th>
+                                        <th>Localizables</th>
+                                        <th>No localizables</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <p class="report-empty-message">No hay datos disponibles.</p>
+                        </div>
+                    </div>
+                    <aside class="report-export-panel">
+                        <h4>Exportar reporte</h4>
+                        <p>Selecciona el formato en el que deseas exportar el reporte.</p>
+                        <button type="button" class="report-export-button">▣ Exportar a PDF</button>
+                        <button type="button" class="report-export-button">▣ Exportar a Excel</button>
+                        <button type="button" class="report-export-button">▣ Exportar a Word</button>
+                        <button type="button" class="report-secondary-button">⌫ Limpiar criterios</button>
+                    </aside>
+                </div>
+
+            </section>
+
+        </section>
+    `;
+
+    document.getElementById("limpiarReporteEgresadosButton")
+        .addEventListener("click", function () {
+            mostrarReporteEgresados();
+        });
+
+    document.getElementById("generarReporteEgresadosAction")
+        .addEventListener("click", function () {
+            alert("La generación del reporte estará disponible cuando se conecten los datos.");
+        });
+}
+
+function mostrarReporteTesistas() {
+
+    contentArea.innerHTML = `
+
+        <section class="report-generator-page">
+
+            <header class="report-generator-header">
+                <h2>Reporte de avance de tesis</h2>
+                <p>
+                    El sistema permite generar reportes del progreso del trabajo
+                    de tesis por tesista, generación o de manera general.
+                </p>
+            </header>
+
+            <section class="report-generator-card">
+                <div class="report-section-heading">
+                    <span>1</span>
+                    <h3>Selecciona el alcance del reporte</h3>
+                </div>
+
+                <div class="report-option-grid report-option-grid-tesistas">
+                    <label class="report-option-card selected">
+                        <input type="radio" name="tesistasReportScope" checked>
+                        <span class="report-option-icon">●</span>
+                        <span>
+                            <strong>Por tesista</strong>
+                            <small>Reporte individual del avance de tesis de un tesista específico.</small>
+                        </span>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="tesistasReportScope">
+                        <span class="report-option-icon">○</span>
+                        <span>
+                            <strong>Por generación</strong>
+                            <small>Reporte del avance de tesis agrupado por generación.</small>
+                        </span>
+                    </label>
+                    <label class="report-option-card">
+                        <input type="radio" name="tesistasReportScope">
+                        <span class="report-option-icon">○</span>
+                        <span>
+                            <strong>General</strong>
+                            <small>Reporte general del avance de tesis de todos los tesistas.</small>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="report-section-heading">
+                    <span>2</span>
+                    <h3>Define los criterios de búsqueda</h3>
+                </div>
+
+                <div class="report-fields-grid report-fields-grid-tesistas">
+                    <label>
+                        <span>Buscar tesista por:</span>
+                        <select><option>Clave de alumno</option></select>
+                    </label>
+                    <label>
+                        <span>Clave / Nombre</span>
+                        <input type="text" placeholder="Ingresa la clave o nombre del tesista">
+                    </label>
+                    <label>
+                        <span>Nivel de avance</span>
+                        <select><option>Todos los niveles</option></select>
+                    </label>
+                    <label>
+                        <span>Generación</span>
+                        <select><option>Desde</option></select>
+                    </label>
+                    <label>
+                        <span>Hasta</span>
+                        <select><option>Seleccionar</option></select>
+                    </label>
+                    <label>
+                        <span>Estado de tesis</span>
+                        <select><option>Todos los estados</option></select>
+                    </label>
+                </div>
+
+                <div class="report-generator-actions">
+                    <button type="button" class="report-secondary-button" id="limpiarReporteTesistasButton">⌫ Limpiar</button>
+                    <button type="button" class="report-primary-button" id="generarReporteTesistasAction">⌕ Generar reporte</button>
+                    <button type="button" class="report-primary-button report-chart-button">▥ Imprimir</button>
+                </div>
+
+                <div class="report-section-heading report-results-heading">
+                    <span>3</span>
+                    <h3>Resultados del reporte</h3>
+                </div>
+
+                <div class="report-preview-table-area">
+                    <div class="report-preview-summary">No hay criterios seleccionados ni resultados para mostrar.</div>
+                    <div class="report-empty-table-container">
+                        <table class="report-preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Tesista</th>
+                                    <th>Generación</th>
+                                    <th>Porcentaje de avance</th>
+                                    <th>Número de evaluaciones</th>
+                                    <th>Estado de tesis</th>
+                                    <th>Comité tutorial asociado</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <p class="report-empty-message">No hay datos disponibles.</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </section>
+    `;
+
+    document.getElementById("limpiarReporteTesistasButton")
+        .addEventListener("click", function () {
+            mostrarReporteTesistas();
+        });
+
+    document.getElementById("generarReporteTesistasAction")
+        .addEventListener("click", function () {
+            alert("La generación del reporte estará disponible cuando se conecten los datos.");
+        });
+}
+
+
+// ==================================================
+// CONTROLES DEL HISTORIAL
+// ==================================================
+
+function inicializarHistorialReportes() {
+
+    const actualizarButton = document.getElementById(
+        "actualizarReportesButton"
+    );
+
+    const acciones = document.querySelectorAll(
+        ".report-action-button"
+    );
+
+
+    // ACTUALIZAR
+    actualizarButton.addEventListener("click", function () {
+
+        alert(
+            "La actualización del historial estará disponible cuando se conecte la base de datos."
+        );
+
+    });
+
+
+    // ACCIONES DE LA TABLA
+    acciones.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const accion = this.dataset.action;
+
+            if (accion === "download") {
+
+                alert(
+                    "La descarga estará disponible cuando se conecten los archivos de reportes."
+                );
+
+            }
+
+            if (accion === "view") {
+
+                alert(
+                    "La consulta del archivo estará disponible próximamente."
+                );
+
+            }
+
+        });
+
+    });
 
 }

@@ -23,6 +23,9 @@ const tesisArrow =
 const miTesisButton =
     document.getElementById("miTesisButton");
 
+const subirAvanceButton =
+    document.getElementById("subirAvanceButton");
+
 const inicioAlumnoButton =
     document.getElementById("inicioAlumnoButton");
 
@@ -75,6 +78,23 @@ miTesisButton.addEventListener("click", function (event) {
     miTesisButton.classList.add("active");
 
     mostrarMiTesis();
+
+});
+
+subirAvanceButton.addEventListener("click", function (event) {
+
+    event.stopPropagation();
+
+    document.querySelectorAll(".sidebar-item, .sidebar-subitem")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+    subirAvanceButton.classList.add("active");
+
+    if (typeof window.mostrarSubirAvance === "function") {
+        window.mostrarSubirAvance();
+    }
 
 });
 // ==================================================

@@ -267,6 +267,36 @@ CREATE TABLE comite_profesor (
     FOREIGN KEY (id_rol_comite) REFERENCES CAT_rol_comite(id_rol_comite)
 ) ENGINE=InnoDB;
 
+CREATE TABLE historial_comite (
+  id_historial       INT AUTO_INCREMENT PRIMARY KEY,
+  id_comite          INT NOT NULL,
+  id_usuario         INT NULL,
+  accion             VARCHAR(30) NOT NULL,
+  rpe_anterior       INT NULL,
+  rpe_nuevo          INT NULL,
+  id_rol_anterior    INT NULL,
+  id_rol_nuevo       INT NULL,
+  fecha_cambio       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  observaciones      VARCHAR(500),
+  CONSTRAINT fk_historial_comite
+    FOREIGN KEY (id_comite) REFERENCES comite(id_comite),
+  CONSTRAINT fk_historial_usuario
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_historial_rpe_anterior
+    FOREIGN KEY (rpe_anterior) REFERENCES profesor(rpe)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_historial_rpe_nuevo
+    FOREIGN KEY (rpe_nuevo) REFERENCES profesor(rpe)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_historial_rol_anterior
+    FOREIGN KEY (id_rol_anterior) REFERENCES CAT_rol_comite(id_rol_comite)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_historial_rol_nuevo
+    FOREIGN KEY (id_rol_nuevo) REFERENCES CAT_rol_comite(id_rol_comite)
+    ON DELETE SET NULL
+) ENGINE=InnoDB;
+
 -- =============================================================
 -- REQUISITO TOEFL
 -- =============================================================
